@@ -283,12 +283,12 @@
             >a {
               position: relative;
               width: calc(190px + #{$sidebar-collapsed-width});
-              color: $primary;
+              color: $white;
               background-color: darken($sidebar-bg, 4%);
               transition: none;
 
               i {
-                color: $primary;
+                color: $white;
               }
 
               span {

@@ -81,7 +81,7 @@ table.dataTable thead td {
 // CARD
 .card-header h1 {
     font-size: 18px;
-    color: #495057;
+    color: $primary;
 }
 
 .card-transparent,
@@ -95,7 +95,7 @@ table.dataTable thead td {
 }
 
 .card-transparent .card-body {
-    border-top: 4px solid #009aad;
+    border-top: 4px solid $primary;
     background: #fff;
 }
 // END CARD

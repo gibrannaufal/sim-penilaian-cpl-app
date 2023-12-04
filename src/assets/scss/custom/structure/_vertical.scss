@@ -617,10 +617,10 @@ body[data-sidebar="colored"] {
 
           &:hover {
             background-color: lighten($primary, 2%);
-            color: rgba($white, 1);
+            color: rgba($black, 1);
             
             i {
-              color: rgba($white, 1);
+              color: rgba($black, 1);
             }
           }
         }

@@ -1,0 +1,65 @@
+<div class="card">
+    <div class="card-header">
+        Daftar Kurikulum
+    </div>
+    <div class="card-body">
+
+        <div class="row">
+            <div class="col-md-12 row">
+                <div class="col-md-5">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <div class="input-group input-group-sm mr-2">
+                                <input type="text" class="form-control form-control-sm"  name="nama_kurikulum"  />
+                                <div class="input-group-append">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-search" (click)="reloadDataTable()">
+                                       
+                                        </i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-7 d-flex justify-content-end">
+                    <button type="button" class="btn btn-sm btn-primary mr-2">
+                        <i class="fa fa-plus font-size-14 align-middle mr-1"></i> Tambah Kurikulum 
+                    </button>
+                </div>
+        
+            </div>
+            <div class="col-md-12 mt-4">
+                <table class="table table-hover" datatable [dtOptions]="dtOptions" >
+                    <thead class="thead-light">
+                        <tr>
+                            <td>No</td>
+                            <td>Kode Kurikulum</td>
+                            <td>Nama Kurikulum</td>
+                            <td>Tahun</td>
+                            <td>Periode</td>
+                            <td>Profil Lulusan</td>
+                            <td width="90"></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let kurikulum of listKurikulum;">
+                            <td>{{kurikulum.no}}</td>
+                            <td class="vertical-middle">{{kurikulum.kode_kurikulum}}</td>
+                            <td class="vertical-middle">{{kurikulum.nama_kurikulum}}</td>
+                            <td class="vertical-middle">{{kurikulum.tahun}}</td>
+                            <td class="vertical-middle">{{kurikulum.periode}}</td>
+                            <td class="vertical-middle">{{kurikulum.profil_lulusan}}</td>
+                            <td class="vertical-middle">
+                                <button class="btn btn-sm btn-success">edit</button>
+                                <button class="btn btn-sm btn-danger">delete</button>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>

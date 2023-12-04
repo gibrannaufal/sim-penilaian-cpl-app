@@ -8,6 +8,8 @@ import { FeatureRoutingModule } from './feature-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserModule } from './user/user.module';
 
+import { KurikulumModule } from './kurikulum/Kurikulum.module';
+
 // const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 //     suppressScrollX: true,
 //     wheelSpeed: 0.3
@@ -21,7 +23,8 @@ import { UserModule } from './user/user.module';
         CommonModule,
         FeatureRoutingModule,
         // PerfectScrollbarModule,
-        UserModule
+        UserModule,
+        KurikulumModule
     ],
     // providers: [
     //     {

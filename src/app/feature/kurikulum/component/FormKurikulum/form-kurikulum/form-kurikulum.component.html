@@ -1,0 +1,90 @@
+<form>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group row">
+                <label class="form-label col-md-3 required">Kode Kurikulum</label>
+                <div class="col-md-9">
+                    <input [(ngModel)]="formModel.kode_kurikulum" type="text" name="kode_kurikulum" class="form-control"
+                        placeholder="Kode Kurikulum">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="form-label col-md-3 required">Nama Kurikulum</label>
+                <div class="col-md-9">
+                    <input [(ngModel)]="formModel.nama_kurikulum" type="text" name="nama_kurikulum" class="form-control"
+                        placeholder="Nama Kurikulum">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="form-label col-md-3 required">Tahun</label>
+                <div class="col-md-9">
+                    <input [(ngModel)]="formModel.tahun" type="text" name="tahun" class="form-control"
+                        placeholder="Tahun Ajaran">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 required">Periode</label>
+                <div class="col-md-9">
+                    <div class="btn-group btn-group-toggle" ngbRadioGroup name="periode"
+                        [(ngModel)]="formModel.periode">
+                        <label ngbButtonLabel class="btn-primary">
+                            <input ngbButton type="radio" value="Ganjil"> Ganjil
+                        </label>
+
+                        <label ngbButtonLabel class="btn-primary" style="margin-left: 10px;">
+                            <input ngbButton type="radio" value="Genap"> Genap
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="form-label col-md-3 required">Profil Lulusan</label>
+                <div class="col-md-9">
+                    <input [(ngModel)]="formModel.profil_lulusan" type="text" name="profil_lulusan" class="form-control"
+                        placeholder="Profil Lulusan">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                <button class="btn btn-sm btn-success" (click)="addDetail()">
+                                    <em class="fa fa-plus"></em>
+                                </button>
+                            </th>
+                            <th style="min-width: 200px;">Kode CPL</th>
+                            <th style="min-width: 200px;">Deskripsi CPL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let detail of formModel.cpl; index as i;">
+                            <td>
+                                <button class="btn btn-sm btn-danger" (click)="removeDetail(formModel.details, i)">
+                                    <em class="fa fa-trash"></em>
+                                </button>
+                            </td>
+                            <td>
+                                <input type="text" placeholder="CPL" (change)="changeDetail(detail)"
+                                    class="form-control" name="kode_cpl[{{i}}]" [(ngModel)]="detail.kode_cpl" />
+                            </td> 
+                            <td>
+                                <input type="text" placeholder="Deskripsi CPL" (change)="changeDetail(detail)"
+                                    class="form-control" name="deskripsi_cpl[{{i}}]" [(ngModel)]="detail.deskripsi_cpl" />
+                            </td> 
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <button type="button" class="btn btn-light mr-2" (click)="afterSave.emit()"><em
+                    class="fa fa-arrow-left"></em> Kembali</button>
+            <button type="button" class="btn btn-primary" (click)="save()"><em class="fa fa-save"></em> Simpan</button>
+        </div>
+    </div>
+</form>

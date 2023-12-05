@@ -12,4 +12,18 @@ export class KurikulumService {
         return this.landaService.DataGet('/v1/kurikulum', arrParameter );
     }
 
+    getKurikulumId(id) {
+      return this.landaService.DataGet('/v1/kurikulum/' + id);
+    }
+
+    createKurikulum(payload) {
+      return this.landaService.DataPost('/v1/kurikulum', payload);
+    }
+  
+    updateKurikulum(payload) {
+      return this.landaService.DataPut('/v1/kurikulum', payload);
+    }
+
+    
+  
 }

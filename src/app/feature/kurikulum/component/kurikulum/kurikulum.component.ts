@@ -26,7 +26,11 @@ export class KurikulumComponent implements OnInit {
     filter: {
         nama_kurikulum: ''
       };
-
+    
+    titleForm: string;
+    productId: number;
+    showForm: boolean;
+    
     constructor(
         private kurikulumService: KurikulumService,
         private landaService: LandaService,
@@ -34,6 +38,7 @@ export class KurikulumComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
+      this.showForm = false;
       this.filter = {
         nama_kurikulum: '',
       
@@ -79,17 +84,17 @@ export class KurikulumComponent implements OnInit {
       return list.id;
     }
  
-    // createCustomer(modal) {
-    //     this.titleModal = 'Tambah Customer';
-    //     this.modelId = 0;
-    //     this.modalService.open(modal, { size: 'lg', backdrop: 'static' });
-    // }
+    formCreate() {
+      this.showForm = true;
+      this.titleForm = 'Tambah kurikulum';
+      this.productId = 0;
+    }
 
-    // updateCustomer(modal, customerModel) {
-    //     this.titleModal = 'Edit Customer: ' + customerModel.nama;
-    //     this.modelId = customerModel.id;
-    //     this.modalService.open(modal, { size: 'lg', backdrop: 'static' });
-    // }
+    formUpdate(kurikulum) {
+      this.showForm = true;
+      this.titleForm = 'Edit Product: ' + kurikulum.nama_kurikulum;
+      this.productId = kurikulum.id;
+    }
 
     // deleteCustomer(userId) {
     //     Swal.fire({

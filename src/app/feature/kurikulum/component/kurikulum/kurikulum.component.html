@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" *ngIf="!showForm">
     <div class="card-header">
         Daftar Kurikulum
     </div>
@@ -23,7 +23,7 @@
                     </form>
                 </div>
                 <div class="col-md-7 d-flex justify-content-end">
-                    <button type="button" class="btn btn-sm btn-primary mr-2">
+                    <button type="button" class="btn btn-sm btn-primary mr-2" (click)="formCreate()">
                         <i class="fa fa-plus font-size-14 align-middle mr-1"></i> Tambah Kurikulum 
                     </button>
                 </div>
@@ -61,5 +61,20 @@
             </div>
         </div>
 
+    </div>
+</div>
+
+<div class="container-fluid" *ngIf="showForm">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-transparent">
+                <div class="card-header  d-flex justify-content-between">
+                    <h1>{{titleForm}}</h1>
+                </div>
+                <div class="card-body">
+                    <app-form-kurikulum [kurikulumId]="kurikulumId" (afterSave)="showForm = false; reloadDataTable()"></app-form-kurikulum>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

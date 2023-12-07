@@ -28,7 +28,7 @@ export class KurikulumComponent implements OnInit {
       };
     
     titleForm: string;
-    productId: number;
+    kurikulumId: number;
     showForm: boolean;
     
     constructor(
@@ -87,35 +87,37 @@ export class KurikulumComponent implements OnInit {
     formCreate() {
       this.showForm = true;
       this.titleForm = 'Tambah kurikulum';
-      this.productId = 0;
+      this.kurikulumId = 0;
     }
 
     formUpdate(kurikulum) {
       this.showForm = true;
-      this.titleForm = 'Edit Product: ' + kurikulum.nama_kurikulum;
-      this.productId = kurikulum.id;
+      this.titleForm = 'Edit Kurikulum: ' + kurikulum.nama_kurikulum;
+      this.kurikulumId = kurikulum.id_kurikulum;
+      
     }
 
-    // deleteCustomer(userId) {
-    //     Swal.fire({
-    //         title: 'Apakah kamu yakin ?',
-    //         text: 'Customer tidak dapat melakukan pesanan setelah kamu menghapus datanya',
-    //         icon: 'warning',
-    //         showCancelButton: true,
-    //         confirmButtonColor: '#34c38f',
-    //         cancelButtonColor: '#f46a6a',
-    //         confirmButtonText: 'Ya, Hapus data ini !',
-    //     }).then((result) => {
-    //         if (result.value) {
-    //             this.kurikulumService.deleteCustomer(userId).subscribe((res: any) => {
-    //                 this.landaService.alertSuccess('Berhasil', res.message);
-    //                 this.reloadDataTable();
-    //             }, err => {
-    //                 console.log(err);
-    //             });
-    //         }
-    //     });
-    // }
+    deleteKurikulum(kurikulumId) {
+        Swal.fire({
+            title: 'Apakah kamu yakin ?',
+            text: 'Menghapus Data Kurikulum akan menghapus Data CPL',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#34c38f',
+            cancelButtonColor: '#f46a6a',
+            confirmButtonText: 'Ya, Hapus data ini !',
+        }).then((result) => {
+            if (result.value) {
+                this.kurikulumService.deleteKurikulum(kurikulumId).subscribe((res: any) => {
+                    this.landaService.alertSuccess('Berhasil', res.message);
+                    this.reloadDataTable();
+                }, err => {
+                    console.log(err);
+                });
+            }
+        });
+    }
+
     reloadDataTable(): void {
       this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
         dtInstance.draw();

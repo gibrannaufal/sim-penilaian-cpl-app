@@ -42,9 +42,9 @@ export class FormKurikulumComponent {
     this.resetForm();
   }
 
-  getKurikulum(productId) {
+  getKurikulum(kurikulumId) {
 
-    this.kurikulumService.getKurikulumId(productId).subscribe((res: any) => {
+    this.kurikulumService.getKurikulumId(kurikulumId).subscribe((res: any) => {
       this.formModel = res.data;
     }, err => {
       console.log(err);
@@ -70,8 +70,9 @@ export class FormKurikulumComponent {
     }
 
     this.activeMode = this.MODE_CREATE;
+    
   }
-
+  
   save() {
     switch (this.activeMode) {
       case this.MODE_CREATE:

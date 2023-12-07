@@ -51,8 +51,16 @@
                             <td class="vertical-middle">{{kurikulum.periode}}</td>
                             <td class="vertical-middle">{{kurikulum.profil_lulusan}}</td>
                             <td class="vertical-middle">
-                                <button class="btn btn-sm btn-success">edit</button>
-                                <button class="btn btn-sm btn-danger">delete</button>
+                                <a href="javascript: void(0);" class="align-middle mr-2"
+                                (click)="formUpdate(kurikulum)" placement="left" container="body"
+                                ngbTooltip="Ubah">
+                                <em class="fa fa-edit font-size-14"></em>
+                            </a>
+                            <a href="javascript: void(0);" class="align-middle"
+                                (click)="deleteKurikulum(kurikulum.id_kurikulum)" placement="left" container="body"
+                                ngbTooltip="Hapus">
+                                <em class="fa fa-trash font-size-14"></em>
+                            </a>
                             </td>
 
                         </tr>

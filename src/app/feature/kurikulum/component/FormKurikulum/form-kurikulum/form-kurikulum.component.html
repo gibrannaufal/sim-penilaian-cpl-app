@@ -25,14 +25,14 @@
             <div class="form-group row">
                 <label class="col-md-3 required">Periode</label>
                 <div class="col-md-9">
-                    <div class="btn-group btn-group-toggle" ngbRadioGroup name="periode"
-                        [(ngModel)]="formModel.periode">
+                    <div class="btn-group btn-group-toggle" ngbRadioGroup 
+                        >
                         <label ngbButtonLabel class="btn-primary">
-                            <input ngbButton type="radio" value="Ganjil"> Ganjil
+                            <input ngbButton [(ngModel)]="formModel.periode" [ngModelOptions]="{standalone: true}" type="radio" value="Ganjil"> Ganjil
                         </label>
 
                         <label ngbButtonLabel class="btn-primary" style="margin-left: 10px;">
-                            <input ngbButton type="radio" value="Genap"> Genap
+                            <input ngbButton [(ngModel)]="formModel.periode" [ngModelOptions]="{standalone: true}" type="radio" value="Genap"> Genap
                         </label>
                     </div>
                 </div>

@@ -24,6 +24,10 @@ export class KurikulumService {
       return this.landaService.DataPut('/v1/kurikulum', payload);
     }
 
+    deleteKurikulum(id) {
+      return this.landaService.DataDelete('/v1/kurikulum/' + id);
+    }
+
     
   
 }

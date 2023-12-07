@@ -4,7 +4,7 @@
             <div class="form-group row">
                 <label class="form-label col-md-3 required">Kode Kurikulum</label>
                 <div class="col-md-9">
-                    <input [(ngModel)]="formModel.kode_kurikulum" type="text" name="kode_kurikulum" class="form-control"
+                    <input [(ngModel)]="formModel.kode_kurikulum" type="text"  disabled name="kode_kurikulum" class="form-control"
                         placeholder="Kode Kurikulum">
                 </div>
             </div>
@@ -18,7 +18,7 @@
             <div class="form-group row">
                 <label class="form-label col-md-3 required">Tahun</label>
                 <div class="col-md-9">
-                    <input [(ngModel)]="formModel.tahun" type="text" name="tahun" class="form-control"
+                    <input [(ngModel)]="formModel.tahun" (ngModelChange)="onTahunChange()" type="text" name="tahun" class="form-control"
                         placeholder="Tahun Ajaran">
                 </div>
             </div>
@@ -62,12 +62,12 @@
                     <tbody>
                         <tr *ngFor="let detail of formModel.cpl; index as i;">
                             <td>
-                                <button class="btn btn-sm btn-danger" (click)="removeDetail(formModel.details, i)">
+                                <button class="btn btn-sm btn-danger" (click)="removeDetail(formModel.cpl, i)">
                                     <em class="fa fa-trash"></em>
                                 </button>
                             </td>
                             <td>
-                                <input type="text" placeholder="CPL" (change)="changeDetail(detail)"
+                                <input type="text" placeholder="CPL" disabled (change)="changeDetail(detail)"
                                     class="form-control" name="kode_cpl[{{i}}]" [(ngModel)]="detail.kode_cpl" />
                             </td> 
                             <td>

@@ -42,6 +42,11 @@ export class FormKurikulumComponent {
     this.resetForm();
   }
 
+  onTahunChange() {
+    const lastTwoDigits = ('' + this.formModel.tahun).slice(-2);
+    this.formModel.kode_kurikulum = `SI1${lastTwoDigits}`;
+  }
+
   getKurikulum(kurikulumId) {
 
     this.kurikulumService.getKurikulumId(kurikulumId).subscribe((res: any) => {
@@ -85,6 +90,14 @@ export class FormKurikulumComponent {
   }
 
   insert() {
+    for(let i=0; i<this.formModel.cpl.length; i++) {
+      if(this.formModel.cpl[i].deskripsi_cpl == '' || this.formModel.cpl[i].deskripsi_cpl == null )
+      {
+        this.formModel.cpl.splice(i, 1);
+        i--;
+      }
+    }
+
     this.kurikulumService.createKurikulum(this.formModel).subscribe((res: any) => {
       this.landaService.alertSuccess('Berhasil', res.message);
       this.afterSave.emit();
@@ -94,6 +107,14 @@ export class FormKurikulumComponent {
   }
 
   update() {
+    for(let i=0; i<this.formModel.cpl.length; i++) {
+      if(this.formModel.cpl[i].deskripsi_cpl == '' || this.formModel.cpl[i].deskripsi_cpl == null )
+      {
+        this.formModel.cpl.splice(i, 1);
+        i--;
+      }
+    }
+
     this.kurikulumService.updateKurikulum(this.formModel).subscribe((res: any) => {
       this.landaService.alertSuccess('Berhasil', res.message);
       this.afterSave.emit();
@@ -103,24 +124,34 @@ export class FormKurikulumComponent {
   }
 
   addDetail() {
+    const nextIndex = this.formModel.cpl.length + 1;
+    const paddedIndex = nextIndex.toString().padStart(3, '0');
+
     let val = {
       is_added: true,
-      kode_cpl: '',
+      kode_cpl: `CPL-${paddedIndex}`,
       deskripsi_cpl: '',
-    }
+    };
+
     this.formModel.cpl.push(val);
   }
 
-  removeDetail(details, paramIndex) {
-    details.splice(paramIndex, 1);
-    if (details[paramIndex]?.id) {
-      this.formModel.cpl.push(details[paramIndex]);
+  removeDetail(cpl, paramIndex) {
+    console.log("log cpl nya sebelum splice:", cpl[paramIndex]?.id_cpl);
+
+    // Splice the element first
+    const removedElement = cpl.splice(paramIndex, 1)[0];
+
+    // Use the original index (paramIndex) to push the removed element to cpl_deleted
+    if (removedElement && removedElement.id_cpl) {
+      this.formModel.cpl_deleted = this.formModel.cpl_deleted || [];
+      this.formModel.cpl_deleted.push(removedElement);
     }
   }
 
-  changeDetail(details) {
-    if (details?.id) {
-      details.is_updated = true;
+  changeDetail(cpl) {
+    if (cpl?.id) {
+      cpl.is_updated = true;
     }
   }
 }

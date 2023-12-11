@@ -1,6 +1,6 @@
 <div class="card" *ngIf="!showForm">
     <div class="card-header">
-       <p style="font-size: 20px;"><b>Daftar Kurikulum</b> </p> 
+       <p style="font-size: 20px;"><b>Daftar CPMK</b> </p> 
     </div>
     <div class="card-body">
 
@@ -8,23 +8,30 @@
             <div class="col-md-12 row">
                 <div class="col-md-5">
                     <form class="form-inline">
-                        <div class="form-group">
-                            <div class="input-group input-group-sm mr-2">
-                                <input type="text" placeholder="Filter Nama Kurikulum" class="form-control form-control-sm" [(ngModel)]="filter.nama_kurikulum"  name="nama_kurikulum"  />
+                        <div class="form-group row">
+                            <div class="col-md-10">
+                                <ng-select  placeholder="Pilih Kurikulum" id="kurikulum"    bindLabel="nama_kurikulum" bindValue="id_kurikulum"
+                                    [dropdownPosition]="'down'"
+                                    [(ngModel)]="filter.id_kurikulum" 
+                                    [search]="true"
+                                    [ngModelOptions]="{standalone: true}">
+                                     <ng-option *ngFor="let k of kurikulum" [value]="k.id_kurikulum">{{ k.kode_kurikulum }} - {{ k.nama_kurikulum }}</ng-option>
+                                </ng-select>
+                            </div>
+                            <div class="col-md-2">
                                 <div class="input-group-append">
                                     <span class="input-group-text">
-                                        <i class="fas fa-search" (click)="reloadDataTable()">
-                                       
-                                        </i>
+                                      <i class="fas fa-search" (click)="reloadDataTable()"></i>
                                     </span>
                                 </div>
                             </div>
                         </div>
+
                     </form>
                 </div>
                 <div class="col-md-7 d-flex justify-content-end">
                     <button type="button" class="btn btn-sm btn-primary mr-2" (click)="formCreate()">
-                        <i class="fa fa-plus font-size-14 align-middle mr-1"></i> Tambah Kurikulum 
+                        <i class="fa fa-plus font-size-14 align-middle mr-1"></i> Tambah CPMK 
                     </button>
                 </div>
         
@@ -36,28 +43,30 @@
                             <td>No</td>
                             <td>Kode Kurikulum</td>
                             <td>Nama Kurikulum</td>
-                            <td>Tahun</td>
-                            <td>Periode</td>
-                            <td>Profil Lulusan</td>
+                            <td>Kode CPL</td>
+                            <td>Deskripsi CPL</td>
+                            <td>Kode CPMK</td>
+                            <td>Deskripsi CPMK</td>
                             <td width="90"></td>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let kurikulum of listKurikulum;">
-                            <td>{{kurikulum.no}}</td>
-                            <td class="vertical-middle">{{kurikulum.kode_kurikulum}}</td>
-                            <td class="vertical-middle">{{kurikulum.nama_kurikulum}}</td>
-                            <td class="vertical-middle">{{kurikulum.tahun}}</td>
-                            <td class="vertical-middle">{{kurikulum.periode}}</td>
-                            <td class="vertical-middle">{{kurikulum.profil_lulusan}}</td>
+                        <tr *ngFor="let cpmk of listCpmk;">
+                            <td>{{cpmk.no}}</td>
+                            <td class="vertical-middle">{{cpmk.detail_kurikulum.kode_kurikulum}}</td>
+                            <td class="vertical-middle">{{cpmk.detail_kurikulum.nama_kurikulum}}</td>
+                            <td class="vertical-middle">{{cpmk.detail_cpl.kode_cpl}}</td>
+                            <td class="vertical-middle">{{cpmk.detail_cpl.deskripsi_cpl}}</td>
+                            <td class="vertical-middle">{{cpmk.kode_cpmk}}</td>
+                            <td class="vertical-middle">{{cpmk.deskripsi_cpmk}}</td>
                             <td class="vertical-middle">
                                 <a href="javascript: void(0);" class="align-middle mr-2"
-                                (click)="formUpdate(kurikulum)" placement="left" container="body"
+                                (click)="formUpdate(cpmk)" placement="left" container="body"
                                 ngbTooltip="Ubah">
                                 <em class="fa fa-edit font-size-14"></em>
                             </a>
                             <a href="javascript: void(0);" class="align-middle"
-                                (click)="deleteKurikulum(kurikulum.id_kurikulum)" placement="left" container="body"
+                                (click)="deleteCpmk(cpmk.id_cpmk)" placement="left" container="body"
                                 ngbTooltip="Hapus">
                                 <em class="fa fa-trash font-size-14"></em>
                             </a>
@@ -80,7 +89,7 @@
                     <h1>{{titleForm}}</h1>
                 </div>
                 <div class="card-body">
-                    <app-form-kurikulum [kurikulumId]="kurikulumId" (afterSave)="showForm = false; reloadDataTable()"></app-form-kurikulum>
+                    <app-form-cpmk [cpmkId]="cpmkId" (afterSave)="showForm = false; reloadDataTable()"></app-form-cpmk>
                 </div>
             </div>
         </div>

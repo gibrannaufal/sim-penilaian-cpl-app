@@ -1,0 +1,156 @@
+<form>
+    <div class="row" *ngIf="activeMode === 'add'">
+        <div class="col-md-12">
+            <div class="form-group row">
+                <label class="form-label col-md-3 required">Kode Kurikulum</label>
+                <div class="col-md-9">
+                    <input  type="text" disabled [(ngModel)]="kode_Kurikulum"   disabled name="kode_kurikulum" class="form-control"
+                        placeholder="Kode Kurikulum">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="form-label col-md-3">Nama Kurikulum</label>
+                <div class="col-md-9">
+                    <ng-select  placeholder="Pilih Kurikulum" id="kurikulum"    bindLabel="nama_kurikulum" 
+                        [dropdownPosition]="'down'"
+                        [(ngModel)]="selectedKurikulum" 
+                        (ngModelChange)="onKurikulumChange($event)"
+                        [ngModelOptions]="{standalone: true}">
+                         <ng-option *ngFor="let k of kurikulum" [value]="{ id_kurikulum: k.id_kurikulum, kode_kurikulum: k.kode_kurikulum }">
+                            {{ k.nama_kurikulum }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="form-label col-md-3 required">Kode CPL</label>
+                <div class="col-md-9">
+                    <input  type="text" disabled [(ngModel)]="kode_cpl"   disabled name="kode_cpl" class="form-control"
+                        placeholder="Kode CPL">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="form-label col-md-3">Deskripsi CPL</label>
+                <div class="col-md-9">
+                    <ng-select  placeholder="Pilih CPL" bindLabel="deskripsi_cpl" 
+                        [disabled]="formModel.id_kurikulum_fk === 0 || formModel.id_kurikulum_fk === null "
+                        [dropdownPosition]="'down'"
+                        [(ngModel)]="selectedCpl" 
+                        (ngModelChange)="onCplChange($event)"
+                        [ngModelOptions]="{standalone: true}">
+                         <ng-option *ngFor="let c of cpl" [value]="{ id_cpl: c.id_cpl, kode_cpl: c.kode_cpl }">
+                             {{ c.deskripsi_cpl }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+            </div>
+           
+        </div>
+        <div  class="col-md-12">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                <button *ngIf="this.formModel.id_kurikulum_fk !== 0 && this.formModel.id_cpl_fk !== 0" class="btn btn-sm btn-success" (click)="addDetail()">
+                                    <em class="fa fa-plus"></em>
+                                </button>
+                            </th>
+                            <th style="min-width: 200px;">Kode CPMK</th>
+                            <th style="min-width: 200px;">Deskripsi CPMK</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let detail of formModel.detail_cpmk; index as i;">
+                            <td>
+                                <button class="btn btn-sm btn-danger" (click)="removeDetail(formModel.detail_cpmk, i)">
+                                    <em class="fa fa-trash"></em>
+                                </button>
+                            </td>
+                            <td>
+                                <input type="text" placeholder="CPMK" disabled (change)="changeDetail(detail)"
+                                    class="form-control" name="kode_cpmk[{{i}}]" [(ngModel)]="detail.kode_cpmk" />
+                            </td> 
+                            <td>
+                                <input type="text" placeholder="Deskripsi CPMK" (change)="changeDetail(detail)"
+                                    class="form-control" name="deskripsi_cpmk[{{i}}]" [(ngModel)]="detail.deskripsi_cpmk" />
+                            </td> 
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- mode update -->
+
+
+    <div class="row" *ngIf="activeMode === 'update'">
+        <div class="col-md-12">
+            <div class="form-group row">
+                <label class="form-label col-md-3 required">Kode Kurikulum</label>
+                <div class="col-md-9">
+                    <input  type="text" disabled [(ngModel)]="formModelUpdate.kode_kurikulum" name="kode_kurikulum" class="form-control"
+                        placeholder="Kode Kurikulum">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="form-label col-md-3">Nama Kurikulum</label>
+                <div class="col-md-9">
+                    <ng-select  placeholder="Pilih Kurikulum"   bindLabel="nama_kurikulum" 
+                        [dropdownPosition]="'down'"
+                        [(ngModel)]="formModelUpdate.id_kurikulum_fk"
+                        [ngModelOptions]="{standalone: true}">
+                         <ng-option *ngFor="let k of kurikulum" [value]="k.id_kurikulum" >
+                            {{ k.nama_kurikulum }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="form-label col-md-3 required">Kode CPL</label>
+                <div class="col-md-9">
+                    <input  type="text" disabled [(ngModel)]="formModelUpdate.kode_cpl"   disabled name="kode_cpl" class="form-control"
+                        placeholder="Kode CPL">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="form-label col-md-3">Deskripsi CPL</label>
+                <div class="col-md-9">
+                    <ng-select  placeholder="Pilih CPL" bindLabel="deskripsi_cpl" 
+                        [dropdownPosition]="'down'"
+                        [(ngModel)]="formModelUpdate.id_cpl_fk"
+                        [ngModelOptions]="{standalone: true}">
+                         <ng-option *ngFor="let c of cpl" [value]="c.id_cpl">
+                             {{ c.deskripsi_cpl }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="form-label col-md-3 required">Kode CPMK</label>
+                <div class="col-md-9">
+                    <input  type="text" disabled [(ngModel)]="formModelUpdate.kode_cpmk"  name="kode_cpmk" class="form-control"
+                        placeholder="Kode CPMK">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="form-label col-md-3 required">Deskripsi CPMK</label>
+                <div class="col-md-9">
+                    <input  type="text" [(ngModel)]="formModelUpdate.deskripsi_cpmk"  name="deskripsi_cpmk" class="form-control"
+                        placeholder="Deskripsi CPMK">
+                </div>
+            </div>
+           
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <button type="button" class="btn btn-light mr-2" (click)="afterSave.emit()"><em
+                    class="fa fa-arrow-left"></em> Kembali</button>
+            <button type="button" class="btn btn-primary" (click)="save()"><em class="fa fa-save"></em> Simpan</button>
+        </div>
+    </div>
+</form>

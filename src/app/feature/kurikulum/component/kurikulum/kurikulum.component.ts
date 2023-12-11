@@ -22,7 +22,6 @@ export class KurikulumComponent implements OnInit {
     dtInstance: Promise<DataTables.Api>;
     dtOptions: any;
 
-    imageSource:any;
     filter: {
         nama_kurikulum: ''
       };

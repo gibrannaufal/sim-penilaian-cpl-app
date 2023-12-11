@@ -27,7 +27,8 @@ export class FormKurikulumComponent {
     periode: string,
     tahun: string,
     profil_lulusan: string,
-    cpl: any,
+    cpl: any, 
+    status: string,
     cpl_deleted: any
   }
 
@@ -64,6 +65,7 @@ export class FormKurikulumComponent {
       periode: '',
       tahun: '',
       profil_lulusan: '',
+      status: '',
       cpl: [],
       cpl_deleted: []
     }
@@ -97,7 +99,7 @@ export class FormKurikulumComponent {
         i--;
       }
     }
-
+    this.formModel.status = this.activeMode;
     this.kurikulumService.createKurikulum(this.formModel).subscribe((res: any) => {
       this.landaService.alertSuccess('Berhasil', res.message);
       this.afterSave.emit();
@@ -114,7 +116,7 @@ export class FormKurikulumComponent {
         i--;
       }
     }
-
+    this.formModel.status = this.activeMode;
     this.kurikulumService.updateKurikulum(this.formModel).subscribe((res: any) => {
       this.landaService.alertSuccess('Berhasil', res.message);
       this.afterSave.emit();
@@ -137,8 +139,6 @@ export class FormKurikulumComponent {
   }
 
   removeDetail(cpl, paramIndex) {
-    console.log("log cpl nya sebelum splice:", cpl[paramIndex]?.id_cpl);
-
     // Splice the element first
     const removedElement = cpl.splice(paramIndex, 1)[0];
 
@@ -154,4 +154,14 @@ export class FormKurikulumComponent {
       cpl.is_updated = true;
     }
   }
+  onKeyPress(event: any) {
+    // Mendapatkan karakter yang dimasukkan
+    const charCode = (event.which) ? event.which : event.keyCode;
+
+    // Memastikan bahwa hanya karakter angka yang diperbolehkan
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        event.preventDefault();
+    }
+  }
+
 }

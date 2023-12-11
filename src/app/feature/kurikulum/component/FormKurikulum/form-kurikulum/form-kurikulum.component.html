@@ -4,27 +4,26 @@
             <div class="form-group row">
                 <label class="form-label col-md-3 required">Kode Kurikulum</label>
                 <div class="col-md-9">
-                    <input [(ngModel)]="formModel.kode_kurikulum" type="text"  disabled name="kode_kurikulum" class="form-control"
+                    <input [(ngModel)]="formModel.kode_kurikulum" type="text" required  disabled name="kode_kurikulum" class="form-control"
                         placeholder="Kode Kurikulum">
                 </div>
             </div>
             <div class="form-group row">
                 <label class="form-label col-md-3 required">Nama Kurikulum</label>
                 <div class="col-md-9">
-                    <input [(ngModel)]="formModel.nama_kurikulum" type="text" name="nama_kurikulum" class="form-control"
+                    <input [(ngModel)]="formModel.nama_kurikulum" type="text" required name="nama_kurikulum" class="form-control"
                         placeholder="Nama Kurikulum">
                 </div>
             </div>
             <div class="form-group row">
-                <label class="form-label col-md-3 required">Tahun</label>
-                <div class="col-md-9">
-                    <input [(ngModel)]="formModel.tahun" (ngModelChange)="onTahunChange()" type="text" name="tahun" class="form-control"
+                <label class="form-label col-md-3 required">Periode Pemberlakuan</label>
+                <div class="col-md-6">
+                    <input [(ngModel)]="formModel.tahun" [disabled]="activeMode === 'update'"
+                    (ngModelChange)="onTahunChange()" (keypress)="onKeyPress($event)"
+                    required type="text" name="tahun" class="form-control"
                         placeholder="Tahun Ajaran">
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-md-3 required">Periode</label>
-                <div class="col-md-9">
+                <div class="col-md-3 mt-2">
                     <div class="btn-group btn-group-toggle" ngbRadioGroup 
                         >
                         <label ngbButtonLabel class="btn-primary">
@@ -40,7 +39,7 @@
             <div class="form-group row">
                 <label class="form-label col-md-3 required">Profil Lulusan</label>
                 <div class="col-md-9">
-                    <input [(ngModel)]="formModel.profil_lulusan" type="text" name="profil_lulusan" class="form-control"
+                    <input [(ngModel)]="formModel.profil_lulusan" type="text" required name="profil_lulusan" class="form-control"
                         placeholder="Profil Lulusan">
                 </div>
             </div>

@@ -14,5 +14,8 @@ export class filterService {
   getCplFilter(id) {
     return this.landaService.DataGet('/v1/cplFilter/'+ id );
   }
+  getCpmkFilter(id) {
+    return this.landaService.DataGet('/v1/cpmkFilter/'+ id );
+  }
 
 }

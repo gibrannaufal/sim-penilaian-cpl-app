@@ -1,0 +1,169 @@
+<form>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="form-label col-md-3 required">Kode Kurikulum</label>
+                <div class="col-md-9">
+                    <input  type="text" disabled [(ngModel)]="formModel.kode_kurikulum"   disabled name="kode_kurikulum" class="form-control"
+                        placeholder="Kode Kurikulum">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="form-label col-md-3">Nama Kurikulum</label>
+                <div class="col-md-9">
+                    <ng-select  placeholder="Pilih Kurikulum" id="kurikulum" bindLabel="id_kurikulum_fk" 
+                        [dropdownPosition]="'down'"
+                        [(ngModel)]="formModel.id_kurikulum_fk" 
+                        (ngModelChange)="onKurikulumChange($event)"
+                        [ngModelOptions]="{standalone: true}">
+                         <ng-option *ngFor="let k of kurikulum" [value]="k.id_kurikulum">
+                            {{ k.nama_kurikulum }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="form-label col-md-3 required">Kode Matakuliah</label>
+                <div class="col-md-9">
+                    <input [(ngModel)]="formModel.kode_matakuliah" type="text"  required name="kode_matakuliah" class="form-control"
+                        placeholder="Kode Matakuliah">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="form-label col-md-3 required">Nama  Matakuliah</label>
+                <div class="col-md-9">
+                    <input [(ngModel)]="formModel.nama_matakuliah" type="text" required name="nama_kurikulum" class="form-control"
+                        placeholder="Nama Matakuliah">
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="form-label col-md-3 required">Deskripsi Matakuliah</label>
+                <div class="col-md-9">
+                    <textarea [(ngModel)]="formModel.deskripsi" required name="deskripi" class="form-control" placeholder="Deskripsi"></textarea>
+                </div>
+                
+            </div>
+            <div class="form-group row">
+                <label class="form-label col-md-3 required">Semester</label>
+                <div class="col-md-9">
+                    <input [(ngModel)]="formModel.semester" (keypress)="onKeyPress($event)" type="text" required name="semester" class="form-control"
+                        placeholder="Semester">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="form-label col-md-3 required">SKS</label>
+                <div class="col-md-9">
+                    <input [(ngModel)]="formModel.sks" (keypress)="onKeyPress($event)" type="text" required name="sks" class="form-control"
+                        placeholder="SKS">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="form-label col-md-3 required">Bahan Kajian</label>
+                <div class="col-md-9">
+                    <input [(ngModel)]="formModel.bobot_kajian" type="text" required name="bahan_kajian" class="form-control"
+                        placeholder="Bahan Kajian">
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-md-12">
+            <div class="table-responsive table-container" >
+                <table class="table" style="border: 2px;">
+                    <thead>     
+                        <tr>
+                            <th style="min-width: 5vw;">
+                                <button class="btn btn-sm btn-success" [disabled]="totalBobot > 100 || !isFormValid" (click)="addDetail()">
+                                    <em class="fa fa-plus"></em>
+                                </button>
+                            </th>
+                            <th style="min-width: 15vw;" >Kode CPMK</th>
+                            <th style="min-width: 30vw;" >Deskripsi CPMK</th>
+                            <th style="min-width: 15vw;" >Kode CPL</th>
+                            <th style="min-width: 30vw;" >Deskripsi CPL</th>
+                            <th style="min-width: 20vw;" >Indikator Pencapaian</th>
+                            <th style="min-width: 20vw;" >Bobot</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let detail of formModel.mk_detail; index as i;">
+                            <td style="min-width: 5vw;" >
+                                <button class="btn btn-sm btn-danger" (click)="removeDetail(formModel.mk_detail, i)">
+                                    <em class="fa fa-trash"></em>
+                                </button>
+                            </td>
+                            <td style="min-width: 15vw;" >
+                                <input  type="text" disabled [(ngModel)]="detail.kode_cpmk" disabled  (change)="changeDetail(detail)" name="kode_cpmk[{{i}}]"  
+                                    class="form-control" placeholder="Kode CPMK">
+                            </td> 
+                            <td style="min-width: 30vw;" >
+                                <ng-select  placeholder="Pilih CPMK" [disabled]="!formModel.id_kurikulum_fk" bindLabel="id_cpmk_fk" name="id_cpmk_fk[{{i}}]"
+                                    [dropdownPosition]="'down'"
+                                    [(ngModel)]="detail.id_cpmk_fk" 
+                                    (change)="changeDetail(detail)"
+                                    (ngModelChange)="onCpmkChange(detail)"
+                                    [ngModelOptions]="{standalone: true}">
+                                     <ng-option *ngFor="let c of cpmk" [value]="c.id_cpmk">
+                                         {{ c.deskripsi_cpmk }}
+                                    </ng-option>
+                                </ng-select>
+                                <div *ngIf="!detail.id_cpmk_fk" style="color: red; font-size: 10px;">
+                                    *cpmk tidak boleh kosong
+                                </div>
+                            </td> 
+           
+                            <td style="min-width: 15vw;">
+                                <input type="text" placeholder="Kode CPL" disabled (change)="changeDetail(detail)"
+                                    class="form-control" name="kode_cpl[{{i}}]" [(ngModel)]="detail.kode_cpl" />
+                            </td> 
+                            <td style="min-width: 30vw;">
+                                <input type="text" placeholder="Deskripsi CPL" (change)="changeDetail(detail)"
+                                    class="form-control" name="deskripsi_cpl{{i}}]" disabled [(ngModel)]="detail.deskripsi_cpl" />
+                            </td> 
+                            <td style="min-width: 20vw;">
+                                <input type="text" placeholder="Indikator Pencapaian" (change)="changeDetail(detail)"
+                                    class="form-control" name="indikator_pencapaian{{i}}]" [(ngModel)]="detail.indikator_pencapaian" />
+                                    <div *ngIf="!detail.indikator_pencapaian" style="color: red; font-size: 10px;">
+                                        *indikator pencapaian tidak boleh kosong
+                                    </div>
+                            </td> 
+                            <td style="min-width: 20vw;">
+                                <input type="text" placeholder="Bobot" (change)="changeDetail(detail)"
+                                    class="form-control" name="bobot_detailmk[{{i}}]" [(ngModel)]="detail.bobot_detailmk" (keypress)="onKeyPress($event)" />
+                                    <div *ngIf="!detail.bobot_detailmk" style="color: red; font-size: 10px;">
+                                        *Bobot tidak boleh kosong
+                                    </div>
+                            </td> 
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td colspan="5">
+                                Total Bobot *Tidak Lebih dari 100
+                            </td>
+                            <td style="text-align: center;">
+                                {{totalBobot}}
+                                <div *ngIf="totalBobot > 100" style="color: red; font-size: 10px;">
+                                    *Total Bobot tidak boleh lebih dari 100
+                                </div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <button type="button" class="btn btn-light mr-2" (click)="afterSave.emit()"><em
+                    class="fa fa-arrow-left"></em> Kembali</button>
+            <button type="button" class="btn btn-primary" [disabled]="totalBobot > 100 || !isFormValid" (click)="save()"><em class="fa fa-save"></em> Simpan</button>
+        </div>
+    </div>
+</form>

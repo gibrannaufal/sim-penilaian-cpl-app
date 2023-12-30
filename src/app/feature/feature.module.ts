@@ -10,6 +10,8 @@ import { UserModule } from './user/user.module';
 
 import { KurikulumModule } from './kurikulum/Kurikulum.module';
 import { CpmkModule } from './cpmk/Cpmk.module';
+import { mataKuliahModule } from './mataKuliah/mataKuliah.module';
+
 // const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 //     suppressScrollX: true,
 //     wheelSpeed: 0.3
@@ -25,7 +27,8 @@ import { CpmkModule } from './cpmk/Cpmk.module';
         // PerfectScrollbarModule,
         UserModule,
         KurikulumModule,
-        CpmkModule
+        CpmkModule,
+        mataKuliahModule
     ],
     // providers: [
     //     {

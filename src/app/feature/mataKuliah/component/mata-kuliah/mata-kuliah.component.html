@@ -1,0 +1,94 @@
+<div class="card" *ngIf="!showForm">
+    <div class="card-header">
+       <p style="font-size: 20px;"><b>Daftar Mata Kuliah</b> </p> 
+    </div>
+    <div class="card-body">
+
+        <div class="row">
+            <div class="col-md-12 row">
+                <div class="col-md-5">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <div class="input-group input-group-sm mr-2">
+                                <input type="text" placeholder="Filter Nama Matakuliah" class="form-control form-control-sm" [(ngModel)]="filter.nama_mk"  name="nama_mk"  />
+                                <div class="input-group-append">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-search" (click)="reloadDataTable()">
+                                       
+                                        </i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-7 d-flex justify-content-end">
+                    <button type="button" class="btn btn-sm btn-primary mr-2" (click)="formCreate()">
+                        <i class="fa fa-plus font-size-14 align-middle mr-1"></i> Tambah Mata Kuliah 
+                    </button>
+                </div>
+        
+            </div>
+            <div class="col-md-12 mt-4">
+                <table class="table table-hover" datatable [dtOptions]="dtOptions" >
+                    <thead class="thead-light">
+                        <tr>
+                            <td>No</td>
+                            <td>Kode Kurikulum</td>
+                            <td>Nama Kurikulum</td>
+                            <td>Nama Matakuliah</td>
+                            <td>Deskripsi</td>
+                            <td>SKS</td>
+                            <td>Bobot</td>
+                            <td>Semester</td>
+                            <td>Bobot Kajian</td>
+                            <td width="90"></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let mk of listmk;">
+                            <td>{{mk.no}}</td>
+                            <td class="vertical-middle">{{mk.kurikulum.kode_kurikulum}}</td>
+                            <td class="vertical-middle">{{mk.kurikulum.nama_kurikulum}}</td>
+                            <td class="vertical-middle">{{mk.nama_matakuliah}}</td>
+                            <td class="vertical-middle">{{mk.deskripsi}}</td>
+                            <td class="vertical-middle">{{mk.sks}}</td>
+                            <td class="vertical-middle">{{mk.bobot}}</td>
+                            <td class="vertical-middle">{{mk.semester}}</td>
+                            <td class="vertical-middle">{{mk.bobot_kajian}}</td>
+                            <td class="vertical-middle">
+                                <a href="javascript: void(0);" class="align-middle mr-2"
+                                (click)="formUpdate(mk)" placement="left" container="body"
+                                ngbTooltip="Ubah">
+                                <em class="fa fa-edit font-size-14"></em>
+                            </a>
+                            <a href="javascript: void(0);" class="align-middle"
+                                (click)="deleteKurikulum(mk.id_matakuliah)" placement="left" container="body"
+                                ngbTooltip="Hapus">
+                                <em class="fa fa-trash font-size-14"></em>
+                            </a>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="container-fluid" *ngIf="showForm">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-transparent">
+                <div class="card-header  d-flex justify-content-between">
+                    <h1>{{titleForm}}</h1>
+                </div>
+                <div class="card-body">
+                    <app-form-mata-kuliah [mkId]="mkId" (afterSave)="showForm = false; reloadDataTable()"></app-form-mata-kuliah>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

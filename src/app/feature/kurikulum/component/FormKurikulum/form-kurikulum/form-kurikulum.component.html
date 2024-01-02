@@ -50,7 +50,7 @@
                     <thead>
                         <tr>
                             <th>
-                                <button class="btn btn-sm btn-success" (click)="addDetail()">
+                                <button class="btn btn-sm btn-success"   (click)="addDetail()">
                                     <em class="fa fa-plus"></em>
                                 </button>
                             </th>
@@ -59,7 +59,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let detail of formModel.cpl; index as i;">
+                        <tr *ngFor="let detail of formModel.cpl; index as i;" >
                             <td>
                                 <button class="btn btn-sm btn-danger" (click)="removeDetail(formModel.cpl, i)">
                                     <em class="fa fa-trash"></em>
@@ -72,6 +72,9 @@
                             <td>
                                 <input type="text" placeholder="Deskripsi CPL" (change)="changeDetail(detail)"
                                     class="form-control" name="deskripsi_cpl[{{i}}]" [(ngModel)]="detail.deskripsi_cpl" />
+                                    <div *ngIf="!detail.deskripsi_cpl" style="color: red; font-size: 10px;">
+                                        *deskripsi_cpltidak boleh kosong
+                                    </div>
                             </td> 
                         </tr>
                     </tbody>
@@ -83,7 +86,7 @@
         <div class="col-md-12 text-right">
             <button type="button" class="btn btn-light mr-2" (click)="afterSave.emit()"><em
                     class="fa fa-arrow-left"></em> Kembali</button>
-            <button type="button" class="btn btn-primary" (click)="save()"><em class="fa fa-save"></em> Simpan</button>
+            <button type="button" class="btn btn-primary"  [disabled]="!isFormValid" (click)="save()"><em class="fa fa-save"></em> Simpan</button>
         </div>
     </div>
 </form>

@@ -31,6 +31,7 @@ export class FormKurikulumComponent {
     status: string,
     cpl_deleted: any
   }
+  isFormValid: boolean = false;
 
   constructor(
     private kurikulumService: KurikulumService,
@@ -52,9 +53,13 @@ export class FormKurikulumComponent {
 
     this.kurikulumService.getKurikulumId(kurikulumId).subscribe((res: any) => {
       this.formModel = res.data;
+      this.validateForm();
+      console.log(this.formModel.cpl);
+      
     }, err => {
       console.log(err);
     });
+
   }
 
   resetForm() {
@@ -136,6 +141,15 @@ export class FormKurikulumComponent {
     };
 
     this.formModel.cpl.push(val);
+
+    if (val.deskripsi_cpl.trim() !== '') {
+      this.validateForm();
+    } else {
+      // If deskripsi_cpl is empty, set isFormValid to false
+      this.isFormValid = false;
+    }
+    console.log(val);
+    
   }
 
   removeDetail(cpl, paramIndex) {
@@ -147,9 +161,12 @@ export class FormKurikulumComponent {
       this.formModel.cpl_deleted = this.formModel.cpl_deleted || [];
       this.formModel.cpl_deleted.push(removedElement);
     }
+    this.isFormValid = true;
+
   }
 
   changeDetail(cpl) {
+    this.validateForm();
     if (cpl?.id) {
       cpl.is_updated = true;
     }
@@ -162,6 +179,18 @@ export class FormKurikulumComponent {
     if (charCode > 31 && (charCode < 48 || charCode > 57)) {
         event.preventDefault();
     }
+  }
+
+  validateForm() {
+    // Reset isFormValid menjadi true
+    this.isFormValid = true;
+  
+    // Validasi input dan setel isFormValid menjadi false jika ada input yang kosong
+    this.formModel.cpl.forEach(detail => {
+      if (!detail.deskripsi_cpl) {
+        this.isFormValid = false;
+      } 
+    });
   }
 
 }

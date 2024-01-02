@@ -143,12 +143,11 @@ export class FormKurikulumComponent {
     this.formModel.cpl.push(val);
 
     if (val.deskripsi_cpl.trim() !== '') {
-      this.validateForm();
+      this.isFormValid = true;
     } else {
       // If deskripsi_cpl is empty, set isFormValid to false
       this.isFormValid = false;
     }
-    console.log(val);
     
   }
 

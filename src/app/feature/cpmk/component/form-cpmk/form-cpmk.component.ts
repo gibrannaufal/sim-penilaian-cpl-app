@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output, SimpleChange } from '@a
 import { CpmkService } from '../../service/cpmk.service';
 import { filterService } from 'src/app/core/services/filter.service';
 import { LandaService } from 'src/app/core/services/landa.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-form-cpmk',
@@ -23,10 +24,15 @@ export class FormCpmkComponent implements OnInit {
   
   kurikulum: any;
   id_kurikulum: number;
+  id_cpl: number;
   cpl:any;
   kode_Kurikulum: string;
   kode_cpl: string;
   showLoading: boolean;
+  titleModal: string;
+  cpmkAll: any;
+  isFormValid: boolean = false;
+
 
   formModelUpdate: {
     id_cpmk: number,
@@ -50,14 +56,11 @@ export class FormCpmkComponent implements OnInit {
     private CpmkService: CpmkService,
     private filterService:filterService,
     private landaService: LandaService,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit(): void { 
     this.getKurikulum();
-    // if(this.formModelUpdate.id_kurikulum_fk !== 0 || this.formModelUpdate.id_kurikulum_fk !== null)
-    // {
-    //   this.getCpl(this.formModelUpdate.id_kurikulum_fk);
-    // }
   }
 
   ngOnChanges(changes: SimpleChange) {
@@ -92,6 +95,8 @@ export class FormCpmkComponent implements OnInit {
   onCplChange(selectedValue: any) {
     this.formModel.id_cpl_fk = selectedValue.id_cpl;
     this.kode_cpl =  selectedValue.kode_cpl;
+    this.getCpmkAll(this.formModel.id_kurikulum_fk, selectedValue.id_cpl);
+
   }
 
 
@@ -139,7 +144,7 @@ export class FormCpmkComponent implements OnInit {
         deskripsi_cpmk: res.data.deskripsi_cpmk
       }
       this.getCpl(res.data.detail_kurikulum.id_kurikulum);
-      console.log(this.formModelUpdate);
+      // console.log(this.formModelUpdate);
 
     }, err => {
       console.log(err);
@@ -164,7 +169,7 @@ export class FormCpmkComponent implements OnInit {
   }
 
   update() {
-    this.CpmkService.updateKurikulum(this.formModelUpdate).subscribe((res: any) => {
+    this.CpmkService.updateCpmk(this.formModelUpdate).subscribe((res: any) => {
       this.landaService.alertSuccess('Berhasil', res.message);
       this.afterSave.emit();
     }, err => {
@@ -172,30 +177,54 @@ export class FormCpmkComponent implements OnInit {
     });
   }
 
+  getCpmkAll(idKurikulum , idCpl)
+  {   
+    const params = {
+      id_kurikulum: idKurikulum,
+      id_cpl: idCpl
+    }
+    this.filterService.getCpmkFilterAll(params).subscribe((res: any) => {
+      this.cpmkAll = res;
+      
+    }, err => {
+      console.log(err);
+    });
+  }
+
   addDetail() {
-    console.log(this.kode_cpl);
-    
-    const matchResult = this.kode_cpl.match(/\d+/); // Mencocokkan angka dalam kode_cpl
-    const nextIndexCpl = matchResult ? parseInt(matchResult[0], 10): 1;
-
-    // Mengambil dua digit dari angka
+    const matchResult = this.kode_cpl.match(/\d+/);
+    const nextIndexCpl = matchResult ? parseInt(matchResult[0], 10) : 1;
     const paddedIndexCpl = nextIndexCpl.toString().padStart(2, '0');
-
-    const nextIndex = this.formModel.detail_cpmk.length + 1;
+  
+    let nextIndex;
+    let detailIndex = this.formModel.detail_cpmk.length + 1 ;
+    if (this.cpmkAll.length > 0) {
+      nextIndex = this.cpmkAll.length + detailIndex;
+    } else {
+      nextIndex = this.formModel.detail_cpmk.length + 1;
+    }
+  
     const paddedIndex = nextIndex.toString().padStart(2, '0');
-
+  
     let val = {
       is_added: true,
       kode_cpmk: `CPMK-${paddedIndexCpl}-${paddedIndex}`,
       deskripsi_cpmk: '',
     };
-
+  
     this.formModel.detail_cpmk.push(val);
+    // console.log(val);
+    
+    if (val.deskripsi_cpmk.trim() !== '') {
+      this.isFormValid = true;
+    } else {
+      // If deskripsi_cpl is empty, set isFormValid to false
+      this.isFormValid = false;
+    }
+    
   }
 
   removeDetail(cpl, paramIndex) {
-    // console.log("log cpl nya sebelum splice:", cpl[paramIndex]?.id_cpmk);
-
     // Splice the element first
     const removedElement = cpl.splice(paramIndex, 1)[0];
 
@@ -204,13 +233,36 @@ export class FormCpmkComponent implements OnInit {
       this.formModel.delete_cpmk = this.formModel.delete_cpmk || [];
       this.formModel.delete_cpmk.push(removedElement);
     }
+    this.isFormValid = true;
+
   }
 
   changeDetail(cpl) {
+    this.validateForm();
     if (cpl?.id) {
       cpl.is_updated = true;
     }
   }
+  
+  lihatCpmk(modalId, kurikulumId , cplId) {
+    this.titleModal = 'List CPMK ' ;
+    this.id_kurikulum = kurikulumId,
+    this.id_cpl = cplId,
+    this.modalService.open(modalId,{ size: 'lg', backdrop: 'static' });
+  }
 
+  validateForm() {
+    // Reset isFormValid menjadi true
+    this.isFormValid = true;
+  
+    // Validasi input dan setel isFormValid menjadi false jika ada input yang kosong
+    this.formModel.detail_cpmk.forEach(detail => {
+      console.log(this.formModel.detail_cpmk);
+      
+      if (!detail.deskripsi_cpmk) {
+        this.isFormValid = false;
+      } 
+    });
+  }
   
 }

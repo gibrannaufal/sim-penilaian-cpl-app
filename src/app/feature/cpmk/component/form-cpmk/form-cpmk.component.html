@@ -44,7 +44,12 @@
                     </ng-select>
                 </div>
             </div>
-           
+            <div class="form-group row">
+                <button class="btn btn-sm btn-primary" 
+                [disabled]="formModel.id_kurikulum_fk === 0 && kode_cpl === null"
+                (click)="lihatCpmk(formListCpmk ,formModel.id_kurikulum_fk ,formModel.id_cpl_fk)"
+                > Lihat list CPMK</button>
+            </div>
         </div>
         <div  class="col-md-12">
             <div class="table-responsive">
@@ -74,6 +79,9 @@
                             <td>
                                 <input type="text" placeholder="Deskripsi CPMK" (change)="changeDetail(detail)"
                                     class="form-control" name="deskripsi_cpmk[{{i}}]" [(ngModel)]="detail.deskripsi_cpmk" />
+                                <div *ngIf="!detail.deskripsi_cpmk" style="color: red; font-size: 10px;">
+                                        *deskripsi cpmk tidak boleh kosong
+                                </div>
                             </td> 
                         </tr>
                     </tbody>
@@ -150,7 +158,19 @@
         <div class="col-md-12 text-right">
             <button type="button" class="btn btn-light mr-2" (click)="afterSave.emit()"><em
                     class="fa fa-arrow-left"></em> Kembali</button>
-            <button type="button" class="btn btn-primary" (click)="save()"><em class="fa fa-save"></em> Simpan</button>
+            <button type="button" class="btn btn-primary" [disabled]="!isFormValid" (click)="save()"><em class="fa fa-save"></em> Simpan</button>
         </div>
     </div>
 </form>
+
+<ng-template #formListCpmk let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title mt-0">{{titleModal}}</h5>
+        <button type="button" class="close" (click)="modal.close()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <app-list-cpmk [id_kurikulum]="id_kurikulum" [id_cpl]="id_cpl" (afterSave)="modal.close(); "></app-list-cpmk>
+    </div>
+</ng-template>

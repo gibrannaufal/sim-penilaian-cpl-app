@@ -20,7 +20,7 @@ export class CpmkService {
     return this.landaService.DataGet('/v1/cpmk/' + id);
   }
 
-  updateKurikulum(payload) {
+  updateCpmk(payload) {
     return this.landaService.DataPut('/v1/cpmk', payload);
   }
 

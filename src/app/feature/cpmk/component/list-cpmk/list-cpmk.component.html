@@ -1,0 +1,26 @@
+<div  class="col-md-12">
+    <div class="table-responsive">
+        <table class="table" style="border: 2px;">
+            <thead>
+                <tr>
+                    <th style="min-width: 200px;">No</th>
+                    <th style="min-width: 200px;">Kode CPMK</th>
+                    <th style="min-width: 200px;">Deskripsi CPMK</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let val of cpmkAll; let i = index;" >   
+                    <td>
+                       {{i + 1}}
+                    </td> 
+                    <td>
+                        {{val.kode_cpmk}}
+                    </td> 
+                    <td>
+                        {{val.deskripsi_cpmk}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

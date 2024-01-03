@@ -17,5 +17,7 @@ export class filterService {
   getCpmkFilter(id) {
     return this.landaService.DataGet('/v1/cpmkFilter/'+ id );
   }
-
+  getCpmkFilterAll(arrParameter) {
+    return this.landaService.DataGet('/v1/cpmkFilterAll/', arrParameter );
+  }
 }

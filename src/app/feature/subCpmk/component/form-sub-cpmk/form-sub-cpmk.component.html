@@ -1,0 +1,238 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-transparent">
+                <div class="card-header  d-flex justify-content-between">
+                    <h1>Tambah Sub-CPMK</h1>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <label class="form-label col-md-3">Nama Kurikulum</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" disabled [(ngModel)]="matakuliah.nama_kurikulum" name="nama_kurikulum" class="form-control"
+                                        placeholder="Kode Kurikulum">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-3 required">Kode Kurikulum</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" disabled [(ngModel)]="matakuliah.kode_kurikulum"  name="kode_kurikulum" class="form-control"
+                                            placeholder="Kode Kurikulum">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-3 required">Nama Mata Kuliah</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" disabled [(ngModel)]="matakuliah.nama_matakuliah"  name="nama_matakuliah" class="form-control"
+                                            placeholder="Nama Mata kuliah">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-3 required">Kode Mata Kuliah</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" disabled [(ngModel)]="matakuliah.kode_matakuliah"  name="kode_matakuliah" class="form-control"
+                                            placeholder="Kode Mata Kuliah">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-3 required">Deskripsi CPMK</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" disabled [(ngModel)]="matakuliah.deskripsi_cpmk"  name="deskripsi_cpmk" class="form-control"
+                                            placeholder="Deskripsi CPMK">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-3 required">Kode CPMK</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" disabled [(ngModel)]="matakuliah.kode_cpmk"  name="kode_cpmk" class="form-control"
+                                            placeholder="Kode CPMK">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-3 required">Bobot CPMK</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" disabled [(ngModel)]="matakuliah.bobot_detailmk"  name="bobot_detailmk" class="form-control"
+                                            placeholder="Bobot CPMK">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-3 required">Capaian Pembelajaran Mata Kuliah</label>
+                                    <div class="col-md-9">
+                                        <input  type="text" disabled [(ngModel)]="matakuliah.indikator_pencapaian"  name="indikator_pencapaian" class="form-control"
+                                            placeholder="Capaian Mata Kuliah">
+                                    </div>
+                                </div>          
+                            </div>
+                     
+                            <div class="col-md-12">
+                                <div class="table-responsive table-container" >
+                                    <table class="table" >
+                                        <thead>     
+                                            <tr>
+                                                <th rowspan="2"  style=" min-width: 5vw;">
+                                                    <button class="btn btn-sm btn-success" (click)="addDetail()" >
+                                                        <em class="fa fa-plus"></em>
+                                                    </button>
+                                                </th>
+                                                <th rowspan="2" style=" min-width: 30vw;" >Deskripsi SUB-CPMK</th>
+                                                <th rowspan="2" style=" min-width: 15vw;" >Kode SUB-CPMK</th>
+                                                <th rowspan="2"style=" min-width: 30vw;" >indikator Pencapaian</th>
+                                                <th style="min-width: 15vw; text-align: center; " colspan="7"> Metode Pembelajaran</th>
+                                                <th style="min-width: 15vw; text-align: center; " colspan="6"> Teknik Penilaian</th>
+                                                <th rowspan="2" style="min-width: 15vw;" >Instrumen Penilaian</th>
+                                                <th rowspan="2" style="min-width: 15vw;" >Pertemuan Ke-</th>
+                                            </tr>
+                                            <tr>
+                                                <!-- METODE PEMBELAJARAN  -->
+                                                <th>Diskusi Kelompok</th>
+                                                <th>Simulasi</th>
+                                                <th>Studi Kasus</th>
+                                                <th>Pembelajaran Kaloboratif</th>
+                                                <th>Pembelajaran Kooperatif</th>
+                                                <th>Pembelajaran Berbasis Proyek</th>
+                                                <th>Pembelajaran Berbasis Masalah</th>
+
+                                                <!-- Teknik Penilaian -->
+                                                <th> Partisipasi</th>
+                                                <th> Tugas/Quiz</th>
+                                                <th> Presentasi</th>
+                                                <th> Tes Tulis</th>
+                                                <th> Tes Lisan</th>
+                                                <th> Tugas Kelompok / Proyek</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- *ngFor="let detail of formModelCreate.detail_subcpmk; index as i;"  -->
+                                            <tr *ngFor="let detail of formModelCreate.detail_subcpmk; index as i;">
+                                                <td style="min-width: 5vw;" >
+                                                    <button class="btn btn-sm btn-danger" (click)="removeDetail(formModelCreate.detail_subcpmk, i)" >
+                                                        <em class="fa fa-trash"></em>
+                                                    </button>
+                                                </td>
+                                                <td style="min-width: 15vw;" >
+                                                    <input  type="text"  [(ngModel)]="detail.nama_subcpmk" name="nama_subcpmk[{{i}}]"  required
+                                                        class="form-control" placeholder="Deskripsi SUB-CPMK">
+                                                </td> 
+                                                <td style="min-width: 15vw;" >
+                                                    <input  type="text" disabled [(ngModel)]="detail.kode_subcpmk" name="kode_subcpmk[{{i}}]" required 
+                                                        class="form-control" placeholder="Kode SUB-CPMK">
+                                                </td> 
+                                                <td style="min-width: 15vw;" >
+                                                    <input  type="text" [(ngModel)]="detail.indikator_pencapaian" name="indikator_pencapaian[{{i}}]" required 
+                                                        class="form-control" placeholder="Indikator Pencapaian">
+                                                </td> 
+
+                                                <!-- metode pembelajaran -->
+                                                <td class="text-center" style="min-width: 5vw;vertical-align: middle;" >
+                                                    <input type="checkbox" [(ngModel)]="detail.diskusi_kelompok"  name="diskusi_kelompok[{{i}}]"style="transform: scale(2); " value="1">
+                                                </td>
+                                                <td class="text-center" style="min-width: 5vw;vertical-align: middle;" >
+                                                    <input type="checkbox" [(ngModel)]="detail.simulasi"  name="simulasi[{{i}}]"style="transform: scale(2); " value="1">
+                                                </td>
+                                                <td class="text-center" style="min-width: 5vw;vertical-align: middle;" >
+                                                    <input type="checkbox" [(ngModel)]="detail.studi_kasus"  name="studi_kasus[{{i}}]"style="transform: scale(2); " value="1">
+                                                </td>
+                                                <td class="text-center" style="min-width: 5vw;vertical-align: middle;" >
+                                                    <input type="checkbox" [(ngModel)]="detail.kaloboratif"  name="kaloboratif[{{i}}]"style="transform: scale(2); " value="1">
+                                                </td>
+                                                <td class="text-center" style="min-width: 5vw;vertical-align: middle;" >
+                                                    <input type="checkbox" [(ngModel)]="detail.kooperatif"  name="kooperatif[{{i}}]"style="transform: scale(2); " value="1">
+                                                </td>
+                                                <td class="text-center" style="min-width: 5vw;vertical-align: middle;" >
+                                                    <input type="checkbox" [(ngModel)]="detail.berbasis_proyek"  name="berbasis_proyek[{{i}}]"style="transform: scale(2); " value="1">
+                                                </td>
+                                                <td class="text-center" style="min-width: 5vw;vertical-align: middle;" >
+                                                    <input type="checkbox" [(ngModel)]="detail.berbasis_masalah"  name="berbasis_masalah[{{i}}]"style="transform: scale(2); " value="1">
+                                                </td>
+                                                
+                                                <!-- teknik penilaian -->
+                                                <td style="min-width: 5vw;" >
+                                                    <input  type="text"  [(ngModel)]="detail.partisipasi" name="partisipasi[{{i}}]"  (change)="changeDetail(detail)" class="form-control" >
+                                                </td> 
+                                                <td style="min-width: 5vw;" >
+                                                    <input  type="text"  [(ngModel)]="detail.tugas" name="tugas[{{i}}]" (change)="changeDetail(detail)"  class="form-control" >
+                                                </td> 
+                                                <td style="min-width: 5vw;" >
+                                                    <input  type="text"  [(ngModel)]="detail.presentasi" name="presentasi[{{i}}]" (change)="changeDetail(detail)"  class="form-control" >
+                                                </td> 
+                                                <td style="min-width: 5vw;" >
+                                                    <input  type="text"  [(ngModel)]="detail.tes_tulis" name="tes_tulis[{{i}}]"  (change)="changeDetail(detail)" class="form-control" >
+                                                </td> 
+                                                <td style="min-width: 5vw;" >
+                                                    <input  type="text"  [(ngModel)]="detail.tes_lisan" name="tes_lisan[{{i}}]" (change)="changeDetail(detail)" class="form-control" >
+                                                </td> 
+                                                <td style="min-width: 5vw;" >
+                                                    <input  type="text"  [(ngModel)]="detail.tugas_kelompok" name="tugas_kelompok[{{i}}]" (change)="changeDetail(detail)"  class="form-control" >
+                                                </td> 
+                                                
+
+                                                <td style="min-width: 15vw;" >
+                                                    <input  type="text" [(ngModel)]="detail.instrumen_penilaian" name="instrumen_penilaian[{{i}}]"  required
+                                                        class="form-control" placeholder="Instrumen Penilaian">
+                                                </td> 
+                                                <td style="min-width: 15vw;" >
+                                                    <input  type="text" [(ngModel)]="detail.pertemuan"  name="pertemuan[{{i}}]"  required
+                                                        class="form-control" placeholder="Pertemuan Ke-">
+                                                </td> 
+                                                                    
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="11" style="text-align: center;" >
+                                                    Total Bobot *Tidak Lebih dari bobot CPMK mata kuliah yaitu {{matakuliah.bobot_detailmk}}
+                                                
+                                                </td>
+                                                <td colspan="6"  style="text-align: center;">
+                                                    {{totalBobot}}
+                                                    <div *ngIf="totalBobot > matakuliah.bobot_detailmk"  style="color: red; font-size: 10px;">
+                                                        *Total Bobot teknik penilaian tidak boleh lebih dari {{matakuliah.bobot_detailmk}}
+                                                    </div>
+                                                </td>
+                                                <td colspan="2"></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-right">
+                                <button type="button" class="btn btn-light mr-2" 
+                                (click)="lihatSubCpmk(formListSubCpmk, matakuliah.deskripsi_cpmk)" 
+                                ><em
+                                        class="fa fa-arrow-left"></em> Kembali</button>
+                                <button type="button" class="btn btn-primary" 
+                                [disabled]="totalBobot > matakuliah.bobot_detailmk"  
+                                (click)="save()" ><em class="fa fa-save"></em> Simpan</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #formListSubCpmk let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title mt-0">{{titleModal}}</h5>
+        <button type="button" class="close" (click)="modal.close()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <app-list-sub-cpmk [id_mk_fk]="id_mk_fk" [id_detailmk_fk]="id_detailmk_fk"  (afterSave)="modal.close(); "></app-list-sub-cpmk>
+    </div>
+</ng-template>

@@ -20,4 +20,19 @@ export class filterService {
   getCpmkFilterAll(arrParameter) {
     return this.landaService.DataGet('/v1/cpmkFilterAll/', arrParameter );
   }
+  getDetailMk(arrParameter)
+  {
+    return this.landaService.DataGet('/v1/detailMk/', arrParameter );
+  }
+
+  getMkById(arrParameter)
+  {
+    return this.landaService.DataGet('/v1/mkById/', arrParameter );
+  }
+
+  getSubCpmkAll(arrParameter)
+  {
+    return this.landaService.DataGet('/v1/subCpmkAll/', arrParameter );
+  }
+  
 }

@@ -5,6 +5,8 @@ import { ListUserComponent } from './user/components/list-user/list-user.compone
 import { KurikulumComponent } from './kurikulum/component/kurikulum/kurikulum.component';
 import { CpmkComponent } from './cpmk/component/cpmk/cpmk.component';
 import { MataKuliahComponent } from './mataKuliah/component/mata-kuliah/mata-kuliah.component';
+import { SubCpmkComponent } from './subCpmk/component/sub-cpmk/sub-cpmk.component';
+import { FormSubCpmkComponent } from './subCpmk/component/form-sub-cpmk/form-sub-cpmk.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -13,6 +15,9 @@ const routes: Routes = [
     { path: 'kurikulum', component: KurikulumComponent, pathMatch: 'full' },
     { path: 'cpmk', component: CpmkComponent, pathMatch: 'full' },
     { path: 'mata-kuliah', component: MataKuliahComponent, pathMatch: 'full' },
+    { path: 'sub-cpmk', component: SubCpmkComponent, pathMatch: 'full' },
+    { path: 'form-sub-cpmk', component: FormSubCpmkComponent, pathMatch: 'full' },
+
 
 ];
 

@@ -1,0 +1,35 @@
+.table {
+    border: 1px solid black;
+  
+    thead, tbody, tfoot {
+      tr {
+        th, td {
+          border: 1px solid black;
+        }
+        
+      }
+    }
+  
+    thead {
+      tr {
+        th[colspan="7"], th[colspan="6"] {
+          border: 1px solid black;
+          text-align: center;
+        }
+        th:last-child,
+        th:nth-last-child(2) {
+            border-bottom: 1px solid black;
+        }
+      }
+    }
+  
+  
+    tfoot {
+      tr {
+        td {
+          text-align: center;
+        }
+      }
+    }
+  }
+  

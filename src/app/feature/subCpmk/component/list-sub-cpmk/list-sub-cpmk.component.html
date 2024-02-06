@@ -1,0 +1,56 @@
+
+<div class="col-md-12">
+    <button type="button" class="btn btn-sm btn-primary" (click)="afterSave.emit()" (click)="formCreate()" >
+        <i class="fa fa-plus font-size-14 align-middle mr-1"></i> Tambah Sub CPMK 
+    </button>
+</div>
+<div class="col-md-12 mt-2">
+    <div class="table-responsive">
+        <table class="table" style="border: 2px;" datatable [dtOptions]="dtOptions">
+            <thead>
+                <tr>
+                    <th style="min-width: 100px;">No</th>
+                    <th style="min-width: 100px;">Deskripsi Sub-CPMK</th>
+                    <th style="min-width: 100px;">kode Sub-CPMK</th>
+                    <th style="min-width: 100px;">Indikator Pencapaian</th>
+                    <th style="min-width: 100px;">Metode Pembelajaran</th>
+                    <th style="min-width: 100px;">Teknik Penilaian</th>
+                    <th style="min-width: 100px;">Rubrik</th>
+                    <th style="min-width: 100px;">Pertemuan</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let val of listSubcpmk; let i = index;" >   
+                    <td>
+                       {{i + 1}}
+                    </td> 
+                    <td>
+                        {{val.nama_subcpmk}}
+                    </td> 
+                    <td>
+                        {{val.kode_subcpmk}}
+                    </td> 
+                    <td>
+                        {{val.indikator_pencapaian}}
+                    </td> 
+                    <td>
+                        {{val.metode_pembelajaran}}
+                    </td> 
+                    <td>
+                        {{val.teknik_penilaian}}
+                    </td>
+                    <td>
+                        {{val.instrumen_penilaian}}
+                    </td>  
+                    <td>
+                        {{val.pertemuan}}
+                    </td> 
+                    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+

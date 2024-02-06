@@ -11,6 +11,7 @@ import { UserModule } from './user/user.module';
 import { KurikulumModule } from './kurikulum/Kurikulum.module';
 import { CpmkModule } from './cpmk/Cpmk.module';
 import { mataKuliahModule } from './mataKuliah/mataKuliah.module';
+import { subCpmkModule } from './subCpmk/subCpmk.module';
 
 // const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 //     suppressScrollX: true,
@@ -28,7 +29,8 @@ import { mataKuliahModule } from './mataKuliah/mataKuliah.module';
         UserModule,
         KurikulumModule,
         CpmkModule,
-        mataKuliahModule
+        mataKuliahModule,
+        subCpmkModule
     ],
     // providers: [
     //     {

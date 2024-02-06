@@ -603,10 +603,10 @@ body[data-sidebar="colored"] {
         }
 
         a {
-          color: rgba($white, 0.5);
+          color:#FFF;
 
           i {
-            color: rgba($white, 0.5);
+            color:#FFF;
           }
 
           &.waves-effect {
@@ -617,10 +617,10 @@ body[data-sidebar="colored"] {
 
           &:hover {
             background-color: lighten($primary, 2%);
-            color: rgba($black, 1);
+            color: #fff;
             
             i {
-              color: rgba($black, 1);
+              color: #fff;
             }
           }
         }

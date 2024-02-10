@@ -1,0 +1,102 @@
+<div class="card" *ngIf="!showForm">
+    <div class="card-header">
+       <p style="font-size: 20px;"><b>Daftar Mata kuliah - Validasi Mata kuliah</b> </p> 
+    </div>
+    <div class="card-body">
+
+        <div class="row">
+            <div class="col-md-12 row">
+                <div class="col-md-5">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <div class="input-group input-group-sm mr-2">
+                                <input type="text" placeholder="Filter Nama Matakuliah" class="form-control form-control-sm" [(ngModel)]="filter.nama_mk"  name="nama_mk"  />
+                                <div class="input-group-append">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-search" (click)="reloadDataTable()">
+                                       
+                                        </i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-12 mt-4 table-responsive table-container">
+                <table class="table table-hover" datatable [dtOptions]="dtOptions" >
+                    <thead class="thead-light">
+                        <tr>
+                            <td>No</td>
+                            <td>Kode Kurikulum</td>
+                            <td>Nama Kurikulum</td>
+                            <td>Nama Matakuliah</td>
+                            <td>Deskripsi</td>
+                            <td>SKS</td>
+                            <td>Bobot</td>
+                            <td>Semester</td>
+                            <td>Bobot Kajian</td>
+                            <td>Pesan</td>
+                            <td>Status</td>
+                            <td style="min-width: 12vw;"></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let mk of listmk;">
+                            <td>{{mk.no}}</td>
+                            <td class="vertical-middle">{{mk.kurikulum.kode_kurikulum}}</td>
+                            <td class="vertical-middle">{{mk.kurikulum.nama_kurikulum}}</td>
+                            <td class="vertical-middle">{{mk.nama_matakuliah}}</td>
+                            <td class="vertical-middle">{{mk.deskripsi}}</td>
+                            <td class="vertical-middle">{{mk.sks}}</td>
+                            <td class="vertical-middle">{{mk.bobot}}</td>
+                            <td class="vertical-middle">{{mk.semester}}</td>
+                            <td class="vertical-middle">{{mk.bobot_kajian}}</td>
+                            <td class="vertical-middle">
+                                <span *ngIf="mk.pesan === null" class="align-items-center text-center">-</span>
+                                {{mk.pesan}}
+                            </td>
+                            <td class="vertical-middle">
+                                <span *ngIf="mk.status == 'diterima'" class="custom-badge custom-badge-success">{{mk.status}}</span>
+                                <span *ngIf="mk.status == 'draft'" class="custom-badge custom-badge-warning">{{mk.status}}</span>
+                                <span *ngIf="mk.status == 'ditolak'"class="custom-badge custom-badge-danger">{{mk.status}}</span>
+                            </td>
+                            <td>
+                            <button (click)="detailMk(listDetailMk, mk.id_matakuliah , mk.nama_matakuliah)" class="btn btn-sm btn-info" title="Detail MK"><i class="fa fa-eye"></i></button>
+                                <button (click)="diterimaMk(mk.id_matakuliah)" class="btn btn-sm btn-success">validasi</button>
+                                <button (click)="ditolak(formValidasiMk ,mk.id_matakuliah)" class="btn btn-sm btn-danger">Ditolak</button>
+                            </td>
+                           
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<ng-template #formValidasiMk let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title mt-0">Beri pesan revisi</h5>
+        <button type="button" class="close" (click)="modal.close()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <app-form-validasi-mk [id_matakuliah]="id_matakuliah" (afterSave)="modal.close(); reloadDataTable()" ></app-form-validasi-mk>
+    </div>
+</ng-template>
+
+<ng-template #listDetailMk let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title mt-0">{{titleForm}}</h5>
+        <button type="button" class="close" (click)="modal.close()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <app-list-detail-mk [id_matakuliah]="id_matakuliah" (afterSave)="modal.close(); reloadDataTable()" ></app-list-detail-mk>
+    </div>
+</ng-template>

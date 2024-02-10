@@ -1,0 +1,89 @@
+<div  class="col-md-12">
+    <div class="table-responsive table-container">
+        <table class="table" style="border: 2px;">
+            <thead>
+                <tr>
+                    <th style="min-width: 100px;">No</th>
+                    <th style="min-width: 200px;">Deskripsi CPMK</th>
+                    <th style="min-width: 100px;">kode CPMK</th>
+                    <th style="min-width: 250px;">Deskripsi CPL</th>
+                    <th style="min-width: 100px;">kode CPL</th>
+                    <th style="min-width: 100px;">Pesan</th>
+                    <th style="min-width: 100px;">Status</th>
+                    <th style="min-width: 15vw;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let val of detailMk; let i = index;" >   
+                    <td>
+                       {{i + 1}}
+                    </td> 
+                    <td>
+                        {{val.deskripsi_cpmk}}
+                    </td> 
+                    <td>
+                        {{val.kode_cpmk}}
+                    </td>
+                    <td>
+                        {{val.deskripsi_cpl}}
+                    </td>
+                    <td>
+                        {{val.kode_cpl}}
+                    </td>
+                    <td class="vertical-middle">
+                        <span *ngIf="val.pesan === null" class="align-items-center text-center">-</span>
+                        {{val.pesan}}
+                    </td>
+                    <td class="vertical-middle">
+                        <span *ngIf="val.status == 'diterima'" class="custom-badge custom-badge-success">{{val.status}}</span>
+                        <span *ngIf="val.status == 'draft'" class="custom-badge custom-badge-warning">{{val.status}}</span>
+                        <span *ngIf="val.status == 'ditolak'"class="custom-badge custom-badge-danger">{{val.status}}</span>
+                    </td>
+                    <td>
+                       <button class="btn btn-sm btn-info" title="Sub-CPMK"
+                       (click)="lihatSubCpmk(formListSubCpmk ,val.id_mk_fk, val.id_detailmk, val.deskripsi_cpmk)">
+                            <i class="fa fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-success"
+                            (click)="diterimaDetailMk(val.id_mk_fk, val.id_detailmk)">
+                            Diterima
+                        </button>
+                        <button class="btn btn-sm btn-danger"
+                            (click)="ditolak(formPesanDitolak ,val.id_mk_fk, val.id_detailmk)">
+                            Ditolak
+                        </button>
+                    </td>
+                    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<ng-template #formPesanDitolak let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title mt-0">Beri pesan revisi</h5>
+        <button type="button" class="close" (click)="modal.close()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <app-form-validasi-mk [id_matakuliah]="id_matakuliah" [id_detailmk]="id_detailmk" (afterSave)="modal.close(); reloadDataTable()" ></app-form-validasi-mk>
+    </div>
+</ng-template>
+
+<ng-template #formListSubCpmk let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title mt-0">{{titleModal}}</h5>
+        <button type="button" class="close" (click)="modal.close()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <app-list-sub-cpmk [id_mk_fk]="id_mk_fk" [id_detailmk_fk]="id_detailmk_fk"  (afterSave)="modal.close(); "></app-list-sub-cpmk>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-light mr-2" (click)="afterSave.emit()"><em
+            class="fa fa-arrow-left"></em> Kembali</button>
+    </div>
+</ng-template>

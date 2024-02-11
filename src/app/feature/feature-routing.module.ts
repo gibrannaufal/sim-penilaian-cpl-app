@@ -7,6 +7,8 @@ import { CpmkComponent } from './cpmk/component/cpmk/cpmk.component';
 import { MataKuliahComponent } from './mataKuliah/component/mata-kuliah/mata-kuliah.component';
 import { SubCpmkComponent } from './subCpmk/component/sub-cpmk/sub-cpmk.component';
 import { FormSubCpmkComponent } from './subCpmk/component/form-sub-cpmk/form-sub-cpmk.component';
+import { ValidasiMkComponent } from './validasiMatakuliah/component/validasi-mk/validasi-mk.component';
+
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -17,6 +19,7 @@ const routes: Routes = [
     { path: 'mata-kuliah', component: MataKuliahComponent, pathMatch: 'full' },
     { path: 'sub-cpmk', component: SubCpmkComponent, pathMatch: 'full' },
     { path: 'form-sub-cpmk', component: FormSubCpmkComponent, pathMatch: 'full' },
+    { path: 'validasi-mk', component: ValidasiMkComponent, pathMatch: 'full' },
 
 
 ];

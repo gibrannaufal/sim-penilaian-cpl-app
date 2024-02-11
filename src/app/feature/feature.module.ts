@@ -12,6 +12,7 @@ import { KurikulumModule } from './kurikulum/Kurikulum.module';
 import { CpmkModule } from './cpmk/Cpmk.module';
 import { mataKuliahModule } from './mataKuliah/mataKuliah.module';
 import { subCpmkModule } from './subCpmk/subCpmk.module';
+import { ValidasiMkModule } from './validasiMatakuliah/ValidasiMk.module';
 
 // const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 //     suppressScrollX: true,
@@ -30,7 +31,8 @@ import { subCpmkModule } from './subCpmk/subCpmk.module';
         KurikulumModule,
         CpmkModule,
         mataKuliahModule,
-        subCpmkModule
+        subCpmkModule,
+        ValidasiMkModule
     ],
     // providers: [
     //     {

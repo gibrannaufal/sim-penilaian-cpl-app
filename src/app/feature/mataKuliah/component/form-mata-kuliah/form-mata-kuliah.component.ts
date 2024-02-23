@@ -22,8 +22,10 @@ export class FormMataKuliahComponent {
   selectedKurikulum: any;
   selectedCpl: any;
   selectedCpmk: any;
+  selectedMatkulApi:any;
 
   kurikulum: any;
+  matkulApi: any;
   id_kurikulum: number;
   cpl:any;
   cpmk:any;
@@ -45,6 +47,9 @@ export class FormMataKuliahComponent {
     bobot: number,
     semester: string,
     bobot_kajian: string,
+    uuid_api: string,
+    prodi: string,
+    kelas: string,
     mk_detail:any,
     mk_detail_deleted:any,
     status:any
@@ -58,6 +63,7 @@ export class FormMataKuliahComponent {
 
   ngOnInit(): void { 
     this.getKurikulum(); 
+    this.getMkApi();
     
   }
 
@@ -129,6 +135,9 @@ export class FormMataKuliahComponent {
       bobot: 0,
       semester: '',
       bobot_kajian: '',
+      uuid_api: '',
+      kelas: '',
+      prodi: '',
       mk_detail: [],
       mk_detail_deleted: [],
       status: ''
@@ -224,9 +233,11 @@ export class FormMataKuliahComponent {
     }
   }
 
-  onKurikulumChange(selectedValue: any) {
-    this.getCpmk(selectedValue);
-    this.getCpl(selectedValue);
+  onKurikulumChange(idKurikulum: any) {
+    this.selectedKurikulum = this.kurikulum .find(kurikulum => kurikulum.id_kurikulum === idKurikulum);
+    this.formModel.kode_kurikulum = this.selectedKurikulum.kode_kurikulum;
+    this.getCpmk(idKurikulum);
+    this.getCpl(idKurikulum);
   }
 
   getCpmk(id_kurikulum: number)
@@ -273,6 +284,7 @@ export class FormMataKuliahComponent {
 
   calculateTotalBobot() {
     this.totalBobot = this.formModel.mk_detail.reduce((total, detail) => total + +detail.bobot_detailmk, 0);
+    this.formModel.bobot = this.totalBobot;
   }
   validateForm() {
     // Reset isFormValid menjadi true
@@ -293,6 +305,34 @@ export class FormMataKuliahComponent {
     if (charCode > 31 && (charCode < 48 || charCode > 57)) {
         event.preventDefault();
     }
+  }
+
+
+  getMkApi()
+  {   
+    const params = {}
+    this.filterService.getMkApi(params).subscribe((res: any) => {
+      this.matkulApi = res;
+      console.log('apinya',this.matkulApi);
+      
+     
+    }, err => {
+      console.log(err);
+    });
+  }
+
+
+  onChangeMatkul(matkul)
+  {
+    this.selectedMatkulApi = this.matkulApi.find(apiMatkul => apiMatkul.mata_kuliah === matkul);
+
+    this.formModel.kode_matakuliah = this.selectedMatkulApi.kode;
+    this.formModel.semester = this.selectedMatkulApi.semester;
+    this.formModel.sks = this.selectedMatkulApi.sks;
+    this.formModel.uuid_api = this.selectedMatkulApi.uid;
+    this.formModel.kelas = this.selectedMatkulApi.kelas;
+    this.formModel.prodi = this.selectedMatkulApi.prodi;
+    
   }
 
 }

@@ -34,5 +34,29 @@ export class filterService {
   {
     return this.landaService.DataGet('/v1/subCpmkAll/', arrParameter );
   }
+
+  getSubCpmkById(arrParameter)
+  {
+    return this.landaService.DataGet('/v1/subCpmkById/', arrParameter );
+  }
+
+  getListMahasiswa(arrParameter)
+  {
+    return this.landaService.DataGet('/v1/getListMahasiswa/', arrParameter );
+  }
+
+  getMkApi(arrParameter) {
+    return this.landaService.DataGet('/v1/getMatkul', arrParameter);
+  }
+
+  getKelasApi(arrParameter) {
+    return this.landaService.DataGet('/v1/getKelas', arrParameter);
+  }
+
+  getPenilaianAll(arrParameter) {
+    return this.landaService.DataGet('/v1/PenilaianAll', arrParameter);
+  }
+
+  
   
 }

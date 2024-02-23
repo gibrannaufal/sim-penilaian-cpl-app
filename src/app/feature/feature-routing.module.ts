@@ -8,6 +8,8 @@ import { MataKuliahComponent } from './mataKuliah/component/mata-kuliah/mata-kul
 import { SubCpmkComponent } from './subCpmk/component/sub-cpmk/sub-cpmk.component';
 import { FormSubCpmkComponent } from './subCpmk/component/form-sub-cpmk/form-sub-cpmk.component';
 import { ValidasiMkComponent } from './validasiMatakuliah/component/validasi-mk/validasi-mk.component';
+import { PenilaianMkComponent } from './penilaianMatakuliah/component/penilaian-mk/penilaian-mk.component';
+import { FormPenilaianComponent } from './penilaianMatakuliah/component/form-penilaian/form-penilaian.component';
 
 
 const routes: Routes = [
@@ -20,6 +22,8 @@ const routes: Routes = [
     { path: 'sub-cpmk', component: SubCpmkComponent, pathMatch: 'full' },
     { path: 'form-sub-cpmk', component: FormSubCpmkComponent, pathMatch: 'full' },
     { path: 'validasi-mk', component: ValidasiMkComponent, pathMatch: 'full' },
+    { path: 'penilaian-mk', component: PenilaianMkComponent, pathMatch: 'full' },
+    { path: 'form-penilaian', component: FormPenilaianComponent, pathMatch: 'full' },
 
 
 ];

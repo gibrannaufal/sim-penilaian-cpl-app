@@ -42,6 +42,8 @@
                             <td>Bobot</td>
                             <td>Semester</td>
                             <td>Bobot Kajian</td>
+                            <td>Pesan</td>
+                            <td>status</td>
                             <td width="90"></td>
                         </tr>
                     </thead>
@@ -56,6 +58,15 @@
                             <td class="vertical-middle">{{mk.bobot}}</td>
                             <td class="vertical-middle">{{mk.semester}}</td>
                             <td class="vertical-middle">{{mk.bobot_kajian}}</td>
+                            <td class="vertical-middle">
+                                <span *ngIf="mk.pesan === null" class="align-items-center text-center">-</span>
+                                {{mk.pesan}}
+                            </td>
+                            <td class="vertical-middle">
+                                <span *ngIf="mk.status == 'diterima'" class="custom-badge custom-badge-success">{{mk.status}}</span>
+                                <span *ngIf="mk.status == 'draft'" class="custom-badge custom-badge-warning">{{mk.status}}</span>
+                                <span *ngIf="mk.status == 'ditolak'"class="custom-badge custom-badge-danger">{{mk.status}}</span>
+                            </td>
                             <td class="vertical-middle">
                                 <a href="javascript: void(0);" class="align-middle mr-2"
                                 (click)="formUpdate(mk)" placement="left" container="body"

@@ -1,0 +1,86 @@
+<div class="card" >
+    <div class="card-header">
+       <p style="font-size: 20px;"><b>Daftar Mata Kuliah-Penilaian Mata Kuliah</b> </p> 
+    </div>
+    <div class="card-body">
+
+        <div class="row">
+            <div class="col-md-12 row">
+                <div class="col-md-5">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <div class="input-group input-group-sm mr-2">
+                                <input type="text" placeholder="Filter Nama Matakuliah" class="form-control form-control-sm" name="nama_mk"  />
+                                <div class="input-group-append">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-search" >
+                                       
+                                        </i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-12 mt-4">
+                <table class="table table-hover" datatable [dtOptions]="dtOptions" >
+                    <thead class="thead-light">
+                        <tr>
+                            <td>No</td>
+                            <td>Kode Kurikulum</td>
+                            <td>Nama Kurikulum</td>
+                            <td>Nama Matakuliah</td>
+                            <td>Deskripsi</td>
+                            <td>SKS</td>
+                            <td>Bobot</td>
+                            <td>Semester</td>
+                            <td>Bobot Kajian</td>
+                            <td>kelas</td>
+                            <td>prodi</td>
+                           
+                            <td width="90"></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let mk of listKelas;">
+                            <td>{{mk.no}}</td>
+                            <td class="vertical-middle">{{mk.kurikulum.kode_kurikulum}}</td>
+                            <td class="vertical-middle">{{mk.kurikulum.nama_kurikulum}}</td>
+                            <td class="vertical-middle">{{mk.nama_matakuliah}}</td>
+                            <td class="vertical-middle">{{mk.deskripsi}}</td>
+                            <td class="vertical-middle">{{mk.sks}}</td>
+                            <td class="vertical-middle">{{mk.bobot}}</td>
+                            <td class="vertical-middle">{{mk.semester}}</td>
+                            <td class="vertical-middle">{{mk.bobot_kajian}}</td>
+                            <td class="vertical-middle">{{mk.kelas}}</td>
+                            <td class="vertical-middle">{{mk.prodi}}</td>
+                            <td class="vertical-middle">
+                                <button class="btn btn-sm btn-primary"
+                                (click)="lihatDetail(formListCpmk ,mk.id_matakuliah,mk.nama_matakuliah, mk.uuid_api )" 
+                                > 
+                                    Lihat Detail
+                                </button>
+                           
+                            </td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<ng-template #formListCpmk let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title mt-0">{{titleModal}}</h5>
+        <button type="button" class="close" (click)="modal.close()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <app-list-detail [id_matakuliah]="id_matakuliah" [uid]="uid" (afterSave)="modal.close()"></app-list-detail>
+    </div>
+</ng-template>

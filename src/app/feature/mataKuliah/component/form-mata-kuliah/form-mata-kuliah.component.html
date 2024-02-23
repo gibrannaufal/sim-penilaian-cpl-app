@@ -6,6 +6,7 @@
                 <div class="col-md-9">
                     <input  type="text" disabled [(ngModel)]="formModel.kode_kurikulum"   disabled name="kode_kurikulum" class="form-control"
                         placeholder="Kode Kurikulum">
+                    
                 </div>
             </div>
             <div class="form-group row">
@@ -26,7 +27,7 @@
             <div class="form-group row">
                 <label class="form-label col-md-3 required">Kode Matakuliah</label>
                 <div class="col-md-9">
-                    <input [(ngModel)]="formModel.kode_matakuliah" type="text"  required name="kode_matakuliah" class="form-control"
+                    <input [(ngModel)]="formModel.kode_matakuliah" disabled type="text"  required name="kode_matakuliah" class="form-control"
                         placeholder="Kode Matakuliah">
                 </div>
             </div>
@@ -34,8 +35,15 @@
             <div class="form-group row">
                 <label class="form-label col-md-3 required">Nama  Matakuliah</label>
                 <div class="col-md-9">
-                    <input [(ngModel)]="formModel.nama_matakuliah" type="text" required name="nama_kurikulum" class="form-control"
-                        placeholder="Nama Matakuliah">
+                    <ng-select  placeholder="Pilih Matakuliah" 
+                    [dropdownPosition]="'down'"
+                    [(ngModel)]="formModel.nama_matakuliah" 
+                    (ngModelChange)="onChangeMatkul(formModel.nama_matakuliah)"
+                    [ngModelOptions]="{standalone: true}">
+                     <ng-option *ngFor="let m of matkulApi" [value]="m.mata_kuliah">
+                        {{ m.mata_kuliah }}
+                    </ng-option>
+                </ng-select>
                 </div>
             </div>
             
@@ -51,14 +59,14 @@
             <div class="form-group row">
                 <label class="form-label col-md-3 required">Semester</label>
                 <div class="col-md-9">
-                    <input [(ngModel)]="formModel.semester" (keypress)="onKeyPress($event)" type="text" required name="semester" class="form-control"
+                    <input [(ngModel)]="formModel.semester" disabled  type="text" required name="semester" class="form-control"
                         placeholder="Semester">
                 </div>
             </div>
             <div class="form-group row">
                 <label class="form-label col-md-3 required">SKS</label>
                 <div class="col-md-9">
-                    <input [(ngModel)]="formModel.sks" (keypress)="onKeyPress($event)" type="text" required name="sks" class="form-control"
+                    <input [(ngModel)]="formModel.sks" disabled  type="text" required name="sks" class="form-control"
                         placeholder="SKS">
                 </div>
             </div>
@@ -78,7 +86,7 @@
                     <thead>     
                         <tr>
                             <th style="min-width: 5vw;">
-                                <button class="btn btn-sm btn-success" [disabled]="totalBobot > 100 || !isFormValid" (click)="addDetail()">
+                                <button class="btn btn-sm btn-success" [disabled]="totalBobot > 100" (click)="addDetail()">
                                     <em class="fa fa-plus"></em>
                                 </button>
                             </th>

@@ -1,0 +1,88 @@
+<div class="col-md-12 mt-2">
+    <div class="table-responsive">
+        <table class="table" style="border: 2px;" datatable [dtOptions]="dtOptions">
+            <thead>
+                <tr>
+                    <th style="min-width: 100px;">No</th>
+                    <th style="min-width: 100px;">Deskripsi Sub-CPMK</th>
+                    <th style="min-width: 100px;">kode Sub-CPMK</th>
+                    <th style="min-width: 100px;">Indikator Pencapaian</th>
+                    <th style="min-width: 100px;">Metode Pembelajaran</th>
+                    <th style="min-width: 100px;">Teknik Penilaian</th>
+                    <th style="min-width: 100px;">Rubrik</th>
+                    <th style="min-width: 100px;">Pertemuan</th>
+                    <th style="min-width: 100px;">Pesan</th>
+                    <th style="min-width: 100px;">Status</th>
+                    <th style="min-width: 200px;"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let val of listSubcpmk; let i = index;" >   
+                    <td>
+                       {{i + 1}}
+                    </td> 
+                    <td>
+                        {{val.nama_subcpmk}}
+                    </td> 
+                    <td>
+                        {{val.kode_subcpmk}}
+                    </td> 
+                    <td>
+                        {{val.indikator_pencapaian}}
+                    </td> 
+                    <td>
+                        {{val.metode_pembelajaran}}
+                    </td> 
+                    <td>
+                        {{val.teknik_penilaian}}
+                    </td>
+                    <td>
+                        {{val.instrumen_penilaian}}
+                    </td>  
+                    <td>
+                        {{val.pertemuan}}
+                    </td> 
+                    <td class="vertical-middle">
+                        <span *ngIf="val.pesan_penilaian === null" class="align-items-center text-center">-</span>
+                        {{val.pesan_penilaian}}
+                    </td>
+                    <td class="vertical-middle">
+                        <span *ngIf="val.status_penilaian == 'diterima'" class="custom-badge custom-badge-success">{{val.status_penilaian}}</span>
+                        <span *ngIf="val.status_penilaian == 'draft'" class="custom-badge custom-badge-warning">{{val.status_penilaian}}</span>
+                        <span *ngIf="val.status_penilaian == 'ditolak'"class="custom-badge custom-badge-danger">{{val.status_penilaian}}</span>
+                    </td>
+                    <td>
+                    <button (click)="lihatNilai(listNilaiMahasiswa, val.id_subcpmk , val.nama_subcpmk)" class="btn btn-sm btn-info" title="Detail MK"><i class="fa fa-eye"></i></button>
+                        <button (click)="diterimaNilai(val.id_subcpmk)" class="btn btn-sm btn-success">validasi</button>
+                        <button (click)="ditolakNilai(formDitolakPenilaian , val.id_subcpmk , val.nama_subcpmk)" class="btn btn-sm btn-danger">Ditolak</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<ng-template #listNilaiMahasiswa let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title mt-0">{{titleModal}}</h5>
+        <button type="button" class="close" (click)="modal.close()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <app-list-nilai-mahasiswa [id_mk_fk]="id_mk_fk" [id_detailmk_fk]="id_detailmk_fk" [uid]="uid" [id_subcpmk]="id_subcpmk" (afterSave)="modal.close(); "></app-list-nilai-mahasiswa>
+    </div>
+</ng-template>
+
+<ng-template #formDitolakPenilaian let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title mt-0">{{titleModal}}</h5>
+        <button type="button" class="close" (click)="modal.close()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <app-form-ditolak-validasi-penilaian [id_mk_fk]="id_mk_fk" [id_detailmk_fk]="id_detailmk_fk" [id_subcpmk]="id_subcpmk" [uid]="uid" (afterSave)="modal.close(); "></app-form-ditolak-validasi-penilaian>
+    </div>
+</ng-template>
+

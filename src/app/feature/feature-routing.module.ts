@@ -10,6 +10,7 @@ import { FormSubCpmkComponent } from './subCpmk/component/form-sub-cpmk/form-sub
 import { ValidasiMkComponent } from './validasiMatakuliah/component/validasi-mk/validasi-mk.component';
 import { PenilaianMkComponent } from './penilaianMatakuliah/component/penilaian-mk/penilaian-mk.component';
 import { FormPenilaianComponent } from './penilaianMatakuliah/component/form-penilaian/form-penilaian.component';
+import { ValidasiPenilaianMkComponent } from './validasiPenilaianMk/component/validasi-penilaian-mk/validasi-penilaian-mk.component';
 
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
     { path: 'validasi-mk', component: ValidasiMkComponent, pathMatch: 'full' },
     { path: 'penilaian-mk', component: PenilaianMkComponent, pathMatch: 'full' },
     { path: 'form-penilaian', component: FormPenilaianComponent, pathMatch: 'full' },
+    { path: 'validasi-penilaian', component: ValidasiPenilaianMkComponent, pathMatch: 'full' },
 
 
 ];

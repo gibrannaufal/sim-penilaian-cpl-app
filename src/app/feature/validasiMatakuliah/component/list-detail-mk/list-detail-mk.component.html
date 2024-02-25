@@ -82,8 +82,4 @@
     <div class="modal-body">
         <app-list-sub-cpmk [id_mk_fk]="id_mk_fk" [id_detailmk_fk]="id_detailmk_fk"  (afterSave)="modal.close(); "></app-list-sub-cpmk>
     </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-light mr-2" (click)="afterSave.emit()"><em
-            class="fa fa-arrow-left"></em> Kembali</button>
-    </div>
 </ng-template>

@@ -78,27 +78,27 @@
                                                 
                                                     <td *ngIf="subCpmk.partisipasi" >
                                                         <input type="text" placeholder="partsipasi" (change)="changeDetail(mahasiswa)"
-                                                        class="form-control" name="partsipasi[{{i}}]" [(ngModel)]="mahasiswa.partsipasi" />
+                                                       [disabled]="subCpmk.available === 1" class="form-control" name="partsipasi[{{i}}]" [(ngModel)]="mahasiswa.partsipasi" />
                                                     </td>
                                                     <td *ngIf="subCpmk.tugas" >
                                                         <input type="text" placeholder="tugas" (change)="changeDetail(mahasiswa)"
-                                                        class="form-control" name="tugas[{{i}}]" [(ngModel)]="mahasiswa.tugas" />
+                                                        [disabled]="subCpmk.available === 1" class="form-control" name="tugas[{{i}}]" [(ngModel)]="mahasiswa.tugas" />
                                                     </td>
                                                 <td *ngIf="subCpmk.presentasi" >
                                                     <input type="text" placeholder="presentasi" (change)="changeDetail(mahasiswa)"
-                                                    class="form-control" name="presentasi[{{i}}]" [(ngModel)]="mahasiswa.presentasi" />
+                                                    [disabled]="subCpmk.available === 1" class="form-control" name="presentasi[{{i}}]" [(ngModel)]="mahasiswa.presentasi" />
                                                 </td>
                                                 <td *ngIf="subCpmk.tes_tulis" >
                                                     <input type="text" placeholder="tes_tulis" (change)="changeDetail(mahasiswa)"
-                                                    class="form-control" name="tes_tulis[{{i}}]" [(ngModel)]="mahasiswa.tes_tulis" />
+                                                    [disabled]="subCpmk.available === 1" class="form-control" name="tes_tulis[{{i}}]" [(ngModel)]="mahasiswa.tes_tulis" />
                                                 </td>
                                                 <td *ngIf="subCpmk.tes_lisan" >
                                                     <input type="text" placeholder="tes_lisan" (change)="changeDetail(mahasiswa)"
-                                                    class="form-control" name="tes_lisan[{{i}}]" [(ngModel)]="mahasiswa.tes_lisan" />
+                                                    [disabled]="subCpmk.available === 1" class="form-control" name="tes_lisan[{{i}}]" [(ngModel)]="mahasiswa.tes_lisan" />
                                                 </td>
                                                 <td *ngIf="subCpmk.tugas_kelompok" >
                                                     <input type="text" placeholder="tugas_kelompok" (change)="changeDetail(mahasiswa)"
-                                                    class="form-control" name="tugas_kelompok[{{i}}]" [(ngModel)]="mahasiswa.tugas_kelompok" />
+                                                    [disabled]="subCpmk.available === 1"  class="form-control" name="tugas_kelompok[{{i}}]" [(ngModel)]="mahasiswa.tugas_kelompok" />
                                                 </td>
                                                 <td  style="text-align: center;"  colspan="6">
                                                     {{mahasiswa.total_nilai}}
@@ -108,10 +108,11 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="col-md-12 text-right">
-                            <button type="button" class="btn btn-light mr-2" (click)="keluar()"><em
-                                    class="fa fa-arrow-left"></em> Kembali</button>
-                            <button type="button" class="btn btn-primary"   (click)="save()"><em class="fa fa-save"></em> Simpan</button>
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-light" (click)="keluar()"><em
+                                    class="fa fa-arrow-left"></em>Kembali</button>
+                            <button type="button" class="btn btn-primary" [disabled]="subCpmk.available === 1"   (click)="save()"><em class="fa fa-save"></em> Simpan</button>
+                            <button type="button" class="btn btn-success" [disabled]="subCpmk.available === 1"   (click)="submit()"><em class="fa fa-save"></em> Submit</button>
                         </div>
                     </div>
                 </div>

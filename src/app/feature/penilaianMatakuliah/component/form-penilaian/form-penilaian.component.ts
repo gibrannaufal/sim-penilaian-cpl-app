@@ -136,7 +136,6 @@ export class FormPenilaianComponent implements OnInit {
   }
 
   save() {
-
     const params = {
       penilaian: this.formModel,
     }
@@ -155,5 +154,42 @@ export class FormPenilaianComponent implements OnInit {
       this.router.navigate(['/penilaian-mk']);
   }
 
-  
+  submit() {
+    Swal.fire({
+      title: 'Apakah kamu yakin ?',
+      text: 'Setelah mensubmit nilai ini tidak bisa dirubah',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#34c38f',
+      cancelButtonColor: '#f46a6a',
+      confirmButtonText: 'Ya, Submit nilai ini !',
+  }).then((result) => {
+      if (result.value) {
+        const param = {
+          penilaian: this.formModel,
+        }
+        this.penilaianMkService.savePenilaian(param).subscribe((res: any) => {
+      
+        }, err => {
+          this.landaService.alertError('Mohon Maaf', err.error.errors);
+        });
+        
+
+        const params = {
+          available: 1,
+          id_subcpmk: this.id_subcpmk,
+          id_mk_fk: this.id_mk_fk,
+          id_detailmk_fk: this.id_detailmk_fk
+        }
+        
+        this.penilaianMkService.submitNilai(params).subscribe((res: any) => {
+          this.landaService.alertSuccess('Berhasil', res.message);
+          window.location.reload();
+        }, err => {
+          this.landaService.alertError('Mohon Maaf', err.error.errors);
+        });
+      }
+  });
+   
+  }
 }

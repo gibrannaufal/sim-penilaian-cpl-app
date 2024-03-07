@@ -15,6 +15,7 @@ import { subCpmkModule } from './subCpmk/subCpmk.module';
 import { ValidasiMkModule } from './validasiMatakuliah/ValidasiMk.module';
 import { PenilaianMkModule } from './penilaianMatakuliah/PenilaianMk.module';
 import { ValidasiPenilaianMkModule } from './validasiPenilaianMk/ValidasiPenilaianMk.module';
+import { evaluasiCplModule } from './evaluasiCpl/evaluasiCpl.module';
 
 // const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 //     suppressScrollX: true,
@@ -36,7 +37,8 @@ import { ValidasiPenilaianMkModule } from './validasiPenilaianMk/ValidasiPenilai
         subCpmkModule,
         ValidasiMkModule,
         PenilaianMkModule,
-        ValidasiPenilaianMkModule
+        ValidasiPenilaianMkModule,
+        evaluasiCplModule
     ],
     // providers: [
     //     {

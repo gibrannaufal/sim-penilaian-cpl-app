@@ -25,5 +25,10 @@ export class PenilaianMkService {
     return this.landaService.DataPost('/v1/subCpmk/submit', payload);
   }
 
+
+  penilaianDetail(arrParameter) {
+    return this.landaService.DataPost('/v1/penilaianMk/detail', arrParameter);
+  }
+
     
 }

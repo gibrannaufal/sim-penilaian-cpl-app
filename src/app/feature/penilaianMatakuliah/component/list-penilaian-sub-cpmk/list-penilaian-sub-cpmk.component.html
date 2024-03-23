@@ -11,6 +11,7 @@
                     <th style="min-width: 100px;">Teknik Penilaian</th>
                     <th style="min-width: 100px;">Rubrik</th>
                     <th style="min-width: 100px;">Pertemuan</th>
+                    <th style="min-width: 100px;">Status Penilaian</th>
                     <th style="min-width: 100px;"></th>
                 </tr>
             </thead>
@@ -40,6 +41,10 @@
                     <td>
                         {{val.pertemuan}}
                     </td> 
+                    <td class="vertical-middle">
+                        <span *ngIf="val.available == 1" class="custom-badge custom-badge-success">Selesai</span>
+                        <span *ngIf="val.available == 0" class="custom-badge custom-badge-warning">Belum Nilai</span>
+                    </td>
                     <td>
                         <button class="btn btn-sm btn-primary" (click)="formPenilaian(val.id_subcpmk)" (click)="afterSave.emit()">lakukan penilaian</button>
                     </td>

@@ -1,5 +1,5 @@
 <div  class="col-md-12">
-    <div class="table-responsive">
+    <div class="table-responsive table-container">
         <table class="table" style="border: 2px;">
             <thead>
                 <tr>
@@ -8,7 +8,8 @@
                     <th style="min-width: 100px;">kode CPMK</th>
                     <th style="min-width: 100px;">Deskripsi CPL</th>
                     <th style="min-width: 100px;">kode CPL</th>
-                    <th style="min-width: 100px;">Action</th>
+                    <th style="min-width: 100px;">Status Penilaian</th>
+                    <th style="min-width: 20vw;" >Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,13 +28,23 @@
                     </td>
                     <td>
                         {{val.kode_cpl}}
+                    </td>  
+                    <td class="vertical-middle">
+                        <span *ngIf="val.is_nilai == 1" class="custom-badge custom-badge-success">Selesai</span>
+                        <span *ngIf="val.is_nilai == 0" class="custom-badge custom-badge-warning">Belum Nilai</span>
                     </td>
+              
                     <td>
-                       <button class="btn btn-sm btn-primary"
-                       (click)="lihatSubCpmk(formListSubCpmk ,val.id_mk_fk, val.id_detailmk, val.deskripsi_cpmk)"
-                       
-                       >
-                       sub-CPMK
+                       <button class="btn btn-sm btn-primary" 
+                            (click)="lihatSubCpmk(formListSubCpmk ,val.id_mk_fk, val.id_detailmk, val.deskripsi_cpmk)"
+                            
+                            >
+                            SUB-CPMK
+                        </button>
+                        <button class="btn btn-sm btn-success"[disabled]="val.is_nilai === 1"
+                            (click)="selesaiPenilaian(val.id_mk_fk, val.id_detailmk)"
+                            >
+                            Selesaikan Penilaian
                         </button>
                     </td>
                     

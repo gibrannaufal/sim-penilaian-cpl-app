@@ -52,11 +52,11 @@ export class ListSubCpmkComponent implements OnInit {
       id_detailmk_fk : this.id_detailmk_fk
     
     };
-    this.getmk();
+    this.getSubCpmk();
   }
 
 
-  getmk() {
+  getSubCpmk() {
       this.dtOptions = {
           serverSide: true,
           processing: true,

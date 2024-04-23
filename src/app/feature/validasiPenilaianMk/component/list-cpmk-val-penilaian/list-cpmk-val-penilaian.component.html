@@ -4,11 +4,11 @@
             <thead>
                 <tr>
                     <th style="min-width: 100px;">No</th>
-                    <th style="min-width: 100px;">Deskripsi CPMK</th>
+                    <th style="min-width: 400px;">Deskripsi CPMK</th>
                     <th style="min-width: 100px;">kode CPMK</th>
-                    <th style="min-width: 100px;">Deskripsi CPL</th>
+                    <!-- <th style="min-width: 100px;">Deskripsi CPL</th> -->
                     <th style="min-width: 100px;">kode CPL</th>
-                    <th style="min-width: 100px;">Action</th>
+                    <th style="min-width: 200px;">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,13 +22,18 @@
                     <td>
                         {{val.kode_cpmk}}
                     </td>
-                    <td>
+                    <!-- <td>
                         {{val.deskripsi_cpl}}
-                    </td>
+                    </td> -->
                     <td>
                         {{val.kode_cpl}}
                     </td>
                     <td>
+                        <button class="btn btn-sm btn-success"
+                        (click)="lihatNilaiCpmk(listNilaiCpmk ,val.id_mk_fk, val.id_detailmk, val.deskripsi_cpmk)"
+                        >
+                        Nilai Cpmk
+                         </button>
                        <button class="btn btn-sm btn-primary"
                        (click)="lihatSubCpmk(listSubCpmkValPenilaian ,val.id_mk_fk, val.id_detailmk, val.deskripsi_cpmk)"
                        
@@ -52,5 +57,17 @@
     </div>
     <div class="modal-body">
         <app-list-sub-cpmk-val-penilaian [id_mk_fk]="id_mk_fk" [id_detailmk_fk]="id_detailmk_fk" [uid]="uid" (afterSave)="modal.close(); "></app-list-sub-cpmk-val-penilaian>
+    </div>
+</ng-template>
+
+<ng-template #listNilaiCpmk let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title mt-0">{{titleModal}}</h5>
+        <button type="button" class="close" (click)="modal.close()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <app-list-nilai-cpmk-mahasiswa [id_mk_fk]="id_mk_fk" [id_detailmk_fk]="id_detailmk_fk" [uid]="uid" (afterSave)="modal.close(); "></app-list-nilai-cpmk-mahasiswa>
     </div>
 </ng-template>

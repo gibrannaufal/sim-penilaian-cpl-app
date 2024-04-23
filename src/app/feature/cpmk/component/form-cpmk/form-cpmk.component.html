@@ -77,8 +77,10 @@
                                     class="form-control" name="kode_cpmk[{{i}}]" [(ngModel)]="detail.kode_cpmk" />
                             </td> 
                             <td>
-                                <input type="text" placeholder="Deskripsi CPMK" (change)="changeDetail(detail)"
-                                    class="form-control" name="deskripsi_cpmk[{{i}}]" [(ngModel)]="detail.deskripsi_cpmk" />
+                                <textarea  placeholder="Deskripsi CPMK" (change)="changeDetail(detail)"
+                                class="form-control" name="deskripsi_cpmk[{{i}}]" [(ngModel)]="detail.deskripsi_cpmk"  cols="20" rows="5"></textarea>
+                                <!-- <input type="text" placeholder="Deskripsi CPMK" (change)="changeDetail(detail)"
+                                    class="form-control" name="deskripsi_cpmk[{{i}}]" [(ngModel)]="detail.deskripsi_cpmk" /> -->
                                 <div *ngIf="!detail.deskripsi_cpmk" style="color: red; font-size: 10px;">
                                         *deskripsi cpmk tidak boleh kosong
                                 </div>
@@ -158,7 +160,8 @@
         <div class="col-md-12 text-right">
             <button type="button" class="btn btn-light mr-2" (click)="afterSave.emit()"><em
                     class="fa fa-arrow-left"></em> Kembali</button>
-            <button type="button" class="btn btn-primary" [disabled]="!isFormValid" (click)="save()"><em class="fa fa-save"></em> Simpan</button>
+            <button type="button" class="btn btn-primary" *ngIf="activeMode === 'add'"  [disabled]="!isFormValid" (click)="save()"><em class="fa fa-save"></em> Simpan</button>
+            <button type="button" class="btn btn-primary" *ngIf="activeMode === 'update'" (click)="save()"><em class="fa fa-save"></em> Simpan</button>
         </div>
     </div>
 </form>

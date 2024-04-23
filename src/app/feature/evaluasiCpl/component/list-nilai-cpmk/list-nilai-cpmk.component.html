@@ -4,25 +4,34 @@
             <thead>
                 <tr>
                     <th style="min-width: 100px;">No</th>
-                    <th style="min-width: 100px;">Matakulih</th>
+                    <th style="min-width: 400px;">Deskripsi CPMK</th>
+                    <th style="min-width: 100px;">Kode CPMK</th>
+                    <th style="min-width: 100px;">Kode CPL</th>
                     <th style="min-width: 100px;">Total Nilai</th>
                     <th style="min-width: 100px;"></th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let val of listRekap; let i = index;" >   
+                <tr *ngFor="let val of rekapNilaiCpmk; let i = index;" >   
                     <td>
                        {{i + 1}}
                     </td> 
                     <td>
-                        {{val.nama_matakuliah}}
+                        {{val.deskripsi_cpmk}}
                     </td> 
+                    <td>
+                        {{val.kode_cpmk}}
+                    </td>  
+                    <td>
+                        {{val.kode_cpl}}
+                    </td>  
                     <td>
                         {{val.total_nilai}}
                     </td>  
+
                     <td>
                         <button class="btn btn-sm btn-success"
-                            (click)="lihatNilaiCpmkMahasiswa(ListCpmkMahasiswa ,val.id_mk_fk, val.id_detailmk_fk, val.nrp, val.nama_matakuliah)"
+                            (click)="lihatNilaiSubCpmkMahasiswa(ListSubCpmkMahasiswa , val.nama_matakuliah)"
                             >
                             Detail
                          </button>
@@ -34,8 +43,7 @@
     </div>
 </div>
 
-
-<ng-template #ListCpmkMahasiswa let-modal>
+<ng-template #ListSubCpmkMahasiswa let-modal>
     <div class="modal-header">
         <h5 class="modal-title mt-0">{{titleModal}}</h5>
         <button type="button" class="close" (click)="modal.close()" aria-label="Close">
@@ -43,6 +51,6 @@
         </button>
     </div>
     <div class="modal-body">
-        <app-list-nilai-cpmk [id_detailmk_fk]="id_detailmk_fk" [id_mk_fk]="id_mk_fk" [nrp]="nrp" (afterSave)="modal.close()"></app-list-nilai-cpmk>
+        <app-list-nilai-sub-cpmk [id_detailmk_fk]="id_detailmk_fk" [id_mk_fk]="id_mk_fk" [nrp]="nrp" (afterSave)="modal.close()"></app-list-nilai-sub-cpmk>
     </div>
 </ng-template>

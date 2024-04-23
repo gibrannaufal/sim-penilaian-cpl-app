@@ -68,7 +68,7 @@ export class ListDetailComponent implements OnInit {
         showCancelButton: true,
         confirmButtonColor: '#34c38f',
         cancelButtonColor: '#f46a6a',
-        confirmButtonText: 'Ya, selesaikan mata kuliah ini !',
+        confirmButtonText: 'Ya, selesaikan cpmk ini !',
     }).then((result) => {
       if(result.value)
       {

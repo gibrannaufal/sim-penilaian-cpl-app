@@ -109,9 +109,9 @@
                                 <input  type="text" disabled [(ngModel)]="detail.kode_cpmk" disabled  (change)="changeDetail(detail)" name="kode_cpmk[{{i}}]"  
                                     class="form-control" placeholder="Kode CPMK">
                             </td> 
-                            <td style="min-width: 30vw;" >
+                            <td style="max-width: 20vw; min-height: 40vw; " >
                                 <ng-select  placeholder="Pilih CPMK" [disabled]="!formModel.id_kurikulum_fk" bindLabel="id_cpmk_fk" name="id_cpmk_fk[{{i}}]"
-                                    [dropdownPosition]="'down'"
+                                    [dropdownPosition]="'up'"
                                     [(ngModel)]="detail.id_cpmk_fk" 
                                     (change)="changeDetail(detail)"
                                     (ngModelChange)="onCpmkChange(detail)"

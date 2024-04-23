@@ -7,3 +7,8 @@
 #filter-kurikulum.ng-select > .ng-select-container {
     height: 37px !important;
 }
+
+::ng-deep ng-dropdown-panel {
+  max-height: 100px; 
+  overflow-y: auto; 
+}

@@ -48,10 +48,20 @@ export class ListCpmkValPenilaianComponent implements OnInit {
   }
 
   lihatSubCpmk(modalId, id_mk_fk , id_detailmk_fk ,nama_cpmk ) {
-    this.titleModal = 'List SUB CPMK ' + nama_cpmk ;
+    this.titleModal = 'List SUB-CPMK ' + nama_cpmk ;
     this.id_mk_fk = id_mk_fk;
     this.id_detailmk_fk = id_detailmk_fk;
     this.modalService.open(modalId,{ size: 'lg', backdrop: 'static' });
     this.afterSave.emit();
   }
+
+  lihatNilaiCpmk(modalId, id_mk_fk , id_detailmk_fk ,nama_cpmk ) {
+    this.titleModal = 'List Nilai CPMK ' + nama_cpmk ;
+    this.id_mk_fk = id_mk_fk;
+    this.id_detailmk_fk = id_detailmk_fk;
+    this.modalService.open(modalId,{ size: 'lg', backdrop: 'static' });
+    this.afterSave.emit();
+  }
+
+
 }

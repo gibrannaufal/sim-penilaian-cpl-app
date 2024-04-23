@@ -54,7 +54,11 @@ export class filterService {
   }
 
   getPenilaianAll(arrParameter) {
-    return this.landaService.DataGet('/v1/PenilaianAll', arrParameter);
+    return this.landaService.DataGet('/v1/penilaianAll', arrParameter);
+  }
+
+  getPenilaianCpmk(arrParameter) {
+    return this.landaService.DataGet('/v1/penilaianCpmk', arrParameter);
   }
 
   

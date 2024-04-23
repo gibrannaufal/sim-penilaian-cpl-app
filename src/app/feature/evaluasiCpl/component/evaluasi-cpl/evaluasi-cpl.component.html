@@ -30,7 +30,7 @@
                             <td>No</td>
                             <td style="min-width: 2vw;">NRP</td>
                             <td style="min-width: 5vw;">Nama</td>
-                            <td style="min-width: 2vw;">Program Studi</td>
+                            <!-- <td style="min-width: 2vw;">Program Studi</td> -->
                             <td style="min-width: 2vw;"></td>
                         </tr>
                     </thead>
@@ -39,7 +39,7 @@
                             <td>{{mahasiswa.no}}</td>
                             <td class="">{{mahasiswa.nrp}}</td>
                             <td class="">{{mahasiswa.nama}}</td>
-                            <td class="">{{mahasiswa.prodi}}</td>
+                            <!-- <td class="">{{mahasiswa.prodi}}</td> -->
                             <td>
                                 <button (click)="formRekap(mahasiswa.nrp, mahasiswa.nama)" class="btn btn-sm btn-primary">Lihat Rekap</button>
                             </td>
@@ -61,7 +61,7 @@
                     <h1>{{titleForm}}</h1>
                 </div>
                 <div class="card-body">
-                    <app-list-rekap [nrp]="nrp" (afterSave)="showForm = false; reloadDataTable()"></app-list-rekap>
+                    <app-list-rekap [nrp]="nrp" (afterSave)="showForm = false;"></app-list-rekap>
                 </div>
             </div>
         </div>

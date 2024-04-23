@@ -1,0 +1,30 @@
+<div  class="col-md-12">
+    <div class="table-responsive">
+        <table class="table" style="border: 2px;">
+            <thead>
+                <tr>
+                    <th style="min-width: 100px;">No</th>
+                    <th style="min-width: 100px;">Nrp</th>
+                    <th style="min-width: 100px;">Nama</th>
+                    <th style="min-width: 100px;">Total Nilai CPMK</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let val of listNilaiCpmk; let i = index;" >   
+                    <td>
+                       {{i + 1}}
+                    </td> 
+                    <td>
+                        {{val.nrp}}
+                    </td> 
+                    <td>
+                        {{val.nama}}
+                    </td>
+                    <td>
+                        {{val.total_nilai}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

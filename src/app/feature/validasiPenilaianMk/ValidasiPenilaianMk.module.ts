@@ -10,6 +10,7 @@ import { ListCpmkValPenilaianComponent } from './component/list-cpmk-val-penilai
 import { ListSubCpmkValPenilaianComponent } from './component/list-sub-cpmk-val-penilaian/list-sub-cpmk-val-penilaian.component';
 import { ListNilaiMahasiswaComponent } from './component/list-nilai-mahasiswa/list-nilai-mahasiswa.component';
 import { FormDitolakValidasiPenilaianComponent } from './component/form-ditolak-validasi-penilaian/form-ditolak-validasi-penilaian.component';
+import { ListNilaiCpmkMahasiswaComponent } from './component/list-nilai-cpmk-mahasiswa/list-nilai-cpmk-mahasiswa.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { FormDitolakValidasiPenilaianComponent } from './component/form-ditolak-
     ListCpmkValPenilaianComponent,
     ListSubCpmkValPenilaianComponent,
     ListNilaiMahasiswaComponent,
-    FormDitolakValidasiPenilaianComponent
+    FormDitolakValidasiPenilaianComponent,
+    ListNilaiCpmkMahasiswaComponent
   ],
   imports: [
     CommonModule,

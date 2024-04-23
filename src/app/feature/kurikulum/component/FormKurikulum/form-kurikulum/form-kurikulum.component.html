@@ -70,8 +70,12 @@
                                     class="form-control" name="kode_cpl[{{i}}]" [(ngModel)]="detail.kode_cpl" />
                             </td> 
                             <td>
-                                <input type="text" placeholder="Deskripsi CPL" (change)="changeDetail(detail)"
-                                    class="form-control" name="deskripsi_cpl[{{i}}]" [(ngModel)]="detail.deskripsi_cpl" />
+                                <textarea placeholder="Deskripsi CPL" (change)="changeDetail(detail)"
+                                class="form-control" name="deskripsi_cpl[{{i}}]" [(ngModel)]="detail.deskripsi_cpl" cols="20" rows="5">
+                                
+                                </textarea>
+                                <!-- <input  type="text" placeholder="Deskripsi CPL" (change)="changeDetail(detail)"
+                                    class="form-control" name="deskripsi_cpl[{{i}}]" [(ngModel)]="detail.deskripsi_cpl" /> -->
                                     <div *ngIf="!detail.deskripsi_cpl" style="color: red; font-size: 10px;">
                                         *deskripsi cpl tidak boleh kosong
                                     </div>

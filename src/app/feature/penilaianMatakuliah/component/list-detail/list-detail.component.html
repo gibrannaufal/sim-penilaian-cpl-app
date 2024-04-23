@@ -4,11 +4,12 @@
             <thead>
                 <tr>
                     <th style="min-width: 100px;">No</th>
-                    <th style="min-width: 100px;">Deskripsi CPMK</th>
+                    <th style="min-width: 400px;">Deskripsi CPMK</th>
                     <th style="min-width: 100px;">kode CPMK</th>
-                    <th style="min-width: 100px;">Deskripsi CPL</th>
+                    <!-- <th style="min-width: 100px;">Deskripsi CPL</th> -->
                     <th style="min-width: 100px;">kode CPL</th>
                     <th style="min-width: 100px;">Status Penilaian</th>
+                    <th style="min-width: 100px;">Sub-CPMK Belum Dinilai</th>
                     <th style="min-width: 20vw;" >Action</th>
                 </tr>
             </thead>
@@ -23,15 +24,19 @@
                     <td>
                         {{val.kode_cpmk}}
                     </td>
-                    <td>
+                    <!-- <td>
                         {{val.deskripsi_cpl}}
-                    </td>
+                    </td> -->
                     <td>
                         {{val.kode_cpl}}
                     </td>  
                     <td class="vertical-middle">
                         <span *ngIf="val.is_nilai == 1" class="custom-badge custom-badge-success">Selesai</span>
                         <span *ngIf="val.is_nilai == 0" class="custom-badge custom-badge-warning">Belum Nilai</span>
+                    </td>
+
+                    <td>
+                        {{val.jumlah_belum_nilai}}
                     </td>
               
                     <td>

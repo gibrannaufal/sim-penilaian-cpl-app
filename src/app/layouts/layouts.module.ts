@@ -10,13 +10,16 @@ import { VerticalComponent } from './vertical/vertical.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { TopbarComponent } from './topbar/topbar.component';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   declarations: [LayoutComponent, FooterComponent, VerticalComponent, TopbarComponent, SidebarComponent],
   imports: [
     CommonModule,
     RouterModule,
     NgbDropdownModule,
-    NgProgressModule
+    NgProgressModule,
+    NgbModule
   ],
   exports: []
 })

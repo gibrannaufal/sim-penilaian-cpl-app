@@ -35,47 +35,49 @@
           </a>
         </li>
         <li>
-          <a [routerLink]="['/validasi-mk']" class="is-parent">
-            <i class="fa fa-check-circle"></i>
-            <span>Validasi Mata Kuliah</span>
-          </a>
-        </li>
-        <li>
           <a [routerLink]="['/penilaian-mk']" class="is-parent">
             <i class="fa fa-briefcase"></i>
             <span>Penilaian Mata Kuliah</span>
           </a>
         </li>
-        <li>
-          <a [routerLink]="['/validasi-penilaian']" class="is-parent">
-            <i class="fa fa-check-circle"></i>
-            <span>Validasi Penilaian</span>
-          </a>
-        </li>
+        <ngb-accordion #acc="ngbAccordion" > 
+          <ngb-panel >
+            <ng-template ngbPanelTitle>
+              <span style="color: black;">Menu Validasi</span>
+            </ng-template> 
+              <ng-template ngbPanelContent > 
+
+                <ul class="metismenu list-unstyled" id="side-menu" #sideMenu>
+                  <li>
+                    <a [routerLink]="['/validasi-penilaian']" class="is-parent">
+                      <i class="fa fa-university" style="color: white; margin-right: 0.5vw;"></i>
+                      <span style="color: white;">Validasi Kurikulum</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a [routerLink]="['/validasi-mk']" class="is-parent">
+                      <i class="fa fa-briefcase" style="color: white; margin-right: 1vw;"></i>
+                      <span style="color: white;">Validasi Mata Kuliah</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a [routerLink]="['/validasi-penilaian']" class="is-parent">
+                      <i class="fa fa-check-circle" style="color: white; margin-right: 0.5vw;"></i>
+                      <span style="color: white;">Validasi Penilaian</span>
+                    </a>
+                  </li>
+                </ul>
+
+              </ng-template> 
+            </ngb-panel> 
+        </ngb-accordion> 
         <li>
           <a [routerLink]="['/evaluasi-cpl']" class="is-parent">
             <i class="fa fa-graduation-cap"></i>
             <span>Evaluasi CPL</span>
           </a>
         </li>
-        <li>
-          <a [routerLink]="['/evaluasi-cpl']" class="is-parent">
-            <i class="fa fa-graduation-cap"></i>
-            <span>Evaluasi CPL</span>
-          </a>
-        </li>
-        <li>
-          <a [routerLink]="['/evaluasi-cpl']" class="is-parent">
-            <i class="fa fa-graduation-cap"></i>
-            <span>Evaluasi CPL</span>
-          </a>
-        </li>
-        <li>
-          <a [routerLink]="['/evaluasi-cpl']" class="is-parent">
-            <i class="fa fa-graduation-cap"></i>
-            <span>Evaluasi CPL</span>
-          </a>
-        </li>
+        
     </ul>
   </div>
 </div>

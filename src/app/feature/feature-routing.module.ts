@@ -12,6 +12,7 @@ import { PenilaianMkComponent } from './penilaianMatakuliah/component/penilaian-
 import { FormPenilaianComponent } from './penilaianMatakuliah/component/form-penilaian/form-penilaian.component';
 import { ValidasiPenilaianMkComponent } from './validasiPenilaianMk/component/validasi-penilaian-mk/validasi-penilaian-mk.component';
 import { EvaluasiCplComponent } from './evaluasiCpl/component/evaluasi-cpl/evaluasi-cpl.component';
+import { ValidasiKurikulumComponent } from './validasiKurikulum/component/validasi-kurikulum/validasi-kurikulum.component';
 
 
 const routes: Routes = [
@@ -28,6 +29,7 @@ const routes: Routes = [
     { path: 'form-penilaian', component: FormPenilaianComponent, pathMatch: 'full' },
     { path: 'validasi-penilaian', component: ValidasiPenilaianMkComponent, pathMatch: 'full' },
     { path: 'evaluasi-cpl', component: EvaluasiCplComponent, pathMatch: 'full' },
+    { path: 'validasi-kurikulum', component: ValidasiKurikulumComponent, pathMatch: 'full' },
 
 
 ];

@@ -1,0 +1,26 @@
+<div  class="col-md-12">
+    <div class="table-responsive table-container">
+        <table class="table" style="border: 2px;">
+            <thead>
+                <tr>
+                    <th style="min-width: 100px;">No</th>
+                    <th style="min-width: 200px;">Deskripsi CPL</th>
+                    <th style="min-width: 100px;">kode CPL</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let val of detailKurikulum; let i = index;" >   
+                    <td>
+                       {{i + 1}}
+                    </td> 
+                    <td>
+                        {{val.deskripsi_cpl}}
+                    </td> 
+                    <td>
+                        {{val.kode_cpl}}
+                    </td>  
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

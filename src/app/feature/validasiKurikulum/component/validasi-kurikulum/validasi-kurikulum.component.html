@@ -1,6 +1,6 @@
 <div class="card" *ngIf="!showForm">
     <div class="card-header">
-       <p style="font-size: 20px;"><b>Daftar Kurikulum</b> </p> 
+       <p style="font-size: 20px;"><b>Daftar Kurikulum - Validasi Kurikulum</b> </p> 
     </div>
     <div class="card-body">
 
@@ -22,11 +22,6 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-md-7 d-flex justify-content-end">
-                    <button type="button" class="btn btn-sm btn-primary mr-2" (click)="formCreate()">
-                        <i class="fa fa-plus font-size-14 align-middle mr-1"></i> Tambah Kurikulum 
-                    </button>
-                </div>
             </div>
             
             <div class="col-md-12 mt-4 table-responsive table-container">
@@ -39,9 +34,9 @@
                             <td>Tahun</td>
                             <td>Periode</td>
                             <td>Profil Lulusan</td>
-                            <td>Pesan</td>
+                            <td>Pesan</td>  
                             <td>Status</td>
-                            <td width="90"></td>
+                            <td style="min-width: 12vw;"></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -61,19 +56,13 @@
                                 <span *ngIf="kurikulum.status == 'draft'" class="custom-badge custom-badge-warning">{{kurikulum.status}}</span>
                                 <span *ngIf="kurikulum.status == 'ditolak'"class="custom-badge custom-badge-danger">{{kurikulum.status}}</span>
                             </td>
-                            <td class="vertical-middle">
-                                <a href="javascript: void(0);" class="align-middle mr-2"
-                                (click)="formUpdate(kurikulum)" placement="left" container="body"
-                                ngbTooltip="Ubah">
-                                <em class="fa fa-edit font-size-14"></em>
-                            </a>
-                            <a href="javascript: void(0);" class="align-middle"
-                                (click)="deleteKurikulum(kurikulum.id_kurikulum)" placement="left" container="body"
-                                ngbTooltip="Hapus">
-                                <em class="fa fa-trash font-size-14"></em>
-                            </a>
+                            <td>
+                                    <button (click)="detailCpl(listCpl, kurikulum.nama_kurikulum , kurikulum.id_kurikulum)"  class="btn btn-sm btn-info" title="Detail MK"><i class="fa fa-eye"></i></button>
+                                    <button (click)="diterimaKurikulum(kurikulum.id_kurikulum)" class="btn btn-sm btn-success">validasi</button>
+                                    <button (click)="ditolak(formValidasiKurikulum ,kurikulum.id_kurikulum)" class="btn btn-sm btn-danger">Ditolak</button>
                             </td>
 
+                            
                         </tr>
                     </tbody>
                 </table>
@@ -83,17 +72,26 @@
     </div>
 </div>
 
-<div class="container-fluid" *ngIf="showForm">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card card-transparent">
-                <div class="card-header  d-flex justify-content-between">
-                    <h1>{{titleForm}}</h1>
-                </div>
-                <div class="card-body">
-                    <app-form-kurikulum [kurikulumId]="kurikulumId" (afterSave)="showForm = false; reloadDataTable()"></app-form-kurikulum>
-                </div>
-            </div>
-        </div>
+<ng-template #formValidasiKurikulum let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title mt-0">{{titleModal}}</h5>
+        <button type="button" class="close" (click)="modal.close()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
-</div>
+    <div class="modal-body">
+        <app-form-validasi-kurikulum [id_kurikulum_fk]="id_kurikulum_fk" (afterSave)="modal.close(); reloadDataTable()" ></app-form-validasi-kurikulum>
+    </div>
+</ng-template>
+
+<ng-template #listCpl let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title mt-0">{{titleModal}}</h5>
+        <button type="button" class="close" (click)="modal.close()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <app-list-cpl [id_kurikulum_fk]="id_kurikulum_fk" (afterSave)="modal.close(); reloadDataTable()" ></app-list-cpl>
+    </div>
+</ng-template>

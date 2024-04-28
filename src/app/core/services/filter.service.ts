@@ -61,6 +61,9 @@ export class filterService {
     return this.landaService.DataGet('/v1/penilaianCpmk', arrParameter);
   }
 
+  getCplByKurikulum(arrParameter) {
+    return this.landaService.DataGet('/v1/CplByKurikulum', arrParameter);
+  }
   
   
 }

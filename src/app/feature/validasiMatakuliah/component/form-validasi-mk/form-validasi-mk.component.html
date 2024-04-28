@@ -1,5 +1,5 @@
 <div class="col-md-12">Pesan</div>
-<div class="col-md-12"><input [(ngModel)]="pesan" type="text"></div>
+<div class="col-md-12"><textarea [(ngModel)]="pesan" type="text"> </textarea></div>
 
 <div class="col-md-12 mt-2 mb-2" *ngIf="this.activeMode === 'mk'">
     <button type="button" class="btn btn-sm btn-light mr-2" (click)="afterSave.emit()"><em

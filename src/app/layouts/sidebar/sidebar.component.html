@@ -40,6 +40,8 @@
             <span>Penilaian Mata Kuliah</span>
           </a>
         </li>
+
+        <!-- menu validasi -->
         <ngb-accordion #acc="ngbAccordion" > 
           <ngb-panel >
             <ng-template ngbPanelTitle>
@@ -71,12 +73,33 @@
               </ng-template> 
             </ngb-panel> 
         </ngb-accordion> 
-        <li>
-          <a [routerLink]="['/evaluasi-cpl']" class="is-parent">
-            <i class="fa fa-graduation-cap"></i>
-            <span>Evaluasi CPL</span>
-          </a>
-        </li>
+
+        <!-- menu laporan -->
+        <ngb-accordion #acc="ngbAccordion" > 
+          <ngb-panel >
+            <ng-template ngbPanelTitle>
+              <span style="color: black;">Menu Laporan</span>
+            </ng-template> 
+              <ng-template ngbPanelContent > 
+
+                <ul class="metismenu list-unstyled" id="side-menu" #sideMenu>
+                  <li>
+                    <a [routerLink]="['/rekap-nilai-all-mahasiswa']" class="is-parent">
+                      <i class="fa fa-university" style="color: white; margin-right: 0.5vw;"></i>
+                      <span style="color: white;">Laporan Rekap Nilai Mahasiswa (kaprodi) </span>
+                    </a>
+                  </li>  
+                  <li>
+                    <a [routerLink]="['/evaluasi-cpl']" class="is-parent">
+                      <i class="fa fa-graduation-cap"></i>
+                      <span>Evaluasi CPL</span>
+                    </a>
+                  </li>
+                </ul>
+
+              </ng-template> 
+            </ngb-panel> 
+        </ngb-accordion> 
         
     </ul>
   </div>

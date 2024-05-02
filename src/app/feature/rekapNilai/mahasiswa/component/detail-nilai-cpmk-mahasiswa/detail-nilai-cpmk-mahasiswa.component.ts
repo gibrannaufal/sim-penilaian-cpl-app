@@ -56,4 +56,22 @@ export class DetailNilaiCpmkMahasiswaComponent implements OnInit {
     this.modalService.open(modalId,{ size: 'lg', backdrop: 'static' });
     this.afterSave.emit();
   }
+
+  getGrade(nilai: number): string {
+    if (nilai >= 80 && nilai <= 100) {
+        return 'A';
+    } else if (nilai >= 75 && nilai < 80) {
+        return 'B+';
+    } else if (nilai >= 70 && nilai < 75) {
+        return 'B';
+    } else if (nilai >= 65 && nilai < 70) {
+        return 'C+';
+    } else if (nilai >= 56 && nilai < 65) {
+        return 'C';
+    } else if (nilai >= 45 && nilai < 56) {
+        return 'D';
+    } else {
+        return 'E'; 
+    }
+  }
 }

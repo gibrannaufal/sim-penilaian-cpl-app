@@ -1,0 +1,56 @@
+<div  class="col-md-12">
+    <div class="table-responsive table-container">
+        <table class="table" style="border: 2px;">
+            <thead>
+                <tr>
+                    <th style="min-width: 100px;">No</th>
+                    <th style="min-width: 400px;">Deskripsi CPMK</th>
+                    <th style="min-width: 100px;">Kode CPMK</th>
+                    <th style="min-width: 100px;">Kode CPL</th>
+                    <th style="min-width: 100px;">Total Nilai</th>
+                    <!-- <th style="min-width: 100px;"></th> -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let val of rekapNilaiCpmk; let i = index;" >   
+                    <td>
+                       {{i + 1}}
+                    </td> 
+                    <td>
+                        {{val.deskripsi_cpmk}}
+                    </td> 
+                    <td>
+                        {{val.kode_cpmk}}
+                    </td>  
+                    <td>
+                        {{val.kode_cpl}}
+                    </td>  
+                    <td>
+                        {{val.total_nilai}}
+                    </td>  
+
+                    <!-- <td>
+                        <button class="btn btn-sm btn-success"
+                            (click)="lihatNilaiSubCpmkMahasiswa(ListSubCpmkMahasiswa , val.nama_matakuliah)"
+                            >
+                            Detail
+                         </button>
+                    </td> -->
+                   
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- <ng-template #ListSubCpmkMahasiswa let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title mt-0">{{titleModal}}</h5>
+        <button type="button" class="close" (click)="modal.close()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <app-list-rekap-nilai-sub-cpmk [id_detailmk_fk]="id_detailmk_fk" [id_mk_fk]="id_mk_fk" [nrp]="nrp" (afterSave)="modal.close()"></app-list-rekap-nilai-sub-cpmk>
+    </div>
+</ng-template> -->

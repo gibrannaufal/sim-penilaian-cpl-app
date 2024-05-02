@@ -1,0 +1,76 @@
+<div class="card">
+    <div class="card-header">
+       <p style="font-size: 20px;"><b>Rekap Nilai Mahasiswa</b> </p> 
+    </div>
+    <div class="card-body">
+
+        <div class="row">
+            <div class="col-md-12 row">
+                <div class="col-md-5">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <div class="input-group input-group-sm mr-2">
+                                <input type="text" placeholder="Filter Nama Matakuliah" class="form-control form-control-sm" [(ngModel)]="filter.nama_matakuliah"  name="nama_matakuliah"  />
+                                <div class="input-group-append">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-search" (click)="reloadDataTable()">
+                                       
+                                        </i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>   
+            </div>
+            <div class="col-md-12 mt-4">
+                <table class="table table-hover" datatable [dtOptions]="dtOptions" >
+                    <thead class="thead-light">
+                        <tr>
+                            <th style="min-width: 100px;">No</th>
+                            <th style="min-width: 100px;">Matakulih</th>
+                            <th style="min-width: 100px;">Total Nilai</th>
+                            <th style="min-width: 100px;"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let val of listRekap;">
+                            <td>
+                                {{val.no}}
+                             </td> 
+                             <td>
+                                 {{val.nama_matakuliah}}
+                             </td> 
+                             <td>
+                                 {{val.total_nilai}}
+                             </td>  
+                             <td>
+                                <button class="btn btn-sm btn-success"
+                                    (click)="lihatNilaiCpmkMahasiswa(ListCpmkMahasiswa ,val.id_mk_fk, val.id_detailmk_fk, val.nrp, val.nama_matakuliah)"
+                                    >
+                                    Detail
+                                </button>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<ng-template #ListCpmkMahasiswa let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title mt-0">{{titleModal}}</h5>
+        <button type="button" class="close" (click)="modal.close()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <app-detail-nilai-cpmk-mahasiswa [id_detailmk_fk]="id_detailmk_fk" [id_mk_fk]="id_mk_fk" [nrp]="nrp" (afterSave)="modal.close()"></app-detail-nilai-cpmk-mahasiswa>
+    </div> 
+</ng-template>

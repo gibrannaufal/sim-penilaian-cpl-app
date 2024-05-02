@@ -14,6 +14,7 @@ import { ValidasiPenilaianMkComponent } from './validasiPenilaianMk/component/va
 import { EvaluasiCplComponent } from './evaluasiCpl/component/evaluasi-cpl/evaluasi-cpl.component';
 import { ValidasiKurikulumComponent } from './validasiKurikulum/component/validasi-kurikulum/validasi-kurikulum.component';
 import { RekapNilaiByKapordiComponent } from './rekapNilai/kaprodi/component/rekap-nilai-by-kapordi/rekap-nilai-by-kapordi.component';
+import { RekapNilaiMahasiswaComponent } from './rekapNilai/mahasiswa/component/rekap-nilai-mahasiswa/rekap-nilai-mahasiswa.component';
 
 
 const routes: Routes = [
@@ -32,6 +33,7 @@ const routes: Routes = [
     { path: 'evaluasi-cpl', component: EvaluasiCplComponent, pathMatch: 'full' },
     { path: 'validasi-kurikulum', component: ValidasiKurikulumComponent, pathMatch: 'full' },
     { path: 'rekap-nilai-all-mahasiswa', component: RekapNilaiByKapordiComponent, pathMatch: 'full' },
+    { path: 'rekap-nilai-mahasiswa', component: RekapNilaiMahasiswaComponent, pathMatch: 'full' },
 
 
 ];

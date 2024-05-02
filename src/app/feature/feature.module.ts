@@ -18,6 +18,7 @@ import { ValidasiPenilaianMkModule } from './validasiPenilaianMk/ValidasiPenilai
 import { evaluasiCplModule } from './evaluasiCpl/evaluasiCpl.module';
 import { ValidasiKurikulumModule } from './validasiKurikulum/ValidasiKurikulum.module';
 import { RekapNilaiByKaprodiModule } from './rekapNilai/kaprodi/RekapNilaiByKaprodi.module';
+import { RekapNilaiByMahasiswaModule } from './rekapNilai/mahasiswa/RekapNilaiByMahasiswa.module';
 
 // const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 //     suppressScrollX: true,
@@ -42,7 +43,8 @@ import { RekapNilaiByKaprodiModule } from './rekapNilai/kaprodi/RekapNilaiByKapr
         ValidasiPenilaianMkModule,
         evaluasiCplModule,
         ValidasiKurikulumModule,
-        RekapNilaiByKaprodiModule
+        RekapNilaiByKaprodiModule,
+        RekapNilaiByMahasiswaModule
     ],
     // providers: [
     //     {

@@ -53,7 +53,7 @@ export class ListRekapNilaiMatkulComponent implements OnInit {
   }
 
   lihatNilaiCpmkMahasiswa(modalId, id_mk_fk , id_detailmk_fk , nrp , nama_mk ) {
-    this.titleModal = 'List SUB CPMK ' + nama_mk ;
+    this.titleModal = 'List CPMK ' + nama_mk ;
     this.id_mk_fk = id_mk_fk;
     this.id_detailmk_fk = id_detailmk_fk;
     this.nrp = nrp;

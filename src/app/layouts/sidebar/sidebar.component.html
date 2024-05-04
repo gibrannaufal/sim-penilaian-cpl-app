@@ -11,38 +11,49 @@
         </li>
         <li class="menu-title">Setting</li>
         <li>
-          <a [routerLink]="['/kurikulum']" class="is-parent">
+          <a [routerLink]="['/kurikulum']" class="is-parent" 
+            *ngIf="profile.roles_name === 'admin' || profile.roles_name === 'sekprodi'"
+            >
             <i class="fa fa-university"></i>
             <span>Kurikulum</span>
           </a>
         </li>
         <li>
-          <a [routerLink]="['/cpmk']" class="is-parent">
+          <a [routerLink]="['/cpmk']" class="is-parent"
+          *ngIf="profile.roles_name === 'admin' || profile.roles_name === 'sekprodi'"
+          >
             <i class="fa fa-share-alt"></i>
             <span>CPMK</span>
           </a>
         </li>
         <li>
-          <a [routerLink]="['/mata-kuliah']" class="is-parent">
+          <a [routerLink]="['/mata-kuliah']" class="is-parent"
+          *ngIf="profile.roles_name === 'admin' || profile.roles_name === 'sekprodi'"
+          >
             <i class="fa fa-book"></i>
             <span>Mata Kuliah</span>
           </a>
         </li>
         <li>
-          <a [routerLink]="['/sub-cpmk']" class="is-parent">
+          <a [routerLink]="['/sub-cpmk']" class="is-parent"
+          *ngIf="profile.roles_name === 'admin' || profile.roles_name === 'koorbidang'"
+          >
             <i class="fa fa-sitemap"></i>
             <span>Sub-CPMK</span>
           </a>
         </li>
         <li>
-          <a [routerLink]="['/penilaian-mk']" class="is-parent">
+          <a [routerLink]="['/penilaian-mk']" class="is-parent"
+          *ngIf="profile.roles_name === 'admin' || profile.roles_name === 'dosen'">
             <i class="fa fa-briefcase"></i>
             <span>Penilaian Mata Kuliah</span>
           </a>
         </li>
 
         <!-- menu validasi -->
-        <ngb-accordion #acc="ngbAccordion" > 
+        <ngb-accordion #acc="ngbAccordion"
+        *ngIf="profile.roles_name === 'admin' || profile.roles_name === 'kaprodi'"
+         > 
           <ngb-panel >
             <ng-template ngbPanelTitle>
               <span style="color: black;">Menu Validasi</span>
@@ -56,7 +67,7 @@
                       <span style="color: white;">Validasi Kurikulum</span>
                     </a>
                   </li>
-                  <li>
+                  <li >
                     <a [routerLink]="['/validasi-mk']" class="is-parent">
                       <i class="fa fa-briefcase" style="color: white; margin-right: 1vw;"></i>
                       <span style="color: white;">Validasi Mata Kuliah</span>
@@ -75,7 +86,8 @@
         </ngb-accordion> 
 
         <!-- menu laporan -->
-        <ngb-accordion #acc="ngbAccordion" > 
+        <ngb-accordion #acc="ngbAccordion" 
+        *ngIf="profile.roles_name === 'admin' || profile.roles_name === 'kaprodi' || profile.roles_name === 'mahasiswa'" > 
           <ngb-panel >
             <ng-template ngbPanelTitle>
               <span style="color: black;">Menu Laporan</span>
@@ -83,22 +95,28 @@
               <ng-template ngbPanelContent > 
 
                 <ul class="metismenu list-unstyled" id="side-menu" #sideMenu>
-                  <li>
+                  <li *ngIf="profile.roles_name === 'admin' || profile.roles_name === 'kaprodi'">
                     <a [routerLink]="['/rekap-nilai-all-mahasiswa']" class="is-parent">
                       <i class="fa fa-university" style="color: white; margin-right: 0.5vw;"></i>
                       <span style="color: white;">Laporan Rekap Nilai Mahasiswa (kaprodi) </span>
                     </a>
                   </li>  
-                  <li>
+                  <li *ngIf="profile.roles_name === 'admin' || profile.roles_name === 'mahasiswa'">
                     <a [routerLink]="['/rekap-nilai-mahasiswa']" class="is-parent">
                       <i class="fa fa-university" style="color: white; margin-right: 0.5vw;"></i>
                       <span style="color: white;">Laporan Rekap Nilai  (mahasiswa) </span>
                     </a>
                   </li>  
-                  <li>
+                  <li *ngIf="profile.roles_name === 'admin' || profile.roles_name === 'mahasiswa'">
                     <a [routerLink]="['/evaluasi-cpl']" class="is-parent">
                       <i class="fa fa-graduation-cap"></i>
-                      <span>Evaluasi CPL</span>
+                      <span>Evaluasi CPL (mahasiswa)</span>
+                    </a>
+                  </li>
+                  <li *ngIf="profile.roles_name === 'admin' || profile.roles_name === 'kaprodi'">
+                    <a [routerLink]="['/evaluasi-cpl']" class="is-parent">
+                      <i class="fa fa-graduation-cap"></i>
+                      <span>Evaluasi CPL (kaprodi)</span>
                     </a>
                   </li>
                 </ul>
@@ -107,7 +125,7 @@
             </ngb-panel> 
         </ngb-accordion> 
 
-        <li>
+        <li *ngIf="profile.roles_name === 'admin'">
           <a [routerLink]="['/user']" class="is-parent">
             <i class="fa fa-cog"></i>
             <span>Setting User & Roles</span>

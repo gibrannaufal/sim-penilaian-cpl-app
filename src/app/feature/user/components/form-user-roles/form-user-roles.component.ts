@@ -3,28 +3,21 @@ import { LandaService } from 'src/app/core/services/landa.service';
 import { UserService } from '../../services/user.service';
 
 @Component({
-  selector: 'app-form-user',
-  templateUrl: './form-user.component.html',
-  styleUrls: ['./form-user.component.scss']
+  selector: 'app-form-user-roles',
+  templateUrl: './form-user-roles.component.html',
+  styleUrls: ['./form-user-roles.component.scss']
 })
-export class FormUserComponent implements OnInit {
+export class FormUserRolesComponent implements OnInit {
   readonly MODE_CREATE = 'add';
   readonly MODE_UPDATE = 'update';
 
-  @Input() userId: number;
+  @Input() rolesId: number;
   @Output() afterSave = new EventEmitter<boolean>();
 
   activeMode: string;
   formModel: {
     id: number,
     name: string,
-    email: string,
-    password: string,
-    nrp: number,
-    alamat: string,
-    jenis_kelamin: string,
-    prodi: string,
-    user_roles_id: number,
   }
 
   listRoles: any;
@@ -35,7 +28,7 @@ export class FormUserComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getRoles();
+    // this.getRoles();
   }
 
   ngOnChanges(changes: SimpleChange) {
@@ -45,27 +38,22 @@ export class FormUserComponent implements OnInit {
   resetForm() {
     this.formModel = {
       id: 0,
-      name: '',
-      email: '',
-      password: '',
-      nrp: 0,
-      user_roles_id: 0,
-      alamat: '',
-      prodi: '',
-      jenis_kelamin: 'laki-laki',
+      name: ''
     }
 
-    if (this.userId > 0) {
+    if (this.rolesId > 0) {
       this.activeMode = this.MODE_UPDATE;
-      this.getUser(this.userId);
+      this.getRoles(this.rolesId);
       return true;
     }
 
     this.activeMode = this.MODE_CREATE;
   }
 
-  getUser(userId) {
-    this.userService.getUserById(userId).subscribe((res: any) => {
+  getRoles(rolesId) {
+    console.log('roles id nya ini' , rolesId);
+    
+    this.userService.getRolesById(rolesId).subscribe((res: any) => {
       this.formModel = res.data;
     }, err => {
       console.log(err);
@@ -84,7 +72,7 @@ export class FormUserComponent implements OnInit {
   }
 
   insert() {
-    this.userService.createUser(this.formModel).subscribe((res: any) => {
+    this.userService.createRoles(this.formModel).subscribe((res: any) => {
       this.landaService.alertSuccess('Berhasil', res.message);
       this.afterSave.emit();
     }, err => {
@@ -93,23 +81,11 @@ export class FormUserComponent implements OnInit {
   }
 
   update() {
-    this.userService.updateUser(this.formModel).subscribe((res: any) => {
+    this.userService.updateRoles(this.formModel).subscribe((res: any) => {
       this.landaService.alertSuccess('Berhasil', res.message);
       this.afterSave.emit();
     }, err => {
       this.landaService.alertError('Mohon Maaf', err.error.errors);
     });
   }
-
-  getRoles()
-  {
-    this.userService.getRoles().subscribe((res: any) => {
-      this.listRoles = res
-      console.log(this.listRoles);
-
-    }, err => {
-      this.landaService.alertError('Mohon Maaf', err.error.errors);
-    });
-  }
-
 }

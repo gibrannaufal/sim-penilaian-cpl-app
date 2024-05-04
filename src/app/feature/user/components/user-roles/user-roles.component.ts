@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChange } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
+import { LandaService } from 'src/app/core/services/landa.service';
 import { UserService } from '../../services/user.service';
 import { ProgressServiceService } from 'src/app/core/services/progress-service.service';
 
@@ -9,11 +10,16 @@ import { DataTableDirective } from 'angular-datatables';
 import { ViewChild } from '@angular/core';
 
 @Component({
-  selector: 'app-list-user',
-  templateUrl: './list-user.component.html',
-  styleUrls: ['./list-user.component.scss']
+  selector: 'app-user-roles',
+  templateUrl: './user-roles.component.html',
+  styleUrls: ['./user-roles.component.scss']
 })
-export class ListUserComponent implements OnInit {
+export class UserRolesComponent implements OnInit{
+
+  readonly MODE_CREATE = 'add';
+  readonly MODE_UPDATE = 'update';
+
+  @Output() afterSave = new EventEmitter<boolean>();
 
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
@@ -21,14 +27,13 @@ export class ListUserComponent implements OnInit {
   dtOptions: any;
 
   filter: {
-    nama: '',
-    nrp: ''
+    name: ''
   };
 
   showForm: boolean;
-  listUser: any;
+  listRoles: any;
   titleModal: string;
-  userId: number;
+  rolesId: number;
 
   constructor(
     private userService: UserService,
@@ -38,14 +43,13 @@ export class ListUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.filter = {
-      nama: '',
-      nrp: '',
+      name: ''
     }
-    this.getUser();
-    this.showForm = false;
+    this.getRoles();
+    this.showForm = true;
   }
 
-  getUser() {
+  getRoles() {
     this.dtOptions = {
         serverSide: true,
         processing: true,
@@ -53,21 +57,20 @@ export class ListUserComponent implements OnInit {
         pageLength: 4,
         ajax: (dtParams: any, callback) => {
           const params = {
-            nama: this.filter.nama,
-            nrp: this.filter.nrp,
+            name: this.filter.name,
             itemperpage: 4,
             per_page: dtParams.length,
             page: (dtParams.start / dtParams.length) + 1,
           };
           
-          this.userService.getUsers(params).subscribe((res: any) => {
+          this.userService.getRolesAll(params).subscribe((res: any) => {
             const { list, meta } = res.data;
      
             let number = dtParams.start + 1;
             list.forEach(val => {
               val.no = number++;
             });
-            this.listUser  = list;
+            this.listRoles  = list;
      
             callback({
               recordsTotal: meta.total,
@@ -82,22 +85,24 @@ export class ListUserComponent implements OnInit {
       };
   }
 
-  createUser(modalId) {
-    this.titleModal = 'Tambah User';
-    this.userId = 0;
+  createRoles(modalId) {
+    this.titleModal = 'Tambah Roles';
+    this.showForm = true;
+    this.rolesId = 0;
     this.modalService.open(modalId, { size: 'lg', backdrop: 'static' });
   }
 
-  updateUser(modalId, user) {
-    this.titleModal = 'Edit User: ' + user.name;
-    this.userId = user.id;
+  updateRoles(modalId, roles) {
+    this.titleModal = 'Edit Roles: ' + roles.name;
+    this.showForm = true;
+    this.rolesId = roles.id;
     this.modalService.open(modalId, { size: 'lg', backdrop: 'static' });
   }
 
-  deleteUser(userId) {
+  deleteRoles(rolesId) {
     Swal.fire({
       title: 'Apakah kamu yakin ?',
-      text: 'User ini tidak dapat login setelah kamu menghapus datanya',
+      text: 'User Roles ini akan berubah menjadi member setelah kamu menghapus datanya',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#34c38f',
@@ -106,8 +111,8 @@ export class ListUserComponent implements OnInit {
     }).then((result) => {
       if (!result.value) return false;
 
-      this.userService.deleteUser(userId).subscribe((res: any) => {
-        this.getUser();
+      this.userService.deleteRoles(rolesId).subscribe((res: any) => {
+        this.getRoles();
       });
     });
   }
@@ -118,8 +123,4 @@ export class ListUserComponent implements OnInit {
     });
    }
 
-  addRoles(modalId) {
-    this.titleModal = 'Daftar Roles';
-    this.showForm = true;
-  }
 }

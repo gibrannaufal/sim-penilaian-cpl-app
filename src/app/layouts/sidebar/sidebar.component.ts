@@ -7,6 +7,8 @@ import { HttpClient } from '@angular/common/http';
 import { MENU } from './menu';
 import { MenuItem } from './menu.model';
 
+import { AuthService } from 'src/app/feature/auth/services/auth.service';
+
 
 @Component({
   selector: 'app-sidebar',
@@ -22,6 +24,7 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() isCondensed = false;
   menu: any;
   data: any;
+  profile: any;
 
   menuItems = [];
 
@@ -29,6 +32,7 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
 
   constructor(
     private eventService: EventService,
+    private authService: AuthService,
     private router: Router,
     private http: HttpClient) {
     router.events.forEach((event) => {
@@ -42,6 +46,7 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
   ngOnInit() {
     this.initialize();
     this._scrollElement();
+    this.getRoles();
   }
 
   ngAfterViewInit() {
@@ -142,7 +147,7 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
    */
   initialize(): void {
     this.menuItems = MENU;
-    console.log(this.menuItems);
+    // console.log(this.menuItems);
   }
 
   /**
@@ -152,4 +157,15 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
   hasItems(item: MenuItem) {
     return item.subItems !== undefined ? item.subItems.length > 0 : false;
   }
+
+  getRoles() {
+    this.authService.getProfile().subscribe((res: any) => {
+      this.profile = res.data;
+
+      console.log('profile id nya ini' , this.profile);
+    }, err => {
+      console.log(err);
+    });
+  }
+
 }

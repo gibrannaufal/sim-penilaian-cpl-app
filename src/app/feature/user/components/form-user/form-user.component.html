@@ -14,6 +14,40 @@
         </div>
     </div>
     <div class="form-group row">
+        <label class="col-md-4 required">NRP</label>
+        <div class="col-md-8">
+            <input [(ngModel)]="formModel.nrp"  name="nrp" class="form-control"
+                placeholder="NRP Pengguna">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-md-4 required">Program Studi</label>
+        <div class="col-md-8">
+            <select [(ngModel)]="formModel.prodi" name="prodi" class="form-control">
+                <option value="">Pilih Program Studi</option>
+                <option value="Sistem Informasi">Sistem informasi</option>
+                <option value="Teknik Informatika">Teknik Informatika</option>
+                <option value="Sistem Informasi D3">Sistem Informasi D3</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-md-4 required">Alamat</label>
+        <div class="col-md-8">
+            <input [(ngModel)]="formModel.alamat" type="alamat" name="alamat" class="form-control"
+                placeholder="Alamat Pengguna">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-md-4 required">Jenis Kelamin</label>
+        <div class="col-md-8">
+            <select [(ngModel)]="formModel.jenis_kelamin" name="jenis_kelamin" class="form-control">
+                <option value="laki-laki">Laki-laki</option>
+                <option value="perempuan">Perempuan</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group row">
         <label class="col-md-4">Password</label>
         <div class="col-md-8">
             <input [(ngModel)]="formModel.password" type="password" name="password" class="form-control"
@@ -23,6 +57,17 @@
             </small>
         </div>
     </div>
+    <div class="form-group row">
+        <label class="col-md-4 required">Roles</label>
+        <div class="col-md-8">
+            <select [(ngModel)]="formModel.user_roles_id" name="user_roles_id" class="form-control" >
+                <option value="0" >Pilih Roles</option>
+                <option *ngFor="let role of listRoles" [value]="role.id">{{ role.name }}</option>
+            </select>
+        </div>
+    </div>
+   
+      
     <div class="form-group row">
         <label class="col-md-4"></label>
         <div class="col-md-8">

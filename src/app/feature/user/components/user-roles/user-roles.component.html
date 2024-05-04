@@ -1,0 +1,71 @@
+<div class="row">
+    <div class="col-md-12 row">
+        <div class="col-md-6">
+            <form class="form-inline">
+                <div class="form-group"> 
+                    <div class="input-group input-group-sm mr-2">
+                        <input type="text" placeholder="Filter Nama roles" class="form-control form-control-sm" [(ngModel)]="filter.name"  name="name"  />
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <i class="fas fa-search" (click)="reloadDataTable()">
+                               
+                                </i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6 text-end">
+            <div role="group" class="btn-group btn-group-sm" style="margin-right: 1vw;">
+                <button type="button" class="btn btn-sm btn-primary" (click)="createRoles(formRoles)">
+                    <em class="fas fa-plus font-size-14 align-middle me-1"></em> Tambah Roles
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <table class="table table-hover" datatable [dtOptions]="dtOptions" >
+            <thead class="thead-light">
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th width="90"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of listRoles;">
+                    <td>{{user.no}}</td>
+                    <td class="vertical-middle">{{user.name}}</td>
+                    <td class="vertical-middle text-right">
+                        <a href="javascript: void(0);" class="align-middle me-2" *ngIf="user.id !== 1 && user.id !== 2"
+                            (click)="updateRoles(formRoles, user)" placement="left" container="body"
+                            ngbTooltip="Ubah">
+                            <em class="fa fa-edit font-size-14"></em>
+                        </a>
+                        <a href="javascript: void(0);" class="align-middle" (click)="deleteRoles(user.id)" *ngIf="user.id !== 1 && user.id !== 2"
+                            placement="left" container="body" ngbTooltip="Hapus">
+                            <em class="fa fa-trash font-size-14"></em>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-12 text-end mt-2">
+        <button type="button" class="btn btn-light mr-2" (click)="afterSave.emit()"><em
+                class="fa fa-arrow-left"></em> Kembali</button>
+    </div>
+</div>
+
+<ng-template #formRoles let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title mt-0">{{titleModal}}</h5>
+        <button type="button" class="close" (click)="modal.close()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <app-form-user-roles [rolesId]="rolesId" (afterSave)="modal.close(); getRoles()"></app-form-user-roles>
+    </div>
+</ng-template>

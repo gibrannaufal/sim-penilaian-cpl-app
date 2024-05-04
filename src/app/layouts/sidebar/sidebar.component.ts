@@ -46,7 +46,7 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
   ngOnInit() {
     this.initialize();
     this._scrollElement();
-    this.getRoles();
+    // this.getRoles();
   }
 
   ngAfterViewInit() {
@@ -158,14 +158,14 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
     return item.subItems !== undefined ? item.subItems.length > 0 : false;
   }
 
-  getRoles() {
-    this.authService.getProfile().subscribe((res: any) => {
-      this.profile = res.data;
+  // getRoles() {
+  //   this.authService.getProfile().subscribe((res: any) => {
+  //     this.profile = res.data;
 
-      console.log('profile id nya ini' , this.profile);
-    }, err => {
-      console.log(err);
-    });
-  }
+  //     console.log('profile id nya ini' , this.profile);
+  //   }, err => {
+  //     console.log(err);
+  //   });
+  // }
 
 }

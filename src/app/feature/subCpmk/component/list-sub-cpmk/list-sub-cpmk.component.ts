@@ -56,7 +56,8 @@ export class ListSubCpmkComponent implements OnInit {
   }
 
   formCreate() {
-  
+    console.log('coba');
+    
     const navigationExtras: NavigationExtras = {
       queryParams: {
         id_mk_fk: this.id_mk_fk,
@@ -66,6 +67,9 @@ export class ListSubCpmkComponent implements OnInit {
     };
   
     this.router.navigate(['/form-sub-cpmk'], navigationExtras);
+    this.afterSave.emit();
+
+
   }
 
   getmk() {

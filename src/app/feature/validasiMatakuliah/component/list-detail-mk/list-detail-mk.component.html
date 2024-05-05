@@ -8,6 +8,7 @@
                     <th style="min-width: 100px;">kode CPMK</th>
                     <th style="min-width: 250px;">Deskripsi CPL</th>
                     <th style="min-width: 100px;">kode CPL</th>
+                    <th style="min-width: 100px;">Bobot CPMK</th>
                     <th style="min-width: 100px;">Pesan</th>
                     <th style="min-width: 100px;">Status</th>
                     <th style="min-width: 15vw;">Action</th>
@@ -29,6 +30,9 @@
                     </td>
                     <td>
                         {{val.kode_cpl}}
+                    </td>
+                    <td>
+                        {{val.bobot_detailmk}}
                     </td>
                     <td class="vertical-middle">
                         <span *ngIf="val.pesan === null" class="align-items-center text-center">-</span>

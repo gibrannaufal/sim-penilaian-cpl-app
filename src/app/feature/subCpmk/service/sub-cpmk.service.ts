@@ -11,6 +11,10 @@ export class SubCpmkService {
   getSubCpmk(arrParameter) {
     return this.landaService.DataGet('/v1/subCpmk', arrParameter );
   }
+
+  getMkSubCpmk(arrParameter) {
+    return this.landaService.DataGet('/v1/subCpmk/mk', arrParameter );
+  }
   
   createSubCpmk(payload) {
     return this.landaService.DataPost('/v1/subCpmk', payload);

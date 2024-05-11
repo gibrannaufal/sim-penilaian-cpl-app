@@ -16,6 +16,7 @@ export class FormMataKuliahComponent {
   readonly MODE_UPDATE = 'update';
 
   @Input() mkId: number;
+  @Input() mkStatus: string;
   @Output() afterSave = new EventEmitter<boolean>();
 
   activeMode: string;
@@ -190,10 +191,12 @@ export class FormMataKuliahComponent {
         this.formModel.mk_detail.splice(i, 1);
         i--;
       }
+    } 
+    if (this.formModel.status === 'ditolak') {
+      this.formModel.status  = 'revisi'
+    }else{
+      this.formModel.status = this.mkStatus;
     }
-    console.log('ini mk detail deletednya ',this.formModel.mk_detail_deleted);
-    
-    this.formModel.status = this.activeMode;
     this.mkService.updateMk(this.formModel).subscribe((res: any) => {
       this.landaService.alertSuccess('Berhasil', res.message);
       this.afterSave.emit();

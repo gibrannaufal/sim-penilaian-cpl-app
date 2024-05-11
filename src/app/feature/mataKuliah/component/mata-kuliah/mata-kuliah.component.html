@@ -64,20 +64,23 @@
                             </td>
                             <td class="vertical-middle">
                                 <span *ngIf="mk.status == 'diterima'" class="custom-badge custom-badge-success">{{mk.status}}</span>
-                                <span *ngIf="mk.status == 'draft'" class="custom-badge custom-badge-warning">{{mk.status}}</span>
+                                <span *ngIf="mk.status == 'draft'" class="custom-badge custom-badge-secondary">{{mk.status}}</span>
                                 <span *ngIf="mk.status == 'ditolak'"class="custom-badge custom-badge-danger">{{mk.status}}</span>
+                                <span *ngIf="mk.status == 'revisi'" class="custom-badge custom-badge-warning">{{mk.status}}</span>
                             </td>
                             <td class="vertical-middle">
-                                <a href="javascript: void(0);" class="align-middle mr-2"
+                                <a href="javascript: void(0);" *ngIf="mk.status == 'draft'" class="align-middle mr-2"
                                 (click)="formUpdate(mk)" placement="left" container="body"
                                 ngbTooltip="Ubah">
                                 <em class="fa fa-edit font-size-14"></em>
                             </a>
-                            <a href="javascript: void(0);" class="align-middle"
+                            <a href="javascript: void(0);" *ngIf="mk.status == 'draft'" class="align-middle"
                                 (click)="deleteKurikulum(mk.id_matakuliah)" placement="left" container="body"
                                 ngbTooltip="Hapus">
                                 <em class="fa fa-trash font-size-14"></em>
                             </a>
+                            <button *ngIf="mk.status === 'ditolak'" class="btn btn-sm btn-warning"  (click)="formUpdate(mk)">Revisi</button>
+
                             </td>
 
                         </tr>

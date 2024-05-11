@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LandaService } from 'src/app/core/services/landa.service';
 import Swal from 'sweetalert2';
 import { MataKuliahService } from 'src/app/feature/mataKuliah/service/mata-kuliah.service';
+import { SubCpmkService } from '../../service/sub-cpmk.service';
 import { DataTableDirective } from 'angular-datatables';
 
 import { ViewChild } from '@angular/core';
@@ -30,6 +31,7 @@ export class SubCpmkComponent implements OnInit {
   
   constructor(
       private mataKuliahService: MataKuliahService,
+      private subCpmkService: SubCpmkService,
       private landaService: LandaService,
       private modalService: NgbModal
   ) { }
@@ -57,7 +59,7 @@ export class SubCpmkComponent implements OnInit {
               page: (dtParams.start / dtParams.length) + 1,
             };
             
-            this.mataKuliahService.getmk(params).subscribe((res: any) => {
+            this.subCpmkService.getMkSubCpmk(params).subscribe((res: any) => {
               const { list, meta } = res.data;
        
               let number = dtParams.start + 1;

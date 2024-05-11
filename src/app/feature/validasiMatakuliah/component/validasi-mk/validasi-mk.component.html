@@ -58,8 +58,9 @@
                             </td>
                             <td class="vertical-middle">
                                 <span *ngIf="mk.status == 'diterima'" class="custom-badge custom-badge-success">{{mk.status}}</span>
-                                <span *ngIf="mk.status == 'draft'" class="custom-badge custom-badge-warning">{{mk.status}}</span>
+                                <span *ngIf="mk.status == 'draft'" class="custom-badge custom-badge-secondary">{{mk.status}}</span>
                                 <span *ngIf="mk.status == 'ditolak'"class="custom-badge custom-badge-danger">{{mk.status}}</span>
+                                <span *ngIf="mk.status == 'revisi'" class="custom-badge custom-badge-warning">{{mk.status}}</span>
                             </td>
                             <td>
                             <button (click)="detailMk(listDetailMk, mk.id_matakuliah , mk.nama_matakuliah)" class="btn btn-sm btn-info" title="Detail MK"><i class="fa fa-eye"></i></button>

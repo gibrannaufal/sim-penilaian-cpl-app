@@ -27,6 +27,7 @@ export class MataKuliahComponent implements OnInit {
   
   titleForm: string;
   mkId: number;
+  mkStatus:  string;
   showForm: boolean;
   
   constructor(
@@ -93,6 +94,7 @@ export class MataKuliahComponent implements OnInit {
     this.showForm = true;
     this.titleForm = 'Edit Matakuliah: ' + mk.nama_matakuliah;
     this.mkId = mk.id_matakuliah;
+    this.mkStatus = mk.status;
     console.log(this.mkId);
     
   }

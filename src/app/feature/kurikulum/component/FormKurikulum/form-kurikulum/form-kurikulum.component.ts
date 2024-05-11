@@ -15,6 +15,7 @@ export class FormKurikulumComponent {
   readonly MODE_UPDATE = 'update';
 
   @Input() kurikulumId: number;
+  @Input() kurikulumStatus: string;
   @Output() afterSave = new EventEmitter<boolean>();
 
   activeMode: string;
@@ -114,6 +115,7 @@ export class FormKurikulumComponent {
   }
 
   update() {
+
     for(let i=0; i<this.formModel.cpl.length; i++) {
       if(this.formModel.cpl[i].deskripsi_cpl == '' || this.formModel.cpl[i].deskripsi_cpl == null )
       {
@@ -121,7 +123,13 @@ export class FormKurikulumComponent {
         i--;
       }
     }
-    this.formModel.status = this.activeMode;
+    if(this.kurikulumStatus === 'ditolak')
+      {
+        this.formModel.status = 'revisi';
+      }else {
+        this.formModel.status  = this.kurikulumStatus
+      }
+    
     this.kurikulumService.updateKurikulum(this.formModel).subscribe((res: any) => {
       this.landaService.alertSuccess('Berhasil', res.message);
       this.afterSave.emit();

@@ -58,20 +58,23 @@
                             </td>
                             <td class="vertical-middle">
                                 <span *ngIf="kurikulum.status == 'diterima'" class="custom-badge custom-badge-success">{{kurikulum.status}}</span>
-                                <span *ngIf="kurikulum.status == 'draft'" class="custom-badge custom-badge-warning">{{kurikulum.status}}</span>
+                                <span *ngIf="kurikulum.status == 'draft'" class="custom-badge custom-badge-secondary">{{kurikulum.status}}</span>
                                 <span *ngIf="kurikulum.status == 'ditolak'"class="custom-badge custom-badge-danger">{{kurikulum.status}}</span>
+                                <span *ngIf="kurikulum.status == 'revisi'" class="custom-badge custom-badge-warning">{{kurikulum.status}}</span>
                             </td>
                             <td class="vertical-middle">
-                                <a href="javascript: void(0);" class="align-middle mr-2"
+                                <a href="javascript: void(0);" *ngIf="kurikulum.status === 'draft'" class="align-middle mr-2"
                                 (click)="formUpdate(kurikulum)" placement="left" container="body"
                                 ngbTooltip="Ubah">
                                 <em class="fa fa-edit font-size-14"></em>
-                            </a>
-                            <a href="javascript: void(0);" class="align-middle"
+                                </a>
+                            <a href="javascript: void(0);" *ngIf="kurikulum.status === 'draft'" class="align-middle"
                                 (click)="deleteKurikulum(kurikulum.id_kurikulum)" placement="left" container="body"
                                 ngbTooltip="Hapus">
                                 <em class="fa fa-trash font-size-14"></em>
                             </a>
+
+                            <button *ngIf="kurikulum.status === 'ditolak'" class="btn btn-sm btn-warning"  (click)="formUpdate(kurikulum)">Revisi</button>
                             </td>
 
                         </tr>
@@ -91,7 +94,7 @@
                     <h1>{{titleForm}}</h1>
                 </div>
                 <div class="card-body">
-                    <app-form-kurikulum [kurikulumId]="kurikulumId" (afterSave)="showForm = false; reloadDataTable()"></app-form-kurikulum>
+                    <app-form-kurikulum [kurikulumId]="kurikulumId" [kurikulumStatus]="kurikulumStatus" (afterSave)="showForm = false; reloadDataTable()"></app-form-kurikulum>
                 </div>
             </div>
         </div>

@@ -53,13 +53,14 @@
                             </td>
                             <td class="vertical-middle">
                                 <span *ngIf="kurikulum.status == 'diterima'" class="custom-badge custom-badge-success">{{kurikulum.status}}</span>
-                                <span *ngIf="kurikulum.status == 'draft'" class="custom-badge custom-badge-warning">{{kurikulum.status}}</span>
+                                <span *ngIf="kurikulum.status == 'draft'" class="custom-badge custom-badge-secondary">{{kurikulum.status}}</span>
                                 <span *ngIf="kurikulum.status == 'ditolak'"class="custom-badge custom-badge-danger">{{kurikulum.status}}</span>
+                                <span *ngIf="kurikulum.status == 'revisi'" class="custom-badge custom-badge-warning">{{kurikulum.status}}</span>
                             </td>
                             <td>
                                     <button (click)="detailCpl(listCpl, kurikulum.nama_kurikulum , kurikulum.id_kurikulum)"  class="btn btn-sm btn-info" title="Detail MK"><i class="fa fa-eye"></i></button>
                                     <button (click)="diterimaKurikulum(kurikulum.id_kurikulum)" class="btn btn-sm btn-success">validasi</button>
-                                    <button (click)="ditolak(formValidasiKurikulum ,kurikulum.id_kurikulum)" class="btn btn-sm btn-danger">Ditolak</button>
+                                    <button (click)="ditolak(formValidasiKurikulum ,kurikulum.id_kurikulum ,kurikulum.nama_kurikulum)" class="btn btn-sm btn-danger">Ditolak</button>
                             </td>
 
                             

@@ -28,6 +28,7 @@ export class KurikulumComponent implements OnInit {
     
     titleForm: string;
     kurikulumId: number;
+    kurikulumStatus: string;
     showForm: boolean;
     
     constructor(
@@ -93,6 +94,7 @@ export class KurikulumComponent implements OnInit {
       this.showForm = true;
       this.titleForm = 'Edit Kurikulum: ' + kurikulum.nama_kurikulum;
       this.kurikulumId = kurikulum.id_kurikulum;
+      this.kurikulumStatus = kurikulum.status;
       
     }
 

@@ -115,7 +115,8 @@ export class ValidasiKurikulumComponent implements OnInit  {
       });
     }
 
-    ditolak(modalId, id_kurikulum_fk ) {
+    ditolak(modalId, id_kurikulum_fk  , nama_kurikulum) {
+      this.titleModal = 'Penolakan Kurikulum :  ' + nama_kurikulum;
       this.id_kurikulum_fk = id_kurikulum_fk,
       this.modalService.open(modalId,{ size: 'sm', backdrop: 'static' });
     }

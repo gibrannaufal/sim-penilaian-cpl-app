@@ -6,10 +6,12 @@ import { FormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { EvaluasiCplComponent } from './component/evaluasi-cpl/evaluasi-cpl.component';
+import { EvaluasiCplMahasiswaComponent } from './component/evaluasi-cpl-mahasiswa/evaluasi-cpl-mahasiswa.component';
 
 @NgModule({
   declarations: [
-    EvaluasiCplComponent
+    EvaluasiCplComponent,
+    EvaluasiCplMahasiswaComponent
   ],
   imports: [
     CommonModule,

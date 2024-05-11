@@ -1,0 +1,53 @@
+<div class="card" *ngIf="!showForm">
+    <div class="card-header">
+       <p style="font-size: 20px;"><b>Daftar Total CPL - Evaluasi CPL</b> </p> 
+    </div>
+    <div class="card-body">
+
+        <div class="row">
+            <div class="col-md-12">
+                <form class="row">
+                    <div class="col-md-5">
+                        <ng-select  placeholder="Pilih Kurikulum" id="kurikulum" bindLabel="nama_kurikulum" bindValue="id_kurikulum"
+                                    [dropdownPosition]="'down'"
+                                    [(ngModel)]="filter.kurikulum" 
+                                    [search]="true"
+                                    [ngModelOptions]="{standalone: true}">
+                                     <ng-option *ngFor="let k of listKurikulum" [value]="k.id_kurikulum">{{ k.kode_kurikulum }} - {{ k.nama_kurikulum }}</ng-option>
+                        </ng-select>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" placeholder="Filter Kode CPL" class="form-control form-control-sm" [(ngModel)]="filter.kode_cpl"  name="kode_cpl"  />
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-sm btn-primary">
+                            <i class="fas fa-search" (click)="reloadTable()"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-12 mt-4">
+                <table class="table table-hover"  >
+                    <thead class="thead-light">
+                        <tr>
+                            <td rowspan="2">No</td>
+                            <td rowspan="2">Kode Cpl</td>
+                            <td rowspan="2">Total ALL CPL</td>
+                            <td rowspan="2">Total CPL Lulus</td>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let val of listCpl; let i = index;">
+                            <td>{{i + 1}}</td>
+                            <td class="vertical-middle">{{val.kode_cpl}}</td>
+                            <td class="vertical-middle">{{val.total_cpl_all}}</td>
+                            <td class="vertical-middle">{{val.total_cpl_didapat}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>

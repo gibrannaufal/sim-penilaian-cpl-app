@@ -8,16 +8,16 @@ import { DataTableDirective } from 'angular-datatables';
 import { ViewChild } from '@angular/core';
 import { filterService } from 'src/app/core/services/filter.service';
 
+
 @Component({
-  selector: 'app-evaluasi-cpl',
-  templateUrl: './evaluasi-cpl.component.html',
-  styleUrls: ['./evaluasi-cpl.component.scss']
+  selector: 'app-evaluasi-cpl-mahasiswa',
+  templateUrl: './evaluasi-cpl-mahasiswa.component.html',
+  styleUrls: ['./evaluasi-cpl-mahasiswa.component.scss']
 })
-export class EvaluasiCplComponent implements OnInit {
-  
-  listMahasiswa: [];
+export class EvaluasiCplMahasiswaComponent implements OnInit {
+
   listCpl: [];
-  listKurikulum: [];
+
   showForm: boolean;
   titleForm: string;
   @ViewChild(DataTableDirective)
@@ -27,7 +27,7 @@ export class EvaluasiCplComponent implements OnInit {
 
   filter: {
       nama_mahasiswa: '',
-      kurikulum: ''
+      kode_cpl: ''
     };
 
   nrp: any;
@@ -43,42 +43,26 @@ export class EvaluasiCplComponent implements OnInit {
     this.showForm = false;
     this.filter = {
       nama_mahasiswa: '',
-      kurikulum: ''
+      kode_cpl: ''
     
     };
-      this.getmahasiswa();
-      this.getKurikulum();
+      this.getCpl();
   }
 
-  getmahasiswa() {
+  getCpl() {
     const param  = {
-      nama_mahasiswa: this.filter.nama_mahasiswa,
-      kurikulum: this.filter.kurikulum,
+      nrp: '181131001',
+      kode_cpl: this.filter.kode_cpl,
     };
-    this.evaluasiCplService.getEvaluasiCplMahasiswa(param).subscribe((res: any) => {
-      this.listMahasiswa = res.data.arrFinal;
-      this.listCpl = res.data.listCpl;
+    this.evaluasiCplService.getCplMahasiswa(param).subscribe((res: any) => {
+      this.listCpl = res.data;
       
-    }, err => {
-      console.log(err);
-    });
-  }
-  getKurikulum() {
-    this.filterService.getKurikulumFilter().subscribe((res: any) => {
-      this.listKurikulum = res
     }, err => {
       console.log(err);
     });
   }
 
   reloadTable(): void {
-    this.getmahasiswa();
+    this.getCpl();
    }
-
-   formRekap(nrp, nama_mahasiswa) {
-    this.showForm = true;
-    this.titleForm = 'List Rekap Nilai Mahasiswa ' + nama_mahasiswa;
-    this.nrp = nrp;
-  }
-
 }

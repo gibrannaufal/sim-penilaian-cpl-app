@@ -8,12 +8,21 @@ export class EvaluasiCplService {
 
   constructor(private landaService: LandaService) { }
 
-  getMahasiswa(arrParameter) {
+  getEvaluasiCplMahasiswa(arrParameter) {
     return this.landaService.DataGet('/v1/evaluasiCpl', arrParameter);
   }
 
   getRekap(arrParameter) {
     return this.landaService.DataGet('/v1/evaluasiCpl/rekap', arrParameter);
   }
+
+  getAllMahasiswa() {
+    return this.landaService.DataGet('/v1/getAllMahasiswa');
+  }
+
+  getCplMahasiswa(arrParameter) {
+    return this.landaService.DataGet('/v1/getCplMahasiswa',arrParameter);
+  }
+
 
 }

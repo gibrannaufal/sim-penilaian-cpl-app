@@ -30,5 +30,8 @@ export class PenilaianMkService {
     return this.landaService.DataPost('/v1/penilaianMk/detail', arrParameter);
   }
 
+  updateStatus(payload) {
+    return this.landaService.DataPost('/v1/subCpmk/status', payload);
+  }
     
 }

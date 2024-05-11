@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LandaService } from 'src/app/core/services/landa.service';
 import Swal from 'sweetalert2';
 import { SubCpmkService } from 'src/app/feature/subCpmk/service/sub-cpmk.service';
+import { PenilaianMkService } from '../../service/penilaian-mk.service';
 import { DataTableDirective } from 'angular-datatables';
 
 import { Router } from '@angular/router';
@@ -42,6 +43,7 @@ export class ListPenilaianSubCpmkComponent implements OnInit{
   
   constructor(
       private subCpmkService: SubCpmkService,
+      private penilaianMkService: PenilaianMkService,
       private landaService: LandaService,
       private modalService: NgbModal,
       private router: Router
@@ -57,14 +59,32 @@ export class ListPenilaianSubCpmkComponent implements OnInit{
     this.getmk();
   }
 
-  formPenilaian(id_subcpmk) {
+  formPenilaian(val) {
+    if(val.status_penilaian === 'ditolak')
+    {
+      console.log('hello');
+      
+      const params ={
+        id_mk_fk: this.id_mk_fk,
+        id_detailmk_fk: this.id_detailmk_fk,
+        id_subcpmk: val.id_subcpmk,
+        status_penilaian: val.status_penilaian
+      }
+      this.penilaianMkService.updateStatus(params).subscribe((res: any) => {
+        // this.subCpmk = res;
+        console.log('Berhasil');
+        
+      }, err => {
+        console.log(err);
+      });
+    }
     const navigationExtras: NavigationExtras = {
       queryParams: {
         id_mk_fk: this.id_mk_fk,
         id_detailmk_fk: this.id_detailmk_fk,
         title: this.titleForm,
         uid: this.uid,
-        id_subcpmk_mk: id_subcpmk
+        id_subcpmk_mk: val.id_subcpmk
       }
     };
   

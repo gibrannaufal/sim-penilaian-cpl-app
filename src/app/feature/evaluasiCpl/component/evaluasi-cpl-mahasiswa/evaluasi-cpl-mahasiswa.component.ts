@@ -17,7 +17,7 @@ import { filterService } from 'src/app/core/services/filter.service';
 export class EvaluasiCplMahasiswaComponent implements OnInit {
 
   listCpl: [];
-
+  listKurikulum = [];
   showForm: boolean;
   titleForm: string;
   @ViewChild(DataTableDirective)
@@ -26,7 +26,7 @@ export class EvaluasiCplMahasiswaComponent implements OnInit {
   dtOptions: any;
 
   filter: {
-      nama_mahasiswa: '',
+      kurikulum: '',
       kode_cpl: ''
     };
 
@@ -42,21 +42,31 @@ export class EvaluasiCplMahasiswaComponent implements OnInit {
   ngOnInit(): void {
     this.showForm = false;
     this.filter = {
-      nama_mahasiswa: '',
+      kurikulum: '',
       kode_cpl: ''
     
     };
       this.getCpl();
+      this.getKurikulum();
   }
 
   getCpl() {
     const param  = {
-      nrp: '181131001',
+      nrp: '191136005',
       kode_cpl: this.filter.kode_cpl,
+      kurikulum: this.filter.kurikulum,
     };
     this.evaluasiCplService.getCplMahasiswa(param).subscribe((res: any) => {
-      this.listCpl = res.data;
+      this.listCpl = res.data.listPenilaian;
       
+    }, err => {
+      console.log(err);
+    });
+  }
+
+  getKurikulum() {
+    this.filterService.getKurikulumFilter().subscribe((res: any) => {
+      this.listKurikulum = res
     }, err => {
       console.log(err);
     });

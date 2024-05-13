@@ -32,17 +32,17 @@
                         <tr>
                             <td rowspan="2">No</td>
                             <td rowspan="2">Kode Cpl</td>
-                            <td rowspan="2">Total ALL CPL</td>
-                            <td rowspan="2">Total CPL Lulus</td>
+                            <td rowspan="2">Total Skor Nilai</td>
+                            <td rowspan="2">Total Capaian Lulusan 100%</td>
 
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let val of listCpl; let i = index;">
                             <td>{{i + 1}}</td>
-                            <td class="vertical-middle">{{val.kode_cpl}}</td>
-                            <td class="vertical-middle">{{val.total_cpl_all}}</td>
-                            <td class="vertical-middle">{{val.total_cpl_didapat}}</td>
+                            <td class="vertical-middle">{{val.kode_cpl}} ({{val.total_nilai}})</td>
+                            <td class="vertical-middle">{{val.total_skor}}</td>
+                            <td class="vertical-middle">{{val.total_capaian_lulusan}}</td>
                         </tr>
                     </tbody>
                 </table>

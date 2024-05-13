@@ -32,32 +32,32 @@
                         <tr>
                             <td rowspan="2">No</td>
                             <td rowspan="2">Nama Mahasiswa</td>
-                            <td colspan="2" *ngFor="let val of listCpl" style="text-align: center;">{{val.kode_cpl}}</td>
-                            <td rowspan="2">Total ALL CPL</td>
-                            <td rowspan="2">Total CPL Lulus</td>
+                            <td colspan="2" *ngFor="let val of listHeader" style="text-align: center;">{{val.kode_cpl}}</td>
+                            <td rowspan="2">Total ALL CPL <br> {{totalCplAll}}</td>
+                            <td rowspan="2">Total CPL Lulus <br> {{totalCapaianAll}} %</td>
 
                         </tr>
                         <tr>
-                            <ng-container *ngFor="let val of listCpl">
-                                <td style="text-align: center;">Total CPL</td>
-                                <td style="text-align: center;">Total CPL Lulus</td>
+                            <ng-container *ngFor="let val of listHeader">
+                                <td style="text-align: center;">Total Skor Nilai <br> {{val['total_skor']}}</td>
+                                <td style="text-align: center;">Total Capaian <br>{{val['capaian']}} %</td>
                             </ng-container>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let val of listMahasiswa; let i = index;">
+                        <tr *ngFor="let val of listNilaiMahasiswa; let i = index;">
                             <td>{{i + 1}}</td>
                             <td class="vertical-middle">{{val.nama}}</td>
-                            <ng-container *ngFor="let value of listCpl">
+                            <ng-container *ngFor="let value of listHeader">
                                 <td style="text-align: center;">
-                                    {{ val.detail.hasOwnProperty(value.id_cpl_fk) ? val.detail[value.id_cpl_fk].total_cpl_all : value.total_cpl }}
+                                    {{ val.detail.hasOwnProperty(value.kode_cpl) ? val.detail[value.kode_cpl].total_skor : 0 }}
                                 </td>
                                 <td style="text-align: center;">
-                                    {{ val.detail.hasOwnProperty(value.id_cpl_fk) ? val.detail[value.id_cpl_fk].total_cpl_didapat : 0 }}
+                                    {{ val.detail.hasOwnProperty(value.kode_cpl) ? val.detail[value.kode_cpl].capaian_cpl : 0 }}
                                 </td>
                             </ng-container>
-                            <td>{{val.total_all_cpl_lulus}}</td>
-                            <td>{{val.total_all_cpl_didapat}}</td>
+                            <td>{{val.totalSkorAll}}</td>
+                            <td>{{val.totalCapaianAll}}</td>
                         </tr>
                     </tbody>
                 </table>

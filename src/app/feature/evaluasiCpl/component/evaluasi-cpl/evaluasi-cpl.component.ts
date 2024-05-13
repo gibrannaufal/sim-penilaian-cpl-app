@@ -15,9 +15,11 @@ import { filterService } from 'src/app/core/services/filter.service';
 })
 export class EvaluasiCplComponent implements OnInit {
   
-  listMahasiswa: [];
-  listCpl: [];
+  listNilaiMahasiswa: [];
+  listHeader: [];
   listKurikulum: [];
+  totalCapaianAll: number;
+  totalCplAll: number;
   showForm: boolean;
   titleForm: string;
   @ViewChild(DataTableDirective)
@@ -56,8 +58,13 @@ export class EvaluasiCplComponent implements OnInit {
       kurikulum: this.filter.kurikulum,
     };
     this.evaluasiCplService.getEvaluasiCplMahasiswa(param).subscribe((res: any) => {
-      this.listMahasiswa = res.data.arrFinal;
-      this.listCpl = res.data.listCpl;
+      this.listNilaiMahasiswa = res.data.listNilai;
+      this.listHeader = res.data.listHeader;
+      this.totalCplAll = res.data.total_cpl_all;
+      this.totalCapaianAll = res.data.total_capaian_all;
+
+      console.log(res.data.listNilai);
+      
       
     }, err => {
       console.log(err);

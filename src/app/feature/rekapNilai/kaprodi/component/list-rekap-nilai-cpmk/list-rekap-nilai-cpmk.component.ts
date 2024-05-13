@@ -16,12 +16,13 @@ import { ViewChild } from '@angular/core';
 export class ListRekapNilaiCpmkComponent implements OnInit {
   @Input() nrp: number;
   @Input() id_mk_fk: number;
-  @Input() id_detailmk_fk: number;
+  @Input() nama_mahasiswa: number;
   @Output() afterSave = new EventEmitter<boolean>();
 
   rekapNilaiCpmk: [];
   
   titleModal: any;
+  id_detailmk_fk: any;
   
   constructor(
       private filterService: filterService,
@@ -50,8 +51,9 @@ export class ListRekapNilaiCpmkComponent implements OnInit {
     });
   }
 
-  lihatNilaiSubCpmkMahasiswa(modalId, nama_mk ) {
-    this.titleModal = 'List SUB CPMK ' + nama_mk ;
+  lihatNilaiSubCpmkMahasiswa(modalId, id_detailmk_fk ) {
+    this.titleModal = 'List SUB CPMK ' + this.nama_mahasiswa ;
+    this.id_detailmk_fk = id_detailmk_fk;
     this.modalService.open(modalId,{ size: 'lg', backdrop: 'static' });
     this.afterSave.emit();
   }

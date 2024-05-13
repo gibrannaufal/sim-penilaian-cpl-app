@@ -1,42 +1,30 @@
-<div  class="col-md-12">
-    <div class="table-responsive table-container">
-        <table class="table" style="border: 2px;">
-            <thead>
-                <tr>
-                    <th style="min-width: 100px;">No</th>
-                    <th style="min-width: 100px;">Matakulih</th>
-                    <th style="min-width: 100px;">Total Nilai</th>
-                    <th style="min-width: 100px;">Grade Nilai</th>
-                    <th style="min-width: 100px;"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let val of listRekap; let i = index;" >   
-                    <td>
-                       {{i + 1}}
-                    </td> 
-                    <td>
-                        {{val.nama_matakuliah}}
-                    </td> 
-                    <td>
-                        {{val.total_nilai}}
-                    </td>  
-                    <td>
-                        {{getGrade(val.total_nilai)}}
-                    </td>
-                    <td>
-                        <button class="btn btn-sm btn-success"
-                            (click)="lihatNilaiCpmkMahasiswa(ListCpmkMahasiswa ,val.id_mk_fk, val.id_detailmk_fk, val.nrp, val.nama_matakuliah)"
-                            >
-                            Detail
-                         </button>
-                    </td>
-                   
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+<div class="col-md-12 mt-4">
+    <table class="table table-hover" datatable [dtOptions]="dtOptions" >
+        <thead class="thead-light">
+            <tr>
+                <td>No</td>
+                <td style="min-width: 2vw;">NRP</td>
+                <td style="min-width: 5vw;">Nama</td>
+                <td style="min-width: 5vw;">Total Nilai</td>
+                <td style="min-width: 5vw;">Grade</td>
+                <td style="min-width: 2vw;"></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let mahasiswa of listMahasiswa;">
+                <td>{{mahasiswa.no}}</td>
+                <td class="">{{mahasiswa.nrp}}</td>
+                <td class="">{{mahasiswa.nama}}</td>
+                <td class="">{{mahasiswa.total_nilai}}</td>
+                <td class="">{{getGrade(mahasiswa.total_nilai)}}</td>
+                <td>
+                    <button (click)="lihatNilaiCpmkMahasiswa(ListCpmkMahasiswa, mahasiswa.nrp, mahasiswa.nama)" class="btn btn-sm btn-primary">Lihat Rekap</button>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+</div> 
 
 
 <ng-template #ListCpmkMahasiswa let-modal>
@@ -47,7 +35,7 @@
         </button>
     </div>
     <div class="modal-body">
-        <app-list-rekap-nilai-cpmk [id_detailmk_fk]="id_detailmk_fk" [id_mk_fk]="id_mk_fk" [nrp]="nrp" (afterSave)="modal.close()"></app-list-rekap-nilai-cpmk>
+        <app-list-rekap-nilai-cpmk [nama_mahasiswa]="nama_mahasiswa"  [id_mk_fk]="id_mk_fk" [nrp]="nrp" (afterSave)="modal.close()"></app-list-rekap-nilai-cpmk>
     </div> 
 </ng-template>
 

@@ -1,6 +1,6 @@
 <div class="card" *ngIf="!showForm" >
     <div class="card-header">
-       <p style="font-size: 20px;"><b>Daftar Mahasiswa - Rekap Nilai Mahasiswa</b> </p> 
+       <p style="font-size: 20px;"><b>List Matakuliah - Rekap Nilai Mahasiswa</b> </p> 
     </div>
     <div class="card-body">
 
@@ -10,7 +10,7 @@
                     <form class="form-inline">
                         <div class="form-group">
                             <div class="input-group input-group-sm mr-2">
-                                <input type="text" placeholder="Filter Nama Matakuliah" class="form-control form-control-sm" [(ngModel)]="filter.nama_mahasiswa"  name="nama_mahasiswa"  />
+                                <input type="text" placeholder="Filter Nama Matakuliah" class="form-control form-control-sm" [(ngModel)]="filter.nama_mk"  name="nama_mk"  />
                                 <div class="input-group-append">
                                     <span class="input-group-text">
                                         <i class="fas fa-search" (click)="reloadDataTable()">
@@ -23,25 +23,36 @@
                     </form>
                 </div>   
             </div>
+
             <div class="col-md-12 mt-4">
                 <table class="table table-hover" datatable [dtOptions]="dtOptions" >
                     <thead class="thead-light">
                         <tr>
                             <td>No</td>
-                            <td style="min-width: 2vw;">NRP</td>
-                            <td style="min-width: 5vw;">Nama</td>
-                            <!-- <td style="min-width: 2vw;">Program Studi</td> -->
-                            <td style="min-width: 2vw;"></td>
+                            <td>Kode Kurikulum</td>
+                            <td>Nama Kurikulum</td>
+                            <td>Nama Matakuliah</td>
+                            <td>Deskripsi</td>
+                            <td>SKS</td>
+                            <td>Bobot</td>
+                            <td>Semester</td>
+                            <td>Bobot Kajian</td>
+                            <td width="90"></td>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let mahasiswa of listMahasiswa;">
-                            <td>{{mahasiswa.no}}</td>
-                            <td class="">{{mahasiswa.nrp}}</td>
-                            <td class="">{{mahasiswa.nama}}</td>
-                            <!-- <td class="">{{mahasiswa.prodi}}</td> -->
-                            <td>
-                                <button (click)="formRekap(mahasiswa.nrp, mahasiswa.nama)" class="btn btn-sm btn-primary">Lihat Rekap</button>
+                        <tr *ngFor="let mk of listmk;">
+                            <td>{{mk.no}}</td>
+                            <td class="vertical-middle">{{mk.kurikulum.kode_kurikulum}}</td>
+                            <td class="vertical-middle">{{mk.kurikulum.nama_kurikulum}}</td>
+                            <td class="vertical-middle">{{mk.nama_matakuliah}}</td>
+                            <td class="vertical-middle">{{mk.deskripsi}}</td>
+                            <td class="vertical-middle">{{mk.sks}}</td>
+                            <td class="vertical-middle">{{mk.bobot}}</td>
+                            <td class="vertical-middle">{{mk.semester}}</td>
+                            <td class="vertical-middle">{{mk.bobot_kajian}}</td>
+                            <td class="vertical-middle">
+                                <button (click)="formRekap(mk.id_matakuliah)" class="btn btn-sm btn-primary" >Lihat Rekap</button>
                             </td>
 
                         </tr>
@@ -61,7 +72,7 @@
                     <h1>{{titleForm}}</h1>
                 </div>
                 <div class="card-body">
-                    <app-list-rekap-nilai-matkul [nrp]="nrp" (afterSave)="showForm = false;"></app-list-rekap-nilai-matkul>
+                    <app-list-rekap-nilai-matkul [id_mk_fk]="id_mk_fk" (afterSave)="showForm = false;"></app-list-rekap-nilai-matkul>
                 </div>
             </div>
         </div>

@@ -8,7 +8,7 @@
                     <th style="min-width: 100px;">Kode CPMK</th>
                     <th style="min-width: 100px;">Kode CPL</th>
                     <th style="min-width: 100px;">Total Nilai</th>
-                    <th style="min-width: 100px;">Grade Nilai</th>
+                    <!-- <th style="min-width: 100px;">Grade Nilai</th> -->
                     <th style="min-width: 100px;"></th>
                 </tr>
             </thead>
@@ -29,12 +29,12 @@
                     <td>
                         {{val.total_nilai}}
                     </td>  
-                    <td>
+                    <!-- <td>
                         {{getGrade(val.total_nilai)}}
-                    </td>
+                    </td> -->
                     <td>
                         <button class="btn btn-sm btn-success"
-                            (click)="lihatNilaiSubCpmkMahasiswa(ListSubCpmkMahasiswa , val.nama_matakuliah)"
+                            (click)="lihatNilaiSubCpmkMahasiswa(ListSubCpmkMahasiswa , val.id_detailmk_fk)"
                             >
                             Detail
                          </button>

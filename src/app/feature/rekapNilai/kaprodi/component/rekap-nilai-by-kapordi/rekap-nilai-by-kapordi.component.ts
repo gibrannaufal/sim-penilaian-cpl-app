@@ -8,6 +8,7 @@ import { RekapNilaiByKaprodiServiceService } from '../../service/rekap-nilai-by-
 import { DataTableDirective } from 'angular-datatables';
 
 import { ViewChild } from '@angular/core';
+import { MataKuliahService } from 'src/app/feature/mataKuliah/service/mata-kuliah.service';
 
 @Component({
   selector: 'app-rekap-nilai-by-kapordi',
@@ -15,7 +16,7 @@ import { ViewChild } from '@angular/core';
   styleUrls: ['./rekap-nilai-by-kapordi.component.scss']
 })
 export class RekapNilaiByKapordiComponent implements OnInit {
-  listMahasiswa: [];
+  listmk: [];
   showForm: boolean;
   titleForm: string;
   @ViewChild(DataTableDirective)
@@ -24,12 +25,13 @@ export class RekapNilaiByKapordiComponent implements OnInit {
   dtOptions: any;
 
   filter: {
-      nama_mahasiswa: ''
+    nama_mk: ''
     };
 
-  nrp: any;
+  id_mk_fk: number;
   
   constructor(
+      private mataKuliahService: MataKuliahService,
       private RekapNilaiByKaprodiServiceService: RekapNilaiByKaprodiServiceService,
       private landaService: LandaService,
       private modalService: NgbModal
@@ -38,13 +40,17 @@ export class RekapNilaiByKapordiComponent implements OnInit {
   ngOnInit(): void {
     this.showForm = false;
     this.filter = {
-      nama_mahasiswa: '',
+      nama_mk: '',
     
     };
-      this.getmahasiswa();
+      this.getmk();
   }
 
-  getmahasiswa() {
+  trackByIndex(index, list): any {
+    return list.id;
+  }
+
+  getmk() {
       this.dtOptions = {
           serverSide: true,
           processing: true,
@@ -52,36 +58,34 @@ export class RekapNilaiByKapordiComponent implements OnInit {
           pageLength: 4,
           ajax: (dtParams: any, callback) => {
             const params = {
-              nama_mahasiswa: this.filter.nama_mahasiswa,
+              nama_mk: this.filter.nama_mk,
               itemperpage: 4,
               per_page: dtParams.length,
               page: (dtParams.start / dtParams.length) + 1,
             };
             
-            this.RekapNilaiByKaprodiServiceService.getMahasiswa(params).subscribe((res: any) => {
+            this.mataKuliahService.getmk(params).subscribe((res: any) => {
               const { list, meta } = res.data;
-       
+      
               let number = dtParams.start + 1;
               list.forEach(val => {
                 val.no = number++;
               });
-              this.listMahasiswa  = list;
-       
+              this.listmk  = list;
+      
               callback({
                 recordsTotal: meta.total,
                 recordsFiltered: meta.total,
                 data: [],
               });
-       
+      
             }, (err: any) => {
               console.log(err);
             });
           },
         };
   }
-  trackByIndex(index, list): any {
-    return list.id;
-  }
+
 
   reloadDataTable(): void {
     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
@@ -89,9 +93,9 @@ export class RekapNilaiByKapordiComponent implements OnInit {
     });
    }
 
-   formRekap(nrp, nama_mahasiswa) {
+   formRekap(id_mk_fk) {
     this.showForm = true;
-    this.titleForm = 'List Rekap Nilai Mahasiswa ' + nama_mahasiswa;
-    this.nrp = nrp;
+    this.titleForm = 'List Rekap Nilai Mahasiswa ';
+    this.id_mk_fk = id_mk_fk;
   }
 }

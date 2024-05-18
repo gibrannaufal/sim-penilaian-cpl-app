@@ -23,6 +23,17 @@
                     </ng-select>
                 </div>
             </div>
+            <div class="form-group row">
+                <label class="form-label col-md-3" for="prodi">Program Studi</label>
+                <div class="col-md-9">
+                    <select [(ngModel)]="formModel.prodi" (ngModelChange)="onProdiChange(formModel.prodi)" name="prodi" id="prodi" class="form-control">
+                        <option value="">Pilih Prodi</option>
+                        <option value="SI">Sistem Informasi</option>
+                        <option value="TI">Teknik Informatika</option>
+                        <option value="DKV">Desain Komunikasi Visual</option>
+                    </select>
+                </div>
+            </div>            
 
             <div class="form-group row">
                 <label class="form-label col-md-3 required">Kode Matakuliah</label>
@@ -35,15 +46,10 @@
             <div class="form-group row">
                 <label class="form-label col-md-3 required">Nama  Matakuliah</label>
                 <div class="col-md-9">
-                    <ng-select  placeholder="Pilih Matakuliah" 
-                    [dropdownPosition]="'down'"
-                    [(ngModel)]="formModel.nama_matakuliah" 
-                    (ngModelChange)="onChangeMatkul(formModel.nama_matakuliah)"
-                    [ngModelOptions]="{standalone: true}">
-                     <ng-option *ngFor="let m of matkulApi" [value]="m.mata_kuliah">
-                        {{ m.mata_kuliah }}
-                    </ng-option>
-                </ng-select>
+                    <input [(ngModel)]="formModel.nama_matakuliah"  (blur)="onMatkulChange(formModel.nama_matakuliah)"  
+                        [disabled]="!formModel.id_kurikulum_fk && !formModel.prodi "
+                        type="text"  required name="nama_matakuliah" class="form-control"
+                        placeholder="Nama Matakuliah">
                 </div>
             </div>
             
@@ -59,14 +65,14 @@
             <div class="form-group row">
                 <label class="form-label col-md-3 required">Semester</label>
                 <div class="col-md-9">
-                    <input [(ngModel)]="formModel.semester" disabled  type="text" required name="semester" class="form-control"
+                    <input [(ngModel)]="formModel.semester"   type="text" required name="semester" class="form-control"
                         placeholder="Semester">
                 </div>
             </div>
             <div class="form-group row">
                 <label class="form-label col-md-3 required">SKS</label>
                 <div class="col-md-9">
-                    <input [(ngModel)]="formModel.sks" disabled  type="text" required name="sks" class="form-control"
+                    <input [(ngModel)]="formModel.sks"   type="text" required name="sks" class="form-control"
                         placeholder="SKS">
                 </div>
             </div>
@@ -76,6 +82,19 @@
                 <div class="col-md-9">
                     <input [(ngModel)]="formModel.bobot_kajian" type="text" required name="bahan_kajian" class="form-control"
                         placeholder="Bahan Kajian">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="form-label col-md-3 required">Periode</label>
+                <div class="col-md-9">
+                    <label ngbButtonLabel class="btn-primary">
+                        <input ngbButton [(ngModel)]="formModel.periode" [ngModelOptions]="{standalone: true}" type="radio" value="Ganjil"> Ganjil
+                    </label>
+
+                    <label ngbButtonLabel class="btn-primary" style="margin-left: 10px;">
+                        <input ngbButton [(ngModel)]="formModel.periode" [ngModelOptions]="{standalone: true}" type="radio" value="Genap"> Genap
+                    </label>
                 </div>
             </div>
             

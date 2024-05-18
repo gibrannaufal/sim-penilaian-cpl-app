@@ -14,7 +14,6 @@ import Swal from 'sweetalert2';
 })
 export class ListDetailComponent implements OnInit {
   @Input() id_matakuliah: number;
-  @Input() uid: number;
 
   @Output() afterSave = new EventEmitter<boolean>();
 

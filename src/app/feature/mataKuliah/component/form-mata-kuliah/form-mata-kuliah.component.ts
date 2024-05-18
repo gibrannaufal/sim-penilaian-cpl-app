@@ -23,7 +23,8 @@ export class FormMataKuliahComponent {
   selectedKurikulum: any;
   selectedCpl: any;
   selectedCpmk: any;
-  selectedMatkulApi:any;
+  selectedTahunKurikulum:any;
+  selectedProdi:any;
 
   kurikulum: any;
   matkulApi: any;
@@ -48,7 +49,7 @@ export class FormMataKuliahComponent {
     bobot: number,
     semester: string,
     bobot_kajian: string,
-    uuid_api: string,
+    periode: string,
     prodi: string,
     kelas: string,
     mk_detail:any,
@@ -136,7 +137,7 @@ export class FormMataKuliahComponent {
       bobot: 0,
       semester: '',
       bobot_kajian: '',
-      uuid_api: '',
+      periode: '',
       kelas: '',
       prodi: '',
       mk_detail: [],
@@ -239,6 +240,7 @@ export class FormMataKuliahComponent {
   onKurikulumChange(idKurikulum: any) {
     this.selectedKurikulum = this.kurikulum .find(kurikulum => kurikulum.id_kurikulum === idKurikulum);
     this.formModel.kode_kurikulum = this.selectedKurikulum.kode_kurikulum;
+    this.selectedTahunKurikulum = this.selectedKurikulum.tahun;
     this.getCpmk(idKurikulum);
     this.getCpl(idKurikulum);
   }
@@ -324,18 +326,40 @@ export class FormMataKuliahComponent {
     });
   }
 
-
-  onChangeMatkul(matkul)
-  {
-    this.selectedMatkulApi = this.matkulApi.find(apiMatkul => apiMatkul.mata_kuliah === matkul);
-
-    this.formModel.kode_matakuliah = this.selectedMatkulApi.kode;
-    this.formModel.semester = this.selectedMatkulApi.semester;
-    this.formModel.sks = this.selectedMatkulApi.sks;
-    this.formModel.uuid_api = this.selectedMatkulApi.uid;
-    this.formModel.kelas = this.selectedMatkulApi.kelas;
-    this.formModel.prodi = this.selectedMatkulApi.prodi;
-    
+  
+  onProdiChange(prodi){
+    this.selectedProdi = prodi;
   }
 
+  onMatkulChange(matkul) {
+    let kodeProdi = '';
+    let kodeTahun = '';
+    let result = '';
+  
+    // ambil prodi yang dipilih
+    if (this.selectedProdi !== null) {
+      const prodi = this.selectedProdi.toString();
+      kodeProdi = prodi.slice(-2);
+    }
+  
+    // ambil tahun kurikulum
+    if (this.selectedTahunKurikulum !== null) {
+      const tahun = this.selectedTahunKurikulum.toString();
+      kodeTahun = tahun.slice(-2);
+    }
+  
+    // generate random string
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    for (let i = 0; i < 6; i++) {
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+  
+    // buat kode mata kuliah
+    if (kodeProdi && kodeTahun) {
+      this.formModel.kode_matakuliah = `${kodeProdi}${kodeTahun}${result}`;
+    } else {
+      this.formModel.kode_matakuliah = null;
+    }
+  }
+  
 }

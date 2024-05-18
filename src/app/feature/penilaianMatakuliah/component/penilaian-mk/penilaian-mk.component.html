@@ -57,7 +57,7 @@
                             <td class="vertical-middle">{{mk.prodi}}</td>
                             <td class="vertical-middle">
                                 <button class="btn btn-sm btn-primary"
-                                (click)="lihatDetail(formListCpmk ,mk.id_matakuliah,mk.nama_matakuliah, mk.uuid_api )" 
+                                (click)="lihatDetail(formListCpmk ,mk.id_matakuliah,mk.nama_matakuliah )" 
                                 > 
                                     Lihat Detail
                                 </button>
@@ -81,6 +81,6 @@
         </button>
     </div>
     <div class="modal-body">
-        <app-list-detail [id_matakuliah]="id_matakuliah" [uid]="uid" (afterSave)="modal.close()"></app-list-detail>
+        <app-list-detail [id_matakuliah]="id_matakuliah" (afterSave)="modal.close()"></app-list-detail>
     </div>
 </ng-template>

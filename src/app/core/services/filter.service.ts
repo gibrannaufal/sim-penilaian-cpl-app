@@ -65,5 +65,8 @@ export class filterService {
     return this.landaService.DataGet('/v1/CplByKurikulum', arrParameter);
   }
   
+  getMahasiswaDummy(arrParameter) {
+    return this.landaService.DataGet('/v1/getMahasiswaDummy', arrParameter);
+  }
   
 }

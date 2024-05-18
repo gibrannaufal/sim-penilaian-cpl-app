@@ -47,7 +47,6 @@ export class FormPenilaianComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
        this.id_mk_fk = params['id_mk_fk'];
         this.id_detailmk_fk = params['id_detailmk_fk'];
-        this.uid = params['uid'];
         this.id_subcpmk = params['id_subcpmk_mk'];
         this.title = params['title'];
     });
@@ -77,12 +76,11 @@ export class FormPenilaianComponent implements OnInit {
   getListMahasiswa()
   {
     const params = {
-      uid:  this.uid,
       id_subcpmk_fk: this.id_subcpmk,
       id_mk_fk: this.id_mk_fk,
       id_detailmk_fk: this.id_detailmk_fk
     }
-    this.filterService.getListMahasiswa(params).subscribe((res: any) => {
+    this.filterService.getMahasiswaDummy(params).subscribe((res: any) => {
       this.formModel = res;
       console.log('list mahasiswa nya ',this.formModel);
       

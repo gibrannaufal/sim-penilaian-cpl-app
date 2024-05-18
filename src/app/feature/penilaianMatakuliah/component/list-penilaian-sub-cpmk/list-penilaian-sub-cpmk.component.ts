@@ -83,7 +83,6 @@ export class ListPenilaianSubCpmkComponent implements OnInit{
         id_mk_fk: this.id_mk_fk,
         id_detailmk_fk: this.id_detailmk_fk,
         title: this.titleForm,
-        uid: this.uid,
         id_subcpmk_mk: val.id_subcpmk
       }
     };

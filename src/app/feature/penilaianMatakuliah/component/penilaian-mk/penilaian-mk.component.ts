@@ -27,7 +27,6 @@ export class PenilaianMkComponent implements OnInit {
   
   titleModal: string;
   id_matakuliah: number;
-  uid:string;
   showForm: boolean;
 
   mkId: number;
@@ -99,10 +98,9 @@ export class PenilaianMkComponent implements OnInit {
     };
   }
 
-  lihatDetail(modalId, id_matakuliah , nama_matakuliah, uid ) {
+  lihatDetail(modalId, id_matakuliah , nama_matakuliah ) {
     this.titleModal = 'List CPMK Mata Kuliah ' + nama_matakuliah ;
-    this.id_matakuliah = id_matakuliah,
-    this.uid = uid,
+    this.id_matakuliah = id_matakuliah
     this.modalService.open(modalId,{ size: 'lg', backdrop: 'static' });
   }
 }

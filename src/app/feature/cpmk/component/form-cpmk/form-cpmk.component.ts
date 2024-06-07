@@ -70,7 +70,7 @@ export class FormCpmkComponent implements OnInit {
 
   getKurikulum()
   {   
-    this.filterService.getKurikulumFilter().subscribe((res: any) => {
+    this.CpmkService.getKurikulumFilterAll().subscribe((res: any) => {
       this.kurikulum = res;
       
     }, err => {

@@ -19,7 +19,6 @@ export class ListNilaiMahasiswaComponent implements OnInit {
 
   @Input() id_mk_fk: number;
   @Input() id_detailmk_fk: number; 
-  @Input() uid: number; 
   @Input() id_subcpmk: number;
 
   // id_mk_fk: number;
@@ -69,12 +68,11 @@ export class ListNilaiMahasiswaComponent implements OnInit {
   getListMahasiswa()
   {
     const params = {
-      uid:  this.uid,
       id_subcpmk_fk: this.id_subcpmk,
       id_mk_fk: this.id_mk_fk,
       id_detailmk_fk: this.id_detailmk_fk
     }
-    this.filterService.getListMahasiswa(params).subscribe((res: any) => {
+    this.filterService.getMahasiswaDummy(params).subscribe((res: any) => {
       this.formModel = res;
       console.log('list mahasiswa nya ',this.formModel);
       

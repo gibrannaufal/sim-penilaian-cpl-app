@@ -28,5 +28,9 @@ export class CpmkService {
     return this.landaService.DataDelete('/v1/cpmk/' + id);
   }
 
+  getKurikulumFilterAll() {
+    return this.landaService.DataGet('/v1/kurikulumFilterAll' );
+  }
+
 
 }

@@ -17,6 +17,8 @@
                     <th style="min-width: 100px;">Teknik Penilaian</th>
                     <th style="min-width: 100px;">Rubrik</th>
                     <th style="min-width: 100px;">Pertemuan</th>
+                    <th style="min-width: 100px;">Pesan</th>
+                    <th style="min-width: 100px;">Status Penilaian</th>
                 </tr>
             </thead>
             <tbody>
@@ -45,6 +47,15 @@
                     <td>
                         {{val.pertemuan}}
                     </td> 
+                    <td class="vertical-middle">
+                        <span *ngIf="val.pesan_penilaian === null" class="align-items-center text-center">-</span>
+                        {{val.pesan_penilaian}}
+                    </td>
+                    <td class="vertical-middle">
+                        <span *ngIf="val.status_penilaian == 'diterima'" class="custom-badge custom-badge-success">{{val.status_penilaian}}</span>
+                        <span *ngIf="val.status_penilaian == 'draft'" class="custom-badge custom-badge-warning">{{val.status_penilaian}}</span>
+                        <span *ngIf="val.status_penilaian == 'ditolak'"class="custom-badge custom-badge-danger">{{val.status_penilaian}}</span>
+                    </td>
                     
                 </tr>
             </tbody>

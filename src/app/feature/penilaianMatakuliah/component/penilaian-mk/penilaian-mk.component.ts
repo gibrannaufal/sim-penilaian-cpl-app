@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { DataTableDirective } from 'angular-datatables';
 
 import { ViewChild } from '@angular/core';
+import { AuthService } from 'src/app/feature/auth/services/auth.service';
 @Component({
   selector: 'app-penilaian-mk',
   templateUrl: './penilaian-mk.component.html',
@@ -29,6 +30,7 @@ export class PenilaianMkComponent implements OnInit {
   id_matakuliah: number;
   showForm: boolean;
 
+  profile: any;
   mkId: number;
   listMk: any;
   listKelas: any;
@@ -36,29 +38,27 @@ export class PenilaianMkComponent implements OnInit {
 
 
   constructor(
+    private authService: AuthService,
     private penilaianMkService: PenilaianMkService,
     private landaService: LandaService,
     private modalService: NgbModal
   ) { }
   
   ngOnInit(): void {
-    this.getMkApi();
     this. getKelas();
     this.filter = {
       nama_mk: '',
     
     };
+    this.getRoles();
   }
   
-  getMkApi()
-  {   
-    const params = {}
-    this.penilaianMkService.getMk(params).subscribe((res: any) => {
-      this.listMk = res;
-      console.log('MK APINYA ADALAH',this.listMk);
+  getRoles() {
+    this.authService.getProfile().subscribe((user: any) => {
+      this.profile = user;
+      console.log(this.profile);
       
-    }, err => {
-      console.log(err);
+      
     });
   }
   getKelas()
@@ -71,6 +71,8 @@ export class PenilaianMkComponent implements OnInit {
       ajax: (dtParams: any, callback) => {
         const params = {
           nama_mk: this.filter.nama_mk,
+          nip: this.profile.nip,
+          roles_name: this.profile.roles_name,
           itemperpage: 4,
           per_page: dtParams.length,
           page: (dtParams.start / dtParams.length) + 1,

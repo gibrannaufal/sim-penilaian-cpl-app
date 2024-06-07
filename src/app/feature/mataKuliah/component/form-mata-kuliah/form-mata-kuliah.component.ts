@@ -47,7 +47,7 @@ export class FormMataKuliahComponent {
     deskripsi: string,
     sks: any, 
     bobot: number,
-    semester: string,
+    semester: number,
     bobot_kajian: string,
     periode: string,
     prodi: string,
@@ -135,7 +135,7 @@ export class FormMataKuliahComponent {
       deskripsi: '',
       sks: '',
       bobot: 0,
-      semester: '',
+      semester: 0,
       bobot_kajian: '',
       periode: '',
       kelas: '',
@@ -176,6 +176,12 @@ export class FormMataKuliahComponent {
       }
     }
     // console.log('detailnya', this.formModel.mk_detail);
+    if (this.formModel.semester % 2 === 0) {
+        this.formModel.periode = 'Genap';
+    } else {
+        this.formModel.periode = 'Ganjil';
+    }
+
     
     this.mkService.createMk(this.formModel).subscribe((res: any) => {
       this.landaService.alertSuccess('Berhasil', res.message);
@@ -193,11 +199,19 @@ export class FormMataKuliahComponent {
         i--;
       }
     } 
+
     if (this.formModel.status === 'ditolak') {
       this.formModel.status  = 'revisi'
     }else{
       this.formModel.status = this.mkStatus;
     }
+
+    if (this.formModel.semester % 2 === 0) {
+        this.formModel.periode = 'Genap';
+    } else {
+        this.formModel.periode = 'Ganjil';
+    }
+    
     this.mkService.updateMk(this.formModel).subscribe((res: any) => {
       this.landaService.alertSuccess('Berhasil', res.message);
       this.afterSave.emit();
@@ -297,7 +311,7 @@ export class FormMataKuliahComponent {
   
     // Validasi input dan setel isFormValid menjadi false jika ada input yang kosong
     this.formModel.mk_detail.forEach(detail => {
-      if ( !detail.indikator_pencapaian || !detail.bobot_detailmk || !detail.id_cpmk_fk) {
+      if (!detail.bobot_detailmk || !detail.id_cpmk_fk) {
         this.isFormValid = false;
       } 
     });
@@ -327,39 +341,39 @@ export class FormMataKuliahComponent {
   }
 
   
-  onProdiChange(prodi){
-    this.selectedProdi = prodi;
-  }
+  // onProdiChange(prodi){
+  //   this.selectedProdi = prodi;
+  // }
 
-  onMatkulChange(matkul) {
-    let kodeProdi = '';
-    let kodeTahun = '';
-    let result = '';
+  // onMatkulChange(matkul) {
+  //   let kodeProdi = '';
+  //   let kodeTahun = '';
+  //   let result = '';
   
-    // ambil prodi yang dipilih
-    if (this.selectedProdi !== null) {
-      const prodi = this.selectedProdi.toString();
-      kodeProdi = prodi.slice(-2);
-    }
+  //   // ambil prodi yang dipilih
+  //   if (this.selectedProdi !== null) {
+  //     const prodi = this.selectedProdi.toString();
+  //     kodeProdi = prodi.slice(-2);
+  //   }
   
-    // ambil tahun kurikulum
-    if (this.selectedTahunKurikulum !== null) {
-      const tahun = this.selectedTahunKurikulum.toString();
-      kodeTahun = tahun.slice(-2);
-    }
+  //   // ambil tahun kurikulum
+  //   if (this.selectedTahunKurikulum !== null) {
+  //     const tahun = this.selectedTahunKurikulum.toString();
+  //     kodeTahun = tahun.slice(-2);
+  //   }
   
-    // generate random string
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    for (let i = 0; i < 6; i++) {
-      result += characters.charAt(Math.floor(Math.random() * characters.length));
-    }
+  //   // generate random string
+  //   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  //   for (let i = 0; i < 6; i++) {
+  //     result += characters.charAt(Math.floor(Math.random() * characters.length));
+  //   }
   
-    // buat kode mata kuliah
-    if (kodeProdi && kodeTahun) {
-      this.formModel.kode_matakuliah = `${kodeProdi}${kodeTahun}${result}`;
-    } else {
-      this.formModel.kode_matakuliah = null;
-    }
-  }
+  //   // buat kode mata kuliah
+  //   if (kodeProdi && kodeTahun) {
+  //     this.formModel.kode_matakuliah = `${kodeProdi}${kodeTahun}${result}`;
+  //   } else {
+  //     this.formModel.kode_matakuliah = null;
+  //   }
+  // }
   
 }

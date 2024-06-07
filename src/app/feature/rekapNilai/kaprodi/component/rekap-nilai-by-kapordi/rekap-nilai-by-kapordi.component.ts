@@ -9,6 +9,7 @@ import { DataTableDirective } from 'angular-datatables';
 
 import { ViewChild } from '@angular/core';
 import { MataKuliahService } from 'src/app/feature/mataKuliah/service/mata-kuliah.service';
+import { AuthService } from 'src/app/feature/auth/services/auth.service';
 
 @Component({
   selector: 'app-rekap-nilai-by-kapordi',
@@ -29,8 +30,10 @@ export class RekapNilaiByKapordiComponent implements OnInit {
     };
 
   id_mk_fk: number;
+  profile: any;
   
   constructor(
+      private authService: AuthService,
       private mataKuliahService: MataKuliahService,
       private RekapNilaiByKaprodiServiceService: RekapNilaiByKaprodiServiceService,
       private landaService: LandaService,
@@ -44,6 +47,16 @@ export class RekapNilaiByKapordiComponent implements OnInit {
     
     };
       this.getmk();
+      this.getRoles();
+  }
+
+  getRoles() {
+    this.authService.getProfile().subscribe((user: any) => {
+      this.profile = user;
+      console.log(this.profile);
+      
+      
+    });
   }
 
   trackByIndex(index, list): any {
@@ -59,12 +72,14 @@ export class RekapNilaiByKapordiComponent implements OnInit {
           ajax: (dtParams: any, callback) => {
             const params = {
               nama_mk: this.filter.nama_mk,
+              nip: this.profile.nip,
+              roles_name: this.profile.roles_name,
               itemperpage: 4,
               per_page: dtParams.length,
               page: (dtParams.start / dtParams.length) + 1,
             };
             
-            this.mataKuliahService.getmk(params).subscribe((res: any) => {
+            this.RekapNilaiByKaprodiServiceService.getMatkulRekap(params).subscribe((res: any) => {
               const { list, meta } = res.data;
       
               let number = dtParams.start + 1;

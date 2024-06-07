@@ -87,7 +87,7 @@
 
         <!-- menu laporan -->
         <ngb-accordion #acc="ngbAccordion" 
-        *ngIf="profile.roles_name === 'admin' || profile.roles_name === 'kaprodi' || profile.roles_name === 'mahasiswa'" > 
+        *ngIf="profile.roles_name === 'admin' || profile.roles_name === 'kaprodi' || profile.roles_name === 'mahasiswa'  || profile.roles_name === 'dosen'" > 
           <ngb-panel >
             <ng-template ngbPanelTitle>
               <span style="color: black;">Menu Laporan</span>
@@ -95,10 +95,10 @@
               <ng-template ngbPanelContent > 
 
                 <ul class="metismenu list-unstyled" id="side-menu" #sideMenu>
-                  <li *ngIf="profile.roles_name === 'admin' || profile.roles_name === 'kaprodi'">
+                  <li *ngIf="profile.roles_name === 'admin' || profile.roles_name === 'kaprodi' || profile.roles_name === 'dosen'">
                     <a [routerLink]="['/rekap-nilai-all-mahasiswa']" class="is-parent">
                       <i class="fa fa-university" style="color: white; margin-right: 0.5vw;"></i>
-                      <span style="color: white;">Laporan Rekap Nilai Mahasiswa (kaprodi) </span>
+                      <span style="color: white;">Laporan Rekap Nilai Mahasiswa (kaprodi/dosen) </span>
                     </a>
                   </li>  
                   <li *ngIf="profile.roles_name === 'admin' || profile.roles_name === 'mahasiswa'">

@@ -162,7 +162,7 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
     this.authService.getProfile().subscribe((user: any) => {
       this.profile = user;
 
-      console.log('profile nya',this.profile);
+      // console.log('profile nya',this.profile);
       
     });
   }

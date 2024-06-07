@@ -140,7 +140,7 @@ export class FormKurikulumComponent {
 
   addDetail() {
     const nextIndex = this.formModel.cpl.length + 1;
-    const paddedIndex = nextIndex.toString().padStart(3, '0');
+    const paddedIndex = nextIndex.toString().padStart(2, '0');
 
     let val = {
       is_added: true,

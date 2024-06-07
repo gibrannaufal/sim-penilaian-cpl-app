@@ -4,7 +4,7 @@
             <div class="form-group row">
                 <label class="form-label col-md-3 required">Kode Kurikulum</label>
                 <div class="col-md-9">
-                    <input  type="text" disabled [(ngModel)]="formModel.kode_kurikulum"   disabled name="kode_kurikulum" class="form-control"
+                    <input  type="text" disabled [(ngModel)]="formModel.kode_kurikulum"   name="kode_kurikulum" class="form-control"
                         placeholder="Kode Kurikulum">
                     
                 </div>
@@ -26,7 +26,7 @@
             <div class="form-group row">
                 <label class="form-label col-md-3" for="prodi">Program Studi</label>
                 <div class="col-md-9">
-                    <select [(ngModel)]="formModel.prodi" (ngModelChange)="onProdiChange(formModel.prodi)" name="prodi" id="prodi" class="form-control">
+                    <select [(ngModel)]="formModel.prodi"  name="prodi" id="prodi" class="form-control">
                         <option value="">Pilih Prodi</option>
                         <option value="SI">Sistem Informasi</option>
                         <option value="TI">Teknik Informatika</option>
@@ -38,15 +38,15 @@
             <div class="form-group row">
                 <label class="form-label col-md-3 required">Kode Matakuliah</label>
                 <div class="col-md-9">
-                    <input [(ngModel)]="formModel.kode_matakuliah" disabled type="text"  required name="kode_matakuliah" class="form-control"
+                    <input [(ngModel)]="formModel.kode_matakuliah" type="text"  required name="kode_matakuliah" class="form-control"
                         placeholder="Kode Matakuliah">
                 </div>
             </div>
-
+            <!-- (blur)="onMatkulChange(formModel.nama_matakuliah)"  -->
             <div class="form-group row">
                 <label class="form-label col-md-3 required">Nama  Matakuliah</label>
                 <div class="col-md-9">
-                    <input [(ngModel)]="formModel.nama_matakuliah"  (blur)="onMatkulChange(formModel.nama_matakuliah)"  
+                    <input [(ngModel)]="formModel.nama_matakuliah"   
                         [disabled]="!formModel.id_kurikulum_fk && !formModel.prodi "
                         type="text"  required name="nama_matakuliah" class="form-control"
                         placeholder="Nama Matakuliah">
@@ -85,7 +85,7 @@
                 </div>
             </div>
 
-            <div class="form-group row">
+            <!-- <div class="form-group row">
                 <label class="form-label col-md-3 required">Periode</label>
                 <div class="col-md-9">
                     <label ngbButtonLabel class="btn-primary">
@@ -96,7 +96,7 @@
                         <input ngbButton [(ngModel)]="formModel.periode" [ngModelOptions]="{standalone: true}" type="radio" value="Genap"> Genap
                     </label>
                 </div>
-            </div>
+            </div> -->
             
         </div>
         <div class="col-md-12">
@@ -113,7 +113,7 @@
                             <th style="min-width: 30vw;" >Deskripsi CPMK</th>
                             <th style="min-width: 15vw;" >Kode CPL</th>
                             <th style="min-width: 30vw;" >Deskripsi CPL</th>
-                            <th style="min-width: 20vw;" >Indikator Pencapaian</th>
+                            <!-- <th style="min-width: 20vw;" >Indikator Pencapaian</th> -->
                             <th style="min-width: 20vw;" >Bobot</th>
                         </tr>
                     </thead>
@@ -152,13 +152,13 @@
                                 <input type="text" placeholder="Deskripsi CPL" (change)="changeDetail(detail)"
                                     class="form-control" name="deskripsi_cpl{{i}}]" disabled [(ngModel)]="detail.deskripsi_cpl" />
                             </td> 
-                            <td style="min-width: 20vw;">
+                            <!-- <td style="min-width: 20vw;">
                                 <input type="text" placeholder="Indikator Pencapaian" (change)="changeDetail(detail)"
                                     class="form-control" name="indikator_pencapaian{{i}}]" [(ngModel)]="detail.indikator_pencapaian" />
                                     <div *ngIf="!detail.indikator_pencapaian" style="color: red; font-size: 10px;">
                                         *indikator pencapaian tidak boleh kosong
                                     </div>
-                            </td> 
+                            </td>  -->
                             <td style="min-width: 20vw;">
                                 <input type="text" placeholder="Bobot" (change)="changeDetail(detail)"
                                     class="form-control" name="bobot_detailmk[{{i}}]" [(ngModel)]="detail.bobot_detailmk" (keypress)="onKeyPress($event)" />
@@ -171,7 +171,7 @@
                     <tfoot>
                         <tr>
                             <td></td>
-                            <td colspan="5">
+                            <td colspan="4">
                                 Total Bobot *Tidak Lebih dari 100
                             </td>
                             <td style="text-align: center;">

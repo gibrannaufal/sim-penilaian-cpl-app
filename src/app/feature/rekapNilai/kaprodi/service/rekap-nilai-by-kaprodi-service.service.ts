@@ -11,6 +11,9 @@ export class RekapNilaiByKaprodiServiceService {
   getMahasiswa(arrParameter) {
     return this.landaService.DataGet('/v1/rekapNilai', arrParameter);
   }
+  getMatkulRekap(arrParameter) {
+    return this.landaService.DataGet('/v1/rekapNilai/getMatkulRekap', arrParameter);
+  }
 
   getRekap(arrParameter) {
     return this.landaService.DataGet('/v1/rekapNilai/rekap', arrParameter);

@@ -31,6 +31,7 @@
                     <thead class="thead-light">
                         <tr>
                             <td rowspan="2">No</td>
+                            <td rowspan="2">Nrp</td>
                             <td rowspan="2">Nama Mahasiswa</td>
                             <td colspan="2" *ngFor="let val of listHeader" style="text-align: center;">{{val.kode_cpl}}</td>
                             <td rowspan="2">Total ALL CPL <br> {{totalCplAll}}</td>
@@ -47,6 +48,7 @@
                     <tbody>
                         <tr *ngFor="let val of listNilaiMahasiswa; let i = index;">
                             <td>{{i + 1}}</td>
+                            <td class="vertical-middle">{{val.nrp}}</td>
                             <td class="vertical-middle">{{val.nama}}</td>
                             <ng-container *ngFor="let value of listHeader">
                                 <td style="text-align: center;">

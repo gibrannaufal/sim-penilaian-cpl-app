@@ -1,0 +1,22 @@
+.box-list {
+    background-color: rgb(134, 134, 143);
+    padding: 20px;
+    color: white;
+    // border-radius: 0px;
+}
+.box-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    // border-radius: 0px;
+}
+.box-item p {
+    margin: 0;
+    display: flex;
+}
+.box-item p span {
+    flex: 1;
+}
+.box-item p .label {
+    flex-basis: 100px;
+}

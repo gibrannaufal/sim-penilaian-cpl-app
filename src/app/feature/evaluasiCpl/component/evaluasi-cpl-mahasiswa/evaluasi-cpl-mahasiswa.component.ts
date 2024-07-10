@@ -7,6 +7,7 @@ import { DataTableDirective } from 'angular-datatables';
 
 import { ViewChild } from '@angular/core';
 import { filterService } from 'src/app/core/services/filter.service';
+import { AuthService } from 'src/app/feature/auth/services/auth.service';
 
 
 @Component({
@@ -31,10 +32,12 @@ export class EvaluasiCplMahasiswaComponent implements OnInit {
     };
 
   nrp: any;
+  profile: any;
   
   constructor(
       private filterService: filterService,
       private evaluasiCplService: EvaluasiCplService,
+      private authService: AuthService,
       private landaService: LandaService,
       private modalService: NgbModal
   ) { }
@@ -46,13 +49,24 @@ export class EvaluasiCplMahasiswaComponent implements OnInit {
       kode_cpl: ''
     
     };
-      this.getCpl();
-      this.getKurikulum();
+    this.getRoles();
+    this.getCpl();
+    this.getKurikulum();
+
+  }
+
+  getRoles() {
+    this.authService.getProfile().subscribe((user: any) => {
+      this.profile = user;
+
+      console.log('profile nya',this.profile);
+      
+    });
   }
 
   getCpl() {
     const param  = {
-      nrp: '191136005',
+      nrp: this.profile.nrp,
       kode_cpl: this.filter.kode_cpl,
       kurikulum: this.filter.kurikulum,
     };

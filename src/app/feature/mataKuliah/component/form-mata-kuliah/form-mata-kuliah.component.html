@@ -124,11 +124,7 @@
                                     <em class="fa fa-trash"></em>
                                 </button>
                             </td>
-                            <td style="min-width: 15vw;" >
-                                <input  type="text" disabled [(ngModel)]="detail.kode_cpmk" disabled  (change)="changeDetail(detail)" name="kode_cpmk[{{i}}]"  
-                                    class="form-control" placeholder="Kode CPMK">
-                            </td> 
-                            <td style="max-width: 20vw; min-height: 40vw; " >
+                            <td style="min-width: 20vw;" >
                                 <ng-select  placeholder="Pilih CPMK" [disabled]="!formModel.id_kurikulum_fk" bindLabel="id_cpmk_fk" name="id_cpmk_fk[{{i}}]"
                                     [dropdownPosition]="'up'"
                                     [(ngModel)]="detail.id_cpmk_fk" 
@@ -136,21 +132,35 @@
                                     (ngModelChange)="onCpmkChange(detail)"
                                     [ngModelOptions]="{standalone: true}">
                                      <ng-option *ngFor="let c of cpmk" [value]="c.id_cpmk">
-                                         {{ c.deskripsi_cpmk }}
+                                         {{ c.kode_cpmk }}
                                     </ng-option>
                                 </ng-select>
                                 <div *ngIf="!detail.id_cpmk_fk" style="color: red; font-size: 10px;">
                                     *cpmk tidak boleh kosong
                                 </div>
                             </td> 
+                            <td style="max-width: 30vw; min-height: 40px;">
+                                <textarea disabled [(ngModel)]="detail.deskripsi_cpmk" 
+                                    (change)="changeDetail(detail)" 
+                                    name="deskripsi_cpmk[{{i}}]"  
+                                    class="form-control" 
+                                    placeholder="Deskripsi CPMK"
+                                    style="resize: none; min-height: 40px; max-height: 150px; overflow-y: auto;">
+                                </textarea>
+                            </td> 
            
                             <td style="min-width: 15vw;">
                                 <input type="text" placeholder="Kode CPL" disabled (change)="changeDetail(detail)"
                                     class="form-control" name="kode_cpl[{{i}}]" [(ngModel)]="detail.kode_cpl" />
                             </td> 
-                            <td style="min-width: 30vw;">
-                                <input type="text" placeholder="Deskripsi CPL" (change)="changeDetail(detail)"
-                                    class="form-control" name="deskripsi_cpl{{i}}]" disabled [(ngModel)]="detail.deskripsi_cpl" />
+                            <td style="max-width: 30vw; min-height: 40px;">
+                                <textarea disabled [(ngModel)]="detail.deskripsi_cpl" 
+                                    (change)="changeDetail(detail)" 
+                                    name="deskripsi_cpl[{{i}}]"  
+                                    class="form-control" 
+                                    placeholder="Deskripsi CPL"
+                                    style="resize: none; min-height: 40px; max-height: 150px; overflow-y: auto;">
+                                </textarea>
                             </td> 
                             <!-- <td style="min-width: 20vw;">
                                 <input type="text" placeholder="Indikator Pencapaian" (change)="changeDetail(detail)"

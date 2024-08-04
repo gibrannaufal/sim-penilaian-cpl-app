@@ -21,12 +21,14 @@ export class FormCpmkComponent implements OnInit {
   activeMode: string;
   selectedKurikulum: any;
   selectedCpl: any;
+  selectedCplUpdate: any = [];
   
   kurikulum: any;
   id_kurikulum: number;
   id_cpl: number;
   cpl:any;
   kode_Kurikulum: string;
+  deskripsi_cpl: string;
   kode_cpl: string;
   showLoading: boolean;
   titleModal: string;
@@ -40,9 +42,19 @@ export class FormCpmkComponent implements OnInit {
     kode_kurikulum:string
     id_cpl_fk: number,
     kode_cpl: string,
+    deskripsi_cpl: string,
     kode_cpmk:string,
     deskripsi_cpmk: string
-  }
+  } = {
+    id_cpmk: 0,
+    id_kurikulum_fk: 0,
+    kode_kurikulum: '',
+    id_cpl_fk: 0,
+    kode_cpl: '',
+    deskripsi_cpl: '',
+    kode_cpmk: '',
+    deskripsi_cpmk: ''
+  };
 
   formModel: {
     id_cpmk: number,
@@ -94,10 +106,12 @@ export class FormCpmkComponent implements OnInit {
 
   onCplChange(selectedValue: any) {
     this.formModel.id_cpl_fk = selectedValue.id_cpl;
+    this.deskripsi_cpl =  selectedValue.deskripsi_cpl;
     this.kode_cpl =  selectedValue.kode_cpl;
     this.getCpmkAll(this.formModel.id_kurikulum_fk, selectedValue.id_cpl);
 
   }
+
 
 
   resetForm() {
@@ -140,6 +154,7 @@ export class FormCpmkComponent implements OnInit {
         kode_kurikulum: res.data.detail_kurikulum.kode_kurikulum,
         id_cpl_fk: res.data.detail_cpl.id_cpl,
         kode_cpl: res.data.detail_cpl.kode_cpl,
+        deskripsi_cpl: res.data.detail_cpl.deskripsi_cpl,
         kode_cpmk: res.data.kode_cpmk,
         deskripsi_cpmk: res.data.deskripsi_cpmk
       }
@@ -150,6 +165,11 @@ export class FormCpmkComponent implements OnInit {
       console.log(err);
     });
   }
+  onCplChangeUpdate(selectedValue: any) {
+    this.selectedCplUpdate = this.cpl.find(cpl => cpl.id_cpl === selectedValue);
+    this.formModelUpdate.deskripsi_cpl = this.selectedCplUpdate.deskripsi_cpl;
+  }
+
 
   insert() {
     for(let i=0; i<this.formModel.detail_cpmk.length; i++) {

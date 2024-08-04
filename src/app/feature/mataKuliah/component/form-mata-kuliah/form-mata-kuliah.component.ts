@@ -94,6 +94,7 @@ export class FormMataKuliahComponent {
             const cplIndex = this.cpl.findIndex(cpmk => cpmk.id_cpl === detail.id_cpl_fk);
             if (cpmkIndex !== -1) {
               detail.kode_cpmk = this.cpmk[cpmkIndex].kode_cpmk;
+              detail.deskripsi_cpmk = this.cpmk[cpmkIndex].deskripsi_cpmk;
               detail.kode_cpl = this.cpl[cplIndex].kode_cpl;
               detail.deskripsi_cpl = this.cpl[cplIndex].deskripsi_cpl;
             }
@@ -285,8 +286,8 @@ export class FormMataKuliahComponent {
       const id_cpmk_fk = this.formModel.mk_detail[i].id_cpmk_fk;
       const cpmk_selected = this.cpmk.find(c => c.id_cpmk === id_cpmk_fk);
 
-      this.formModel.mk_detail[i].kode_cpmk = cpmk_selected.kode_cpmk
-      this.formModel.mk_detail[i].id_cpl_fk = cpmk_selected.id_cpl_fk
+      this.formModel.mk_detail[i].deskripsi_cpmk = cpmk_selected.deskripsi_cpmk;
+      this.formModel.mk_detail[i].id_cpl_fk = cpmk_selected.id_cpl_fk;
 
       const cpl_selected = this.cpl.find(c => c.id_cpl === cpmk_selected.id_cpl_fk )
 

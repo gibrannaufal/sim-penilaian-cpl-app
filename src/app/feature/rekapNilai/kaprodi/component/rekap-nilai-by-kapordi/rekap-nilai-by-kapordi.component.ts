@@ -53,7 +53,7 @@ export class RekapNilaiByKapordiComponent implements OnInit {
   getRoles() {
     this.authService.getProfile().subscribe((user: any) => {
       this.profile = user;
-      console.log(this.profile);
+      // console.log(this.profile);
       
       
     });

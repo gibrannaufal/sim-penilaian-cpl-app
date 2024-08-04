@@ -10,6 +10,7 @@ import { RekapNilaiByKaprodiServiceService } from '../../../kaprodi/service/reka
 import { DataTableDirective } from 'angular-datatables';
 
 import { ViewChild } from '@angular/core';
+import { AuthService } from 'src/app/feature/auth/services/auth.service';
 
 
 @Component({
@@ -35,10 +36,12 @@ export class RekapNilaiMahasiswaComponent implements OnInit {
   titleModal: string;
   id_detailmk_fk: number;
   id_mk_fk: number;
+  profile: any;
   
   
   constructor(
       private rekapNilaiMahasiswaService : RekapNilaiMahasiswaService,
+      private authService: AuthService,
       private rekapNilaiByKaprodiServiceService : RekapNilaiByKaprodiServiceService,
       private landaService: LandaService,
       private modalService: NgbModal
@@ -50,7 +53,16 @@ export class RekapNilaiMahasiswaComponent implements OnInit {
       nama_matakuliah: '',
     
     };
-      this.getRekap();
+    this.getRoles();
+    this.getRekap();
+  }
+  getRoles() {
+    this.authService.getProfile().subscribe((user: any) => {
+      this.profile = user;
+
+      // console.log('profile nya',this.profile);
+      
+    });
   }
 
   getRekap() {
@@ -61,7 +73,7 @@ export class RekapNilaiMahasiswaComponent implements OnInit {
         pageLength: 4,
         ajax: (dtParams: any, callback) => {
           const params = {
-            nrp: '201136009',
+            nrp: this.profile.nrp,
             nama_matakuliah: this.filter.nama_matakuliah,
             itemperpage: 4,
             per_page: dtParams.length,

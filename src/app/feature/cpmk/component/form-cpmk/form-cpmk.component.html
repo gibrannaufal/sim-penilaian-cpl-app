@@ -25,23 +25,23 @@
             <div class="form-group row">
                 <label class="form-label col-md-3 required">Kode CPL</label>
                 <div class="col-md-9">
-                    <input  type="text" disabled [(ngModel)]="kode_cpl"   disabled name="kode_cpl" class="form-control"
-                        placeholder="Kode CPL">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="form-label col-md-3">Deskripsi CPL</label>
-                <div class="col-md-9">
-                    <ng-select  placeholder="Pilih CPL" bindLabel="deskripsi_cpl" 
+                    <ng-select  placeholder="Pilih CPL" bindLabel="kode_cpl" 
                         [disabled]="formModel.id_kurikulum_fk === 0 || formModel.id_kurikulum_fk === null "
                         [dropdownPosition]="'down'"
                         [(ngModel)]="selectedCpl" 
                         (ngModelChange)="onCplChange($event)"
                         [ngModelOptions]="{standalone: true}">
-                         <ng-option *ngFor="let c of cpl" [value]="{ id_cpl: c.id_cpl, kode_cpl: c.kode_cpl }">
-                             {{ c.deskripsi_cpl }}
+                         <ng-option *ngFor="let c of cpl" [value]="{ id_cpl: c.id_cpl, deskripsi_cpl: c.deskripsi_cpl ,kode_cpl: c.kode_cpl }">
+                             {{ c.kode_cpl }}
                         </ng-option>
                     </ng-select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="form-label col-md-3">Deskripsi CPL</label>
+                <div class="col-md-9">
+                    <input  type="text" disabled [(ngModel)]="deskripsi_cpl" style="height: 100px"   disabled name="deskripsi_cpl" class="form-control"
+                        placeholder="Deskripsi CPL">
                 </div>
             </div>
             <div class="form-group row">
@@ -94,8 +94,6 @@
 
 
     <!-- mode update -->
-
-
     <div class="row" *ngIf="activeMode === 'update'">
         <div class="col-md-12">
             <div class="form-group row">
@@ -121,21 +119,22 @@
             <div class="form-group row">
                 <label class="form-label col-md-3 required">Kode CPL</label>
                 <div class="col-md-9">
-                    <input  type="text" disabled [(ngModel)]="formModelUpdate.kode_cpl"   disabled name="kode_cpl" class="form-control"
-                        placeholder="Kode CPL">
+                    <ng-select  placeholder="Pilih CPL" bindLabel="kode_cpl" 
+                        [dropdownPosition]="'down'"
+                        [(ngModel)]="formModelUpdate.id_cpl_fk"
+                        (ngModelChange)="onCplChangeUpdate($event)"
+                        [ngModelOptions]="{standalone: true}">
+                        <ng-option *ngFor="let c of cpl" [value]="c.id_cpl">
+                            {{ c.kode_cpl }}
+                        </ng-option>
+                    </ng-select>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="form-label col-md-3">Deskripsi CPL</label>
                 <div class="col-md-9">
-                    <ng-select  placeholder="Pilih CPL" bindLabel="deskripsi_cpl" 
-                        [dropdownPosition]="'down'"
-                        [(ngModel)]="formModelUpdate.id_cpl_fk"
-                        [ngModelOptions]="{standalone: true}">
-                         <ng-option *ngFor="let c of cpl" [value]="c.id_cpl">
-                             {{ c.deskripsi_cpl }}
-                        </ng-option>
-                    </ng-select>
+                    <input  type="text" style="height: 150px;" disabled [(ngModel)]="formModelUpdate.deskripsi_cpl"   disabled name="deskripsi_cpl" class="form-control"
+                    placeholder="Deskripsi CPL">
                 </div>
             </div>
 
